@@ -1,0 +1,6 @@
+[{"_id":{"$oid":"5de6c9ab68301e3378389fb1"},"author":"Denis Gavrila","text":"Nice one","rating":{"$numberInt":"3"},"cardId":"5de10b7fddf06107ac067f02","authorId":"5dd19c7636ae352f2cea15d4","__v":{"$numberInt":"0"}}
+,{"_id":{"$oid":"5de6d1d3dc57ff13e041889f"},"author":"Denis Gavrila","text":"testing this","rating":{"$numberInt":"1"},"cardId":"5dc860557f5cb520b0b71d86","authorId":"5dd19c7636ae352f2cea15d4","__v":{"$numberInt":"0"}}
+,{"_id":{"$oid":"5de8219722af960f5c123c3c"},"author":"Denis Gavrila","text":"Not a huge fan of the rounded edges but good idea!","rating":{"$numberInt":"2"},"cardId":"5dc860527f5cb520b0b71d74","authorId":"5dd19c7636ae352f2cea15d4","__v":{"$numberInt":"0"}}
+,{"_id":{"$oid":"5de821c81c9d440000b705cc"},"author":"Dana Ramos","text":"Love this card design, it fits perfectly in my recipe blog!","rating":{"$numberInt":"5"},"cardId":"5dc860527f5cb520b0b71d74","authorId":"4f","__v":{"$numberInt":"0"}}
+,{"_id":{"$oid":"5e8f82007895792d9c50b983"},"author":"Dylan Smith","text":"Good Design!","rating":{"$numberInt":"3"},"cardId":"5dc860527f5cb520b0b71d74","authorId":"5e4d6d56367d050228d55262","__v":{"$numberInt":"0"}}
+]

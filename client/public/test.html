@@ -1,0 +1,880 @@
+<style>
+    .cards {
+    display: grid;
+    grid-template-columns: repeat(12, [col] 1fr);
+    grid-template-rows: repeat(5, [row] auto);
+    grid-column-gap: 1em;
+    grid-row-gap: 15px;
+}
+.flip-wrapper { 
+ display:block;
+perspective:1000px;
+}
+ .inner {
+position:relative;
+transition: transform 1s;
+transform-style: preserve-3d;
+}
+.front, .back {
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility: hidden
+}
+ .back {
+transform: rotateX(180deg);
+}
+ .inner.flipped {
+ transform: rotateX(180deg);
+}
+.cards { 
+display: grid;
+ grid-template-columns: repeat(12, [col] 1fr);
+ grid-template-rows: repeat(5, [row] auto);
+ grid-column-gap: 1em;
+ grid-row-gap: 15px; 
+}.container { 
+   background-color : #ffe8c6;
+   padding : 30px;
+   width : 1200px;
+
+ } 
+ 
+.change_me { 
+   background-color : #c4f58e;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   padding : ;
+   text-align : center;
+   margin : ;
+
+ } 
+ 
+.layout { 
+   background-color : #8ee2f5;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.col_6-12_row_5 { 
+   background-color : #c4f58e;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.card_2 { 
+   background-color : #8ee2f5;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me3 { 
+   background-color : #c4f58e;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me4 { 
+   background-color : #8ee2f5;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me5 { 
+   background-color : #c4f58e;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me7 { 
+   background-color : #8ee2f5;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me3-copy { 
+   background-color : #c4f58e;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me4-copy { 
+   background-color : #8ee2f5;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me5-copy { 
+   background-color : #c4f58e;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me7-copy { 
+   background-color : #8ee2f5;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me3-copy-copy { 
+   background-color : #c4f58e;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me4-copy-copy { 
+   background-color : #8ee2f5;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me5-copy-copy { 
+   background-color : #c4f58e;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me7-copy-copy { 
+   background-color : #8ee2f5;
+   border-radius : 25px;
+   font-family : Arial, Helvetica, sans-serif;
+   box-shadow : 0px 0px 7px 0px rgba(0,0,0,0.43);
+   height : 250px;
+   text-align : center;
+
+ } 
+ 
+.change_me-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 1 / 4;
+
+ } 
+ 
+.layout-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 4 / 7;
+
+ } 
+ 
+.col_6-12_row_5-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 7 / 10;
+
+ } 
+ 
+.card_2-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 10 / 13;
+
+ } 
+ 
+.change_me3-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 1 / 4;
+
+ } 
+ 
+.change_me4-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 4 / 7;
+
+ } 
+ 
+.change_me5-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 7 / 10;
+
+ } 
+ 
+.change_me7-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 10 / 13;
+
+ } 
+ 
+.change_me3-copy-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 1 / 4;
+
+ } 
+ 
+.change_me4-copy-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 4 / 7;
+
+ } 
+ 
+.change_me5-copy-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 7 / 10;
+
+ } 
+ 
+.change_me7-copy-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 10 / 13;
+
+ } 
+ 
+.change_me3-copy-copy-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 1 / 4;
+
+ } 
+ 
+.change_me4-copy-copy-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 4 / 7;
+
+ } 
+ 
+.change_me5-copy-copy-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 7 / 10;
+
+ } 
+ 
+.change_me7-copy-copy-wrapper { 
+	position: relative;
+	display: inline-table;
+	grid-column: 10 / 13;
+
+ } 
+ 
+.change_me .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0px;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.change_me .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me .back  .cardParagraph-1 { 
+   border-radius : 2;
+   margin : 20px;
+
+ } 
+ 
+.layout .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.layout .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.layout .back  .cardParagraph-1 { 
+   border-radius : 2;
+   margin : 20px;
+
+ } 
+ 
+.col_6-12_row_5 .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.col_6-12_row_5 .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.col_6-12_row_5 .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+.card_2 .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.card_2 .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me3 .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.change_me3 .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me3 .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+.change_me4 .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0px;
+   display : block;
+   padding : 10px;
+
+ } 
+ 
+.change_me4 .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me4 .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+.change_me5 .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.change_me5 .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me5 .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+.change_me7 .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.change_me7 .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me7 .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+.change_me3-copy .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.change_me3-copy .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me3-copy .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+.change_me4-copy .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0px;
+   display : block;
+   padding : 10px;
+
+ } 
+ 
+.change_me4-copy .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me4-copy .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+.change_me5-copy .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.change_me5-copy .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me5-copy .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+.change_me7-copy .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.change_me7-copy .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me7-copy .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+.change_me3-copy-copy .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.change_me3-copy-copy .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me3-copy-copy .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+.change_me4-copy-copy .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0px;
+   display : block;
+   padding : 10px;
+
+ } 
+ 
+.change_me4-copy-copy .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me4-copy-copy .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+.change_me5-copy-copy .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.change_me5-copy-copy .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me5-copy-copy .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+.change_me7-copy-copy .front  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+   padding : 35px;
+
+ } 
+ 
+.change_me7-copy-copy .back  .cardTitle-0 { 
+   color : black;
+   text-align : center;
+   margin : 0;
+   display : block;
+
+ } 
+ 
+.change_me7-copy-copy .back  .cardParagraph-1 { 
+   border-radius : 2;
+
+ } 
+ 
+ 
+ 
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+          function flipCard(name) {
+            $(name).toggleClass("flipped")
+          }
+          $('.layout.inner .front .cardTitle-0').click(function() {
+            flipCard(".layout");
+          });
+          $('.layout .back .cardTitle-0').click(function() {
+            flipCard(".layout");
+            });
+        });
+    </script>
+<html>
+  <div class="container">
+    <div class="cards">
+    
+    <div class="change_me-wrapper flip-wrapper">
+      <div class="change_me inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">From which language is the word ‘ketchup’ derived??</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">Chinese</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="layout-wrapper flip-wrapper">
+      <div class="layout inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">Which is the country with the biggest population in Europe?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">Russia</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="col_6-12_row_5-wrapper flip-wrapper">
+      <div class="col_6-12_row_5 inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">Who portrayed Edward Scissorhands?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">Johnny Depp</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="card_2-wrapper flip-wrapper">
+      <div class="card_2 inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">What are made and repaired by a cobbler?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="change_me3-wrapper flip-wrapper">
+      <div class="change_me3 inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">What is an endoscope used to examine?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">The inside of the body</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="change_me4-wrapper flip-wrapper">
+      <div class="change_me4 inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">Apart from womanizing and producing films, what was the other passion of Howard Hughes?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">Aviation</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="change_me5-wrapper flip-wrapper">
+      <div class="change_me5 inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">What colour are the four stars on the flag of New Zealand?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">Red</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="change_me7-wrapper flip-wrapper">
+      <div class="change_me7 inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">How many states make up the United States of America?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">50 states</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="change_me3-copy-wrapper flip-wrapper">
+      <div class="change_me3-copy inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">What is an endoscope used to examine?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">The inside of the body</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="change_me4-copy-wrapper flip-wrapper">
+      <div class="change_me4-copy inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">Apart from womanizing and producing films, what was the other passion of Howard Hughes?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">Aviation</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="change_me5-copy-wrapper flip-wrapper">
+      <div class="change_me5-copy inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">What colour are the four stars on the flag of New Zealand?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">Red</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="change_me7-copy-wrapper flip-wrapper">
+      <div class="change_me7-copy inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">How many states make up the United States of America?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">50 states</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="change_me3-copy-copy-wrapper flip-wrapper">
+      <div class="change_me3-copy-copy inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">What is an endoscope used to examine?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">The inside of the body</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="change_me4-copy-copy-wrapper flip-wrapper">
+      <div class="change_me4-copy-copy inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">Apart from womanizing and producing films, what was the other passion of Howard Hughes?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">Aviation</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="change_me5-copy-copy-wrapper flip-wrapper">
+      <div class="change_me5-copy-copy inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">What colour are the four stars on the flag of New Zealand?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">Red</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    <div class="change_me7-copy-copy-wrapper flip-wrapper">
+      <div class="change_me7-copy-copy inner"> 
+        <div class="front">
+              <h1 class="cardTitle-0">How many states make up the United States of America?</h1> 
+       </div> 
+      <div class="back">
+              <h1 class="cardTitle-0">Answer</h1> 
+         <p class="cardParagraph-1">50 states</p> 
+       </div>
+      </div> 
+    </div> 
+    
+    </div>
+    </div>
+</html>

@@ -1,0 +1,27 @@
+.cards {
+    display: grid;
+    grid-template-columns: repeat(12, [col] 1fr);
+    grid-column-gap: 1em;
+    grid-row-gap: 15px;
+}
+.top-toolbar {
+    padding: 10px;
+    padding-top:10px;
+}
+.card-body {
+    cursor: pointer;
+}
+
+.preview {
+    width: 90%;
+    height:100%;
+}
+.preview .modal-content {
+    height: calc(100% - 56px);
+}
+
+.card-render h1, .card-render h2 .card-render h4, .card-render h5, .card-render h3, .card-render p {
+    font-size: revert;
+    font-weight: revert;
+    line-height: revert;
+}

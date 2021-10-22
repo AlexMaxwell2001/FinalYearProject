@@ -1,0 +1,26 @@
+.code {
+    background: #fff;
+    border-radius: 2px;
+    display: inline-block;
+    margin-top: 2vh;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    width: 100%;
+}
+
+.code pre {
+    margin-left: 1rem;
+}
+
+.tab-demo {
+    position: unset;
+}
+
+
+
+.modal-content h4 {
+    text-align: center;
+    color: #414141;
+}
+
+

@@ -1,0 +1,6 @@
+./cwc-app-master
+node server
+
+
+./cwc-app-master/client
+npm run start

@@ -1,0 +1,484 @@
+[{
+  "_id": {
+    "$oid": "60476c10e60c9b0015324aec"
+  },
+  "grid": [
+    {
+      "id": 0,
+      "col_start": "1",
+      "col_end": "6",
+      "row_start": "1",
+      "row_end": "1",
+      "width": "100%"
+    }
+  ],
+  "name": "test",
+  "createdBy": "60326cd72b310533d0d90c5c",
+  "cardSet": "60507f67f3ee2f0015afcf3d",
+  "arrangementType": "grid",
+  "createdAt": {
+    "$date": "2021-03-09T12:37:36.740Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-16T12:55:36.786Z"
+  },
+  "__v": 0,
+  "min_width": "250px",
+  "responsive": true,
+  "col_spacing": "30px",
+  "row_spacing": "0px"
+},{
+  "_id": {
+    "$oid": "604775913991fb40641a05bf"
+  },
+  "grid": [],
+  "name": "New",
+  "createdBy": "60326cd72b310533d0d90c5c",
+  "cardSet": "",
+  "arrangementType": "",
+  "createdAt": {
+    "$date": "2021-03-09T13:18:09.288Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-09T13:18:09.288Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "604776493991fb40641a05c0"
+  },
+  "grid": [],
+  "name": "123",
+  "createdBy": "60326cd72b310533d0d90c5c",
+  "cardSet": "",
+  "arrangementType": "",
+  "createdAt": {
+    "$date": "2021-03-09T13:21:13.746Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-09T13:21:13.746Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "604776a03991fb40641a05c1"
+  },
+  "grid": [],
+  "name": "333",
+  "createdBy": "60326cd72b310533d0d90c5c",
+  "cardSet": "604b6aea3dfb7033e4e9434e",
+  "arrangementType": "grid",
+  "createdAt": {
+    "$date": "2021-03-09T13:22:40.959Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-13T16:40:08.554Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6048c94aedf35023c09dd999"
+  },
+  "grid": [],
+  "name": "Liam Coffey",
+  "createdBy": "603cc1d39bdbe93f141828a8",
+  "cardSet": "",
+  "arrangementType": "",
+  "createdAt": {
+    "$date": "2021-03-10T13:27:38.809Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-10T13:27:38.809Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "604917bd6c7ec90015b2775d"
+  },
+  "grid": [],
+  "name": "test",
+  "createdBy": "604912c36c7ec90015b27744",
+  "cardSet": "",
+  "arrangementType": "",
+  "createdAt": {
+    "$date": "2021-03-10T19:02:21.952Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-10T19:02:21.952Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60507cec7e6eab2324076784"
+  },
+  "grid": [],
+  "name": "ad",
+  "createdBy": "603cc1d39bdbe93f141828a8",
+  "cardSet": "603ad3aa0942e33f94435538",
+  "arrangementType": "",
+  "createdAt": {
+    "$date": "2021-03-16T09:39:56.283Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-16T09:39:56.283Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60507d347e6eab2324076789"
+  },
+  "grid": [],
+  "name": "asd",
+  "createdBy": "603cc1d39bdbe93f141828a8",
+  "cardSet": "603ad3aa0942e33f94435538",
+  "arrangementType": "",
+  "createdAt": {
+    "$date": "2021-03-16T09:41:08.234Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-16T09:41:08.234Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60624fc93b46cf00153df9de"
+  },
+  "grid": [],
+  "name": "grid",
+  "createdBy": "6058cec995ae38001563170c",
+  "cardSet": "60624f9c3b46cf00153df9dd",
+  "arrangementType": "stack",
+  "createdAt": {
+    "$date": "2021-03-29T22:08:09.027Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-29T22:10:24.900Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6062537f3b46cf00153df9f0"
+  },
+  "grid": [],
+  "name": "stack",
+  "createdBy": "6058cec995ae38001563170c",
+  "cardSet": "606252f83b46cf00153df9e9",
+  "arrangementType": "stack",
+  "createdAt": {
+    "$date": "2021-03-29T22:23:59.951Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-29T22:30:29.849Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "606774b42633d300155cfdcf"
+  },
+  "grid": [
+    {
+      "id": 0,
+      "col_start": "1",
+      "col_end": "6"
+    }
+  ],
+  "name": "Test Arrangement",
+  "createdBy": "60326cd72b310533d0d90c5c",
+  "cardSet": "604e2afff4876351a81cb1af",
+  "arrangementType": "grid",
+  "createdAt": {
+    "$date": "2021-04-02T19:47:00.919Z"
+  },
+  "updatedAt": {
+    "$date": "2021-04-02T19:48:50.333Z"
+  },
+  "__v": 0,
+  "col_spacing": "0px",
+  "min_width": "150px",
+  "responsive": true,
+  "row_spacing": "0px"
+},{
+  "_id": {
+    "$oid": "606777ca2633d300155cfdd6"
+  },
+  "grid": [
+    {
+      "id": 0,
+      "col_start": "1",
+      "col_end": "6",
+      "row_start": "1",
+      "row_end": "1",
+      "width": "100%",
+      "height": ""
+    },
+    {
+      "id": 1,
+      "col_start": "7",
+      "col_end": "12",
+      "row_start": "1",
+      "row_end": "1",
+      "width": "100%"
+    }
+  ],
+  "name": "Test",
+  "createdBy": "60326cd72b310533d0d90c5c",
+  "cardSet": "604e2afff4876351a81cb1af",
+  "arrangementType": "grid",
+  "createdAt": {
+    "$date": "2021-04-02T20:00:10.619Z"
+  },
+  "updatedAt": {
+    "$date": "2021-04-02T20:01:45.630Z"
+  },
+  "__v": 0,
+  "min_width": "250px",
+  "responsive": true
+},{
+  "_id": {
+    "$oid": "609956f8c63c7500154c282a"
+  },
+  "grid": [],
+  "name": "test",
+  "createdBy": "60954826f4500c0015f03cc7",
+  "cardSet": "603ad3aa0942e33f94435538",
+  "arrangementType": "",
+  "createdAt": {
+    "$date": "2021-05-10T15:53:28.895Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-10T15:53:28.895Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "609e8047368ed30015e38336"
+  },
+  "grid": [],
+  "name": "stack",
+  "createdBy": "609412258e803d0015b0f7fe",
+  "cardSet": "603ad3aa0942e33f94435538",
+  "arrangementType": "",
+  "createdAt": {
+    "$date": "2021-05-14T13:51:03.675Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-14T13:51:03.675Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60b8aa4a66e4db0015d7f6ab"
+  },
+  "grid": [],
+  "name": "Test Questions",
+  "createdBy": "60b89b4466e4db0015d7f697",
+  "cardSet": "60b8a4a066e4db0015d7f69e",
+  "arrangementType": "stack",
+  "createdAt": {
+    "$date": "2021-06-03T10:09:14.909Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-03T10:09:37.520Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60b8dd02697b0a0015afca6b"
+  },
+  "grid": [
+    {
+      "id": 0,
+      "col_start": "1",
+      "col_end": "",
+      "row_start": ""
+    },
+    {
+      "id": 1,
+      "col_start": "1",
+      "row_start": "3"
+    },
+    {
+      "id": 3,
+      "col_start": "",
+      "col_end": ""
+    },
+    {
+      "id": 14,
+      "col_start": "2",
+      "col_end": "6",
+      "row_start": "",
+      "row_end": ""
+    }
+  ],
+  "name": "grid",
+  "createdBy": "60b89b4466e4db0015d7f697",
+  "cardSet": "60b8dcd7697b0a0015afca6a",
+  "arrangementType": "grid",
+  "createdAt": {
+    "$date": "2021-06-03T13:45:38.242Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-03T14:11:38.634Z"
+  },
+  "__v": 0,
+  "responsive": false
+},{
+  "_id": {
+    "$oid": "60c0fda056f262001561cc66"
+  },
+  "grid": [],
+  "name": "red deck",
+  "createdBy": "60b89b4466e4db0015d7f697",
+  "cardSet": "60c0e8ae3d0fd40015ea2e6e",
+  "arrangementType": "stack",
+  "createdAt": {
+    "$date": "2021-06-09T17:42:56.047Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-09T17:43:47.135Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60c23cb7df3ed40015c2c512"
+  },
+  "grid": [],
+  "name": "Tester",
+  "createdBy": "60326cd72b310533d0d90c5c",
+  "cardSet": "603ad3aa0942e33f94435538",
+  "arrangementType": "",
+  "createdAt": {
+    "$date": "2021-06-10T16:24:23.396Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-10T16:24:23.396Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60c802c22d137f00154aa012"
+  },
+  "grid": [],
+  "name": "Card game",
+  "createdBy": "60b89b4466e4db0015d7f697",
+  "cardSet": "603ad3aa0942e33f94435538",
+  "arrangementType": "",
+  "createdAt": {
+    "$date": "2021-06-15T01:30:42.073Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-15T01:30:42.073Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60ca2bf684031e0015e09719"
+  },
+  "grid": [
+    {
+      "id": 0,
+      "col_start": "1"
+    },
+    {
+      "id": 1,
+      "col_start": ""
+    },
+    {
+      "id": 2,
+      "col_start": "",
+      "row_start": ""
+    },
+    {
+      "id": 4,
+      "col_start": ""
+    },
+    {
+      "id": 3,
+      "col_start": "1"
+    },
+    {
+      "id": 5,
+      "col_start": "",
+      "row_start": ""
+    },
+    {
+      "id": 6,
+      "col_start": ""
+    },
+    {
+      "id": 7,
+      "col_start": ""
+    },
+    {
+      "id": 8,
+      "col_start": "1"
+    },
+    {
+      "id": 9,
+      "col_start": ""
+    },
+    {
+      "id": 10,
+      "col_start": ""
+    }
+  ],
+  "name": "Card game 2.0",
+  "createdBy": "60b89b4466e4db0015d7f697",
+  "cardSet": "60ca16944a7fc70015c08c98",
+  "arrangementType": "grid",
+  "createdAt": {
+    "$date": "2021-06-16T16:51:02.205Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-17T02:50:29.215Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60cab8bcf5711a0015b33c29"
+  },
+  "grid": [],
+  "name": "stacked Card game 2.0",
+  "createdBy": "60b89b4466e4db0015d7f697",
+  "cardSet": "60ca16944a7fc70015c08c98",
+  "arrangementType": "stack",
+  "createdAt": {
+    "$date": "2021-06-17T02:51:40.741Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-17T02:52:34.063Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60d217dc96d4870015a91f58"
+  },
+  "grid": [],
+  "name": "for webapp",
+  "createdBy": "60b89b4466e4db0015d7f697",
+  "cardSet": "60cf95e6c9de4a001519dfaa",
+  "arrangementType": "stack",
+  "createdAt": {
+    "$date": "2021-06-22T17:03:24.640Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-24T15:32:20.166Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60ed8580f758bb0015b1ae8f"
+  },
+  "grid": [],
+  "name": "toptrump",
+  "createdBy": "60954826f4500c0015f03cc7",
+  "cardSet": "603ad3aa0942e33f94435538",
+  "arrangementType": "",
+  "createdAt": {
+    "$date": "2021-07-13T12:22:24.511Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-13T12:22:24.511Z"
+  },
+  "__v": 0
+}]
