@@ -195,7 +195,7 @@ function ActionBar(props) {
     var redoFlag=true;
     if(!getUndo())undoFlag=false;
     if(!getRedo())redoFlag=false;
-    return <div className="top-toolbar"on>
+    return <div className="top-toolbar">
         <Button tooltip="Export your code!" style={{ lineHeight: "12px" }} icon={<Icon className="right">code</Icon>} onClick={_ => setCodeOpen(true)} className="btn btn-outline" >
             <span className="hide-on-small-only">VIEW CODE</span>
         </Button>
