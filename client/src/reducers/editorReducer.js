@@ -7,12 +7,12 @@ const initialState = {
 };
 
 function getUndo(){
-    if(undo.length==0)return true;
+    if(undo.length===0)return true;
     return false
 }
 
 function getRedo(){
-    if(redo.length==0)return true;
+    if(redo.length===0)return true;
     return false
 }
 
@@ -20,7 +20,7 @@ export default function (state = initialState, action) {
     let newState;
     let index, front, type, value, ref;
     if( (JSON.stringify(state).includes("back"))){
-        if(action.type != "UNDO" && action.type != "SET_EDITING_STYLE" && action.type != "REDO"){
+        if(action.type !== "UNDO" && action.type !== "SET_EDITING_STYLE" && action.type !== "REDO"){
             undo.push(JSON.parse(JSON.stringify(state)));
         }
     }
@@ -129,16 +129,16 @@ export default function (state = initialState, action) {
                 ...newState, unsaved: true
             };
         case "UNDO":
-            var temp= undo.pop()
+            var temp1= undo.pop()
             redo.push(state)
             return {
-                ...temp, unsaved: true
+                ...temp1, unsaved: true
             };
         case "REDO":
-            var temp= redo.pop();
+            var temp2= redo.pop();
             undo.push(state)
             return {
-                ...temp, unsaved: true
+                ...temp2, unsaved: true
             };
         case "TOGGLE_OPTION":
             let option = action.payload.option;

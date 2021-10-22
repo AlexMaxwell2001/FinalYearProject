@@ -140,7 +140,7 @@ function AdvancedStyles(props) {
     advancedArray = Object.entries(props.editor[face].styles[id].data.advancedStyles);
   return <React.Fragment><h5>Advanced styles</h5>
     <GridModal trigger={
-      <Col style={{ paddingBottom: 15 }} s={12}><a style={{ textDecoration: "underline" }}> How do I use this?</a></Col>
+      <Col style={{ paddingBottom: 15 }} s={12}><div style={{ textDecoration: "underline", color:"blue", cursor:"pointer" }}> How do I use this?</div></Col>
     } />
     <Row>
       <TextInput id={props.id + "styleName"} value={styleName} onChange={e => setStyleName(e.target.value)} s={6} label={"Style Name"} />
@@ -226,7 +226,7 @@ function StyleSelector(props) {
 
               <Row>
                 <StyleModal trigger={
-                  <Col style={{ marginBottom: 15 }} s={12}><a style={{ textDecoration: "underline" }}>What do these mean?</a></Col>
+                  <Col style={{ marginBottom: 15 }} s={12}><div style={{ textDecoration: "underline", color:"blue", cursor:"pointer" }}>What do these mean?</div></Col>
                 } />
                 {BODY_OPTIONS.map((value, index) => {
                   let styleValue = validateStyle(body[value[1]]);

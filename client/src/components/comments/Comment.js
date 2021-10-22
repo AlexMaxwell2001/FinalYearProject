@@ -61,8 +61,8 @@ class Comment extends Component {
         <div style={ style.comment }>
           <h3>{this.props.author}</h3>
           <span dangerouslySetInnerHTML={ this.rawMarkup() } />
-          <a style={ style.updateLink } href='#' onClick={ this.updateComment }>update</a>
-          <a style={ style.deleteLink } href='#' onClick={ this.deleteComment }>delete</a>
+          <button style={ style.updateLink } class="btn btn-primary" onClick={ this.updateComment }>update</button>
+          <button style={ style.updateLink } class="btn btn-primary" onClick={ this.deleteComment }>delete</button>
           { (this.state.toBeUpdated)
             ? (<form onSubmit={ this.handleCommentUpdate }>
                 <StarRatings

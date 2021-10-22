@@ -21,19 +21,17 @@ import { FilterDropDown, FilterPrivacy, getSort } from '../components/Sort';
 import { useHistory } from 'react-router';
 
 const Iframe = (props) => {
-    let iframe_ref = null;
     const writeHTML = (frame) => {
         if (!frame) {
             return;
         }
-        iframe_ref = frame;
         let doc = frame.contentDocument;
         doc.open();
         doc.write(props.content);
         doc.close();
     };
     return (
-        <iframe  frameBorder="0" src="about:blank" scrolling="yes" height="100%" width="100%" ref={writeHTML} >
+        <iframe title="title" frameBorder="0" src="about:blank" scrolling="yes" height="100%" width="100%" ref={writeHTML} >
             <base target="_blank" />
             </iframe>
     );
@@ -44,7 +42,7 @@ function Preview(props) {
         return null;
         let card = props.editor.backEnabled ? generateFlippableCard(props.editor)
         : generateSingleCard(props.editor)
-    return <Iframe content={card.html + "<style>" + card.css.body + card.css.extras + card.css.content[0].css + card.css.content[1].css + "</style><script src='https://code.jquery.com/jquery-3.5.1.min.js' integrity='sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0='crossorigin='anonymous'></script>" + "<script>" + card.js + "</script>"} />
+    return <Iframe content={card.html + '<style>' + card.css.body + card.css.extras + card.css.content[0].css + card.css.content[1].css + "</style><script src=${https://code.jquery.com/jquery-3.5.1.min.js' integrity='sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0='crossorigin='anonymous'></script><script>" + card.js + '</script>'} />
 }
 
 function AddSet(props) {
@@ -311,7 +309,7 @@ function CardsView(props) {
                         onBlur={e => props.updateStyle(cardId, source, index, { "text": e.currentTarget.textContent })}>{styles.text}</span>
                 </button>
               case "Link Button":
-                return <a href="#"><button className = {className} onMouseEnter={_=>setMouseOverStyle(index)} onClick={_=>props.setEditingStyle({id: index, face:source})} key={index} style={{...styles, ...advancedStyles}}>
+                return <a href="https://google.com"><button className = {className} onMouseEnter={_=>setMouseOverStyle(index)} onClick={_=>props.setEditingStyle({id: index, face:source})} key={index} style={{...styles, ...advancedStyles}}>
                     <span contentEditable suppressContentEditableWarning={true}
                         onBlur={e => props.updateStyle(cardId, source, index, { "text": e.currentTarget.textContent })}>{styles.text}</span>
                 </button></a>

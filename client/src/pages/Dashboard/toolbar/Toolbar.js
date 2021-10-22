@@ -119,7 +119,6 @@ function LookUpComponent(props) {
     case "Button":
       return <ContentOption icon="smart_button" optionSet={otherOptions} {...props} />
       case "Link Button":
-        console.log([['href', 'href']].concat(otherOptions))
       return <ContentOption icon="link" optionSet={[['href', 'href']].concat(otherOptions)} {...props} />
     case "Seperator":
       return <ContentOption icon="maximize" optionSet={otherOptions} {...props} />

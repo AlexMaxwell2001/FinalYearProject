@@ -17,12 +17,12 @@ function CardOutput(props) {
     useEffect(() => {
         Prism.highlightAll();
     });
-    const copyText = (ref) => {
-        if (ref === "html") {
-            navigator.clipboard.writeText(card.html)
-            props.addMessage({ message: "Code copied to clipboard!", type: 1 })
-        }
-    }
+    // const copyText = (ref) => {
+    //     if (ref === "html") {
+    //         navigator.clipboard.writeText(card.html)
+    //         props.addMessage({ message: "Code copied to clipboard!", type: 1 })
+    //     }
+    // }
     return (
         <div>
             <Tabs className='tab-demo z-depth-1'>

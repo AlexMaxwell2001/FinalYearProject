@@ -6,7 +6,6 @@ export const setCards = cards => {
   };
 
   export const saveCard = (id, card) => {
-    console.log("save", card.back, id);
     return {
       type: "UPDATE_P_CARD",
       payload: {card, id}

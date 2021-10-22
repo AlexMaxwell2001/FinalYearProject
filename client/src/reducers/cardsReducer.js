@@ -30,7 +30,6 @@ export default function (state = initState(), action) {
             newState = state;
             let newCards = newState.cards;
             newCards.cards = newCards.cards.map(currentCard=> {
-                console.log(currentCard._id, id);
                 if(currentCard._id === id) {
                     return card
                 }

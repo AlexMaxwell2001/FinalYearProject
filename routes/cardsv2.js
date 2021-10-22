@@ -40,7 +40,6 @@ router.route('/template/:id').get((req, res) => {
 // });
 
 router.route('/update/:id').post((req, res) => {
-    console.log(req.body.card.body);
     newCard.findById(req.body.id)
         .then(_ => {
             newCard.updateOne({_id: req.body.card._id}, {...req.body.card})

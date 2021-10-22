@@ -13,20 +13,18 @@ import {
 import ArrangeOutput from './ArrangeOutput';
 import { FilterDropDown, FilterPrivacy, getSort } from '../components/Sort';
 import { MOST_RECENT } from '../utils/Constants';
-import { Prompt, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import WarningModal from '../components/WarningModal';
 import EditorLayout from '../Layout/EditorLayout';
-import { css, html, js } from 'js-beautify';
+import { css, js } from 'js-beautify';
 import InfoModal from '../components/InfoModal';
 
 
   const Iframe = (props) => {
-    let iframe_ref = null;
     const writeHTML = (frame) => {
         if (!frame) {
             return;
         }
-        iframe_ref = frame;
         let doc = frame.contentDocument;
         doc.open();
         doc.write(props.content);
@@ -234,7 +232,7 @@ function GridConfuration(props) {
             }>
             <Row>
                     <GridModal trigger = {
-                        <Col style={{marginBottom:15}} s={12}><a style={{textDecoration: "underline"}}>What do these mean?</a></Col>
+                        <Col style={{marginBottom:15}} s={12}><div style={{textDecoration: "underline", color:"blue", cursor:"pointer"}}>What do these mean?</div></Col>
                     }/>
                     <TextInput id={index + "cs"} value={checkValue("col_start")} onChange={e=>props.updateGridValue(index, "col_start", e.target.value)}  s={6} label="Column Start"></TextInput>
                     <TextInput id={index + "ce"} value={checkValue("col_end")} onChange={e=>props.updateGridValue(index, "col_end", e.target.value)}s={6} label="Column End"></TextInput>

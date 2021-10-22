@@ -34,19 +34,17 @@ function validateStyle(styleValue) {
 }
 
 const Iframe = (props) => {
-    let iframe_ref = null;
     const writeHTML = (frame) => {
         if (!frame) {
             return;
         }
-        iframe_ref = frame;
         let doc = frame.contentDocument;
         doc.open();
         doc.write(props.content);
         doc.close();
     };
     return (
-        <iframe frameBorder="0" src="about:blank" scrolling="yes" height="100%" width="100%" ref={writeHTML} />
+        <iframe title="html" frameBorder="0" src="about:blank" scrolling="yes" height="100%" width="100%" ref={writeHTML} />
     );
 };
 
@@ -54,7 +52,7 @@ function Preview(props) {
     if (!props.open)
         return null;
     let card = generateRegularCard({ ...props.sets, gridEnabled: false })
-    return <Iframe content={card.html + "<style>" + card.css.container + card.css.wrapper + card.css.body + card.css.extras + card.css.content + card.css.content.css + "</style><script src='https://code.jquery.com/jquery-3.5.1.min.js' integrity='sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0='crossorigin='anonymous'></script>" + "<script>" + card.js + "</script>"} />
+    return <Iframe content={card.html + "<style>" + card.css.container + card.css.wrapper + card.css.body + card.css.extras + card.css.content + card.css.content.css + "</style><script src='https://code.jquery.com/jquery-3.5.1.min.js' integrity='sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0='crossorigin='anonymous'></script><script>" + card.js + "</script>"} />
 }
 function EditSet(props) {
     const [codeOpen, setCodeOpen] = useState(false);
@@ -133,7 +131,7 @@ function EditSet(props) {
                             <div className='componentEditor'>
                                 <Row>
                                     <StyleModal trigger={
-                                        <Col style={{ marginBottom: 15 }} s={12}><a style={{ textDecoration: "underline" }}>What do these mean?</a></Col>
+                                        <Col style={{ marginBottom: 15 }} s={12}><div style={{ textDecoration: "underline",color:"blue", cursor:"pointer" }}>What do these mean?</div></Col>
                                     } />
                                     {CONTAINER_OPTIONS.map((value, index) => {
                                         let styleValue = validateStyle(props.sets.container[value[1]]);

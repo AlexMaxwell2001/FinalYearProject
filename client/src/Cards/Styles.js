@@ -34,13 +34,13 @@ export function BackgroundImage(props) {
         <Textarea id={"bi" + id + face} s={12} onChange={e=>props.updateStyle(cardId, face, id, { backgroundImage: e.target.value })} 
               value={validateStyle(styles.backgroundImage)} label="Image URL"></Textarea>
         <TextInput id={"alt" + id + face}  s={6}  onChange={e=>props.updateStyle(cardId, face, id, { alt: e.target.value })} 
-              value={validateStyle(styles.alt)} label={"Alt Text"} value={validateStyle(styles.alt)}/>
+              label={"Alt Text"} value={validateStyle(styles.alt)}/>
         <TextInput id={"bf" + id + face}  s={6} onChange={e=>props.updateStyle(cardId, face, id, { backdropFilter: e.target.value })} 
-              value={validateStyle(styles.backdropFilter)} label={"Backdrop Filter"} value={validateStyle(styles.backdropFilter)}/>
+              label={"Backdrop Filter"} value={validateStyle(styles.backdropFilter)}/>
         <TextInput id={"bs" + id + face}  s={6} onChange={e=>props.updateStyle(cardId, face, id, { backgroundSize: e.target.value })} 
-              value={validateStyle(styles.backgroundSize)} label={"Background Size"} value={validateStyle(styles.backgroundSize)}/>
+              label={"Background Size"} value={validateStyle(styles.backgroundSize)}/>
         <TextInput id={"br" + id + face}  s={6} onChange={e=>props.updateStyle(cardId, face, id, { backgroundRepeat: e.target.value })} 
-              value={validateStyle(styles.backgroundRepeat)} label={"Background Repeat"} value={validateStyle(styles.backgroundRepeat)}/>
+              label={"Background Repeat"} value={validateStyle(styles.backgroundRepeat)}/>
     </>
   }
   

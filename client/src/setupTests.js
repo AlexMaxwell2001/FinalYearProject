@@ -11,7 +11,6 @@ global.nextTick = function nextTick(){
 };
 global.findShallowIn = function findShallowIn(el,list){
 	return list.reduce(function(node,selector){
-		console.log(node.debug())
 		try{
 			node = node.dive()
 		}catch(e){

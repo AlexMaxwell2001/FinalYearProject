@@ -46,7 +46,6 @@ router.route('/template/:id').get((req, res) => {
 // });
 
 router.route('/update/:id').post((req, res) => {
-    console.log(req.body);
     cardSet.findByIdAndUpdate({_id: req.body.id},{...req.body.card, _id: req.body.id}, function(err, result){
         if(err){
             res.json('[POST] | /cards/update/:id | Card successfully updated!')
