@@ -1,6 +1,6 @@
 // Author @Liam
 // Turn our card configuration into code
-var rename = require('deep-rename-keys');
+//var rename = require('deep-rename-keys');
 
 const convertToString = (front, backEnabled, updatedCSS, editorState, cardName, index, set) => {
     let cssObj = Object.assign({}, updatedCSS); // create copy of the object
@@ -119,7 +119,7 @@ const generateJS = (editorState, index) => {
 }
 
 const generateSingleJS = (editorState) => {
-    const {backEnabled, backTrigger, frontTrigger, front, back, name} = editorState
+    const {backEnabled, backTrigger, frontTrigger, front, back} = editorState
     let js = ""
     if(backEnabled) {
         let selectedFrontTrigger = front.styles[frontTrigger.id]
@@ -190,7 +190,7 @@ let testing = Object.assign({}, css);//make a clone of the object so we can dele
     if(testing.styles) {
     testing.styles = testing.styles.map( style => {
         let correctedAdvanced = null, correctedRegular = {}
-        if(style.data.advancedStyles != undefined) {
+        if(style.data.advancedStyles !== undefined) {
             let newStyles = style.data.advancedStyles;
             for (let [k, v] of Object.entries(newStyles)) {
                 let x = camelCaseToDash(k)
@@ -228,34 +228,34 @@ let testing = Object.assign({}, css);//make a clone of the object so we can dele
     return testing;
 
 //this will rename the keys to regular css
-var updatedCSS = rename(testing, function (key) {
-    if (key === 'card') return '.card';
-    if (key === 'fontWeight') return 'font-weight'
-    if (key === 'maxHeight') return 'max-height'
-    if (key === 'cardTitle') return '.cardTitle';
-    if (key === 'cardTitle2') return '.cardTitle2';
-    if (key === 'cardLink Button') return '.cardLinkButton';
-    if (key === 'cardParagraph1') return '.cardParagraph1';
-    if (key === 'cardParagraph2') return '.cardParagraph2';
-    if (key === 'cardParagraph3') return '.cardParagraph3';
-    if (key === 'cardImg') return '.cardImg';
-    if (key === 'cardButton') return '.cardButton';
-    if (key === 'maxWidth') return 'max-width';
-    if (key === 'boxShadow') return 'box-shadow';
-    if (key === 'textAlign') return 'text-align';
-    if (key === 'fontFamily') return 'font-family';
-    if (key === 'backgroundColor') return 'background-color';
-    if (key === 'backgroundImage') return 'background-image';
-    if (key === 'backgroundRepeat') return 'background-repeat';
-    if (key === 'backdropFilter') return 'backdrop-filter';
-    if (key === 'fontSize') return 'font-size';
-    if (key === 'lineHeight') return 'line-height';
-    if (key === 'borderRadius') return 'border-radius';
-    if (key === 'backgroundSize') return 'background-size';
-    if (key === 'minHeight') return 'min-height';
-    return key;
-})
-return updatedCSS;
+// var updatedCSS = rename(testing, function (key) {
+//     if (key === 'card') return '.card';
+//     if (key === 'fontWeight') return 'font-weight'
+//     if (key === 'maxHeight') return 'max-height'
+//     if (key === 'cardTitle') return '.cardTitle';
+//     if (key === 'cardTitle2') return '.cardTitle2';
+//     if (key === 'cardLink Button') return '.cardLinkButton';
+//     if (key === 'cardParagraph1') return '.cardParagraph1';
+//     if (key === 'cardParagraph2') return '.cardParagraph2';
+//     if (key === 'cardParagraph3') return '.cardParagraph3';
+//     if (key === 'cardImg') return '.cardImg';
+//     if (key === 'cardButton') return '.cardButton';
+//     if (key === 'maxWidth') return 'max-width';
+//     if (key === 'boxShadow') return 'box-shadow';
+//     if (key === 'textAlign') return 'text-align';
+//     if (key === 'fontFamily') return 'font-family';
+//     if (key === 'backgroundColor') return 'background-color';
+//     if (key === 'backgroundImage') return 'background-image';
+//     if (key === 'backgroundRepeat') return 'background-repeat';
+//     if (key === 'backdropFilter') return 'backdrop-filter';
+//     if (key === 'fontSize') return 'font-size';
+//     if (key === 'lineHeight') return 'line-height';
+//     if (key === 'borderRadius') return 'border-radius';
+//     if (key === 'backgroundSize') return 'background-size';
+//     if (key === 'minHeight') return 'min-height';
+//     return key;
+// })
+// return updatedCSS;
 }
 
 
@@ -265,7 +265,7 @@ const getCardHTML = (currentCard, gridEnabled, index) => {
     let frontCSS = newToCss(front);
     let backCSS = newToCss(back);
     let cleanName = getCleanName(name) + "-" + index;
-    let wrapperName = !backEnabled ? `${cleanName}-wrapper` : `${cleanName}-wrapper flip-wrapper`;
+    //let wrapperName = !backEnabled ? `${cleanName}-wrapper` : `${cleanName}-wrapper flip-wrapper`;
     let cardName = !backEnabled ? `${cleanName}` : `${cleanName} inner`;
     let backName = flipDirection === "false" ? "back-h" : "back"
     let innerName = flipDirection === "false" ? "inner-h" : "inner"
@@ -282,7 +282,7 @@ const getGridHTML = (currentCard, gridEnabled, index) => {
     let frontCSS = newToCss(front);
     let backCSS = newToCss(back);
     let cleanName = getCleanName(name) + "-" + index;
-    let wrapperName = !backEnabled ? `${cleanName}-wrapper` : `${cleanName}-wrapper flip-wrapper`;
+    //let wrapperName = !backEnabled ? `${cleanName}-wrapper` : `${cleanName}-wrapper flip-wrapper`;
     let backName = flipDirection === "false" ? "back-h" : "back"
     let innerName = flipDirection === "false" ? "inner-h" : "inner"
     let cardName = !backEnabled ? `${cleanName}` : `${cleanName} ${innerName}`;
@@ -357,7 +357,7 @@ const generateRegularCard = (editorState) => {
 }
 
 const generateFlippableCard = (editorState) => {
-    const {front, back, body, name, backEnabled, flipDirection} = editorState
+    const {front, back, body, backEnabled, flipDirection} = editorState
     let rotate = flipDirection === "false" ? "Y" : "X"
     let frontCSS = newToCss(front);
     let backCSS = newToCss(back);
@@ -379,7 +379,7 @@ const generateFlippableCard = (editorState) => {
 }
 
 const generateSingleCard = (editorState) => {
-    const {front, back, body, name} = editorState
+    const {front, body} = editorState
     let frontCSS = newToCss(front);
     let bodyCss = newToCss(body);
     return {
@@ -406,7 +406,7 @@ const generateGrid = (config, grid, cards, container) => {
             body: '',
             content: '',
             wrapper: '',
-            extras
+            extras:'',
         },
         js: ''
     }
@@ -473,7 +473,7 @@ const generateStack = (editorState) => {
             body: '',
             content: '',
             wrapper: '',
-            extras
+            extras:'',
         },
         js: ''
     }
