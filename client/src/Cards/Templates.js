@@ -69,7 +69,14 @@ function Templates(props) {
         <h3 className="black-text">Card Library</h3>
         <Tabs className='tab-demo z-depth-1'>
             <Tab title="Templates">
-                <div className="card-grid-container-smaller">
+                <div className="card-grid-container">
+                    <b style={{ fontSize: 18 }}>Search:</b>
+                    <input value={nameFilter} 
+                        onChange={e => setNameFilter(e.target.value)} 
+                        className="bordered" 
+                        placeholder="Card Name" 
+                        type="text" />
+                    <FilterDropDown sort={sort} setSort={setSort} />
                     {renderDefaultCards()}
                 </div>
             </Tab>
