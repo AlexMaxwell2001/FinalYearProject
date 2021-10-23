@@ -163,7 +163,9 @@ function EditSet(props) {
                 </div>
             </div></React.Fragment>
     }
-    const handleSave = () => {
+    const handleSave = (context) => {
+        if(context === "private")props.setVisibility("public")
+        else props.setVisibility("private")
         props.setUnsaved();
         saveSet(id, props.sets)
             .then(_ => props.addMessage({ message: "Set Saved Successfully!", type: 1 }))
@@ -227,6 +229,11 @@ function EditSet(props) {
                     open={codeOpen}>
                     <SetOutput open={codeOpen} sets={props.sets} />
                 </Modal>
+                <Button
+                    icon={<Icon className="right">public</Icon>}
+                    onClick={_ => handleSave(props.sets.visibility)}
+                    className="btn btn-primary" >
+                    Make Set {props.sets.visibility}</Button>
                 <Modal
                     header='Settings'
                     fixedFooter={true}
@@ -241,14 +248,6 @@ function EditSet(props) {
                     />
                     <TagSelector tags={props.sets.tags} setTags={props.setTags} />
                     <TagDisplay tags={props.sets.tags} setTags={props.setTags} deleteable={true} />
-                    <h5>Card Visibility</h5>
-                    <p>Select wheter you want the card to be visible to all users of the app or keep it private if you don't
-                    want others to see your card design! Make sure you hit save to update the cards visibility permanently.
-                    This can be changed at anytime. When using the "Save As" feature you can set the new cards visibility
-           from here, whatever the current state is, is what the new cards visibility will be set to.</p>
-                    <p><b>Current state:</b> {props.sets.visibility}</p>
-                    <Button onClick={_ => props.setVisibility("private")} className="btn-primary">Turn Off</Button>
-                    <Button onClick={_ => props.setVisibility("public")} className="btn-primary">Turn On</Button>
                 </Modal></React.Fragment>}
         </div>
     }

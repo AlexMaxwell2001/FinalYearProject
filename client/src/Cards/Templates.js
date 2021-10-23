@@ -74,9 +74,8 @@ function Templates(props) {
                     <input value={nameFilter} 
                         onChange={e => setNameFilter(e.target.value)} 
                         className="bordered" 
-                        placeholder="Card Name" 
+                        placeholder="Template Name" 
                         type="text" />
-                    <FilterDropDown sort={sort} setSort={setSort} />
                     {renderDefaultCards()}
                 </div>
             </Tab>

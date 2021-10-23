@@ -51,10 +51,10 @@ class CommentForm extends Component {
           style={ style.commentFormText}
           value={ this.state.text }
           onChange={ this.handleTextChange } />
-        <input
+        <button
           type='submit'
-          style={ style.commentFormPost }
-          value='Post'/>
+          className='btn btn-primary'
+          >POST</button>
       </form>
     )
   }
