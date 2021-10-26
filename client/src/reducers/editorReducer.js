@@ -20,8 +20,6 @@ export default function (state = initialState, action) {
     let newState;
     let index, front, type, value, ref;
     if( (JSON.stringify(state).includes("back"))){
-        console.log("came here" + action.type)
-        console.log(action.payload)
         if(action.type !== "UNDO" && action.type !== "SET_EDITING_STYLE" && action.type !== "REDO" && action.type !== 'UPDATE_EDITOR_STATE' && action.type !== "RESET_EDITOR_STATE" && action.type !== "TOGGLE_DRAWER" && action.type !== "CLOSE_DRAWER"){
             undo.push(JSON.parse(JSON.stringify(state)));
         }

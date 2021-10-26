@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'materialize-css';
 import { connect } from "react-redux";
-import { deleteCard } from "../api/CardsAPI"
+import { deleteCard} from "../api/CardsAPI"
 import { logoutUser } from "../actions/authActions";
 import { MOST_RECENT } from '../utils/Constants'
 import { newCard, SelectTemplate } from '../actions/editorActions';
@@ -32,9 +32,11 @@ function Templates(props) {
     }
     let pageSize = 10
     let pageStart = (currentPage - 1) * pageSize;
-    let defaultCards = props.cards.cards.cards.filter(cards => cards.createdBy === "root");
+    let defaultCards = props.cards.cards.cards.filter(cards => cards.visibility === "public");
     let myCards = props.cards.cards.cards.filter(cards => cards.createdBy === user.id);
-    const renderDefaultCards = () => defaultCards.map((value, index) => {
+    const renderDefaultCards = () =>defaultCards
+        .filter(v => { return v.name && v.name.toLowerCase().includes(nameFilter.toLowerCase())})
+        .map((value, index) => {
         return <div onClick={_ => {openCard(value._id)}} 
                     className="card-grid-item" key={index}>
                     <h5><b>{value.name}</b></h5>

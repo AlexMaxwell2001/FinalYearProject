@@ -163,9 +163,11 @@ function EditSet(props) {
                 </div>
             </div></React.Fragment>
     }
-    const handleSave = (context) => {
-        if(context === "private")props.setVisibility("public")
-        else props.setVisibility("private")
+    const handleSave = (context, offset) => {
+        if(offset === 1){
+            if(context === "private")props.setVisibility("public")
+            else props.setVisibility("private")
+        }
         props.setUnsaved();
         saveSet(id, props.sets)
             .then(_ => props.addMessage({ message: "Set Saved Successfully!", type: 1 }))
@@ -231,9 +233,9 @@ function EditSet(props) {
                 </Modal>
                 <Button
                     icon={<Icon className="right">public</Icon>}
-                    onClick={_ => handleSave(props.sets.visibility)}
+                    onClick={_ => handleSave(props.sets.visibility, 1)}
                     className="btn btn-primary" >
-                    Make Set {props.sets.visibility}</Button>
+                    Make Set {props.sets.visibility === "public"? "private" : "public" }</Button>
                 <Modal
                     header='Settings'
                     fixedFooter={true}
