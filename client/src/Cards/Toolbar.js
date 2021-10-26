@@ -223,7 +223,6 @@ function StyleSelector(props) {
           <CollapsibleItem header={<b style={{ textAlign: "center", width: "60%" }}>Body</b>}
             icon={<i className="material-icons">dashboard</i>} >
             <div className='componentEditor'>
-
               <Row>
                 <StyleModal trigger={
                   <Col style={{ marginBottom: 15 }} s={12}><div style={{ textDecoration: "underline", color:"blue", cursor:"pointer" }}>What do these mean?</div></Col>

@@ -8,7 +8,7 @@ import {
 import {
     getRedo, getUndo
 } from '../reducers/editorReducer';
-import {saveCard} from '../actions/cardActions'
+import {saveCard, setCardVisibility} from '../actions/cardActions'
 import { generateFlippableCard, generateSingleCard } from '../Code/CodeGenerator'
 import { updateCard } from '../api/CardsAPI';
 import CardOutput from './CardOutput'
@@ -179,6 +179,15 @@ function ActionBar(props) {
     const [codeOpen, setCodeOpen] = useState(false);
     const [setsOpen, setSetsOpen] = useState(false);
     const [previewOpen, setPreviewOpen] = useState(false);
+    const handleTemplateSave = (context) => {
+        if(context === "private")props.setCardVisibility("public")
+        else props.setCardVisibility("private")
+        updateCard(props.editor._id, props.editor)
+            .then(_ => { 
+                props.setSaved();
+                props.saveCard(props.editor._id, props.editor);
+            })
+    }
     const handleSave = async e => {
         e.preventDefault();
         updateCard(props.editor._id, props.editor)
@@ -251,6 +260,12 @@ function ActionBar(props) {
         <Button icon={<Icon className="right">redo</Icon>} onClick={_ => props.redoContent()} className="btn btn-primary"
             type="submit" id="redo"  tooltip="Redo your last undo!" disabled={redoFlag}>
              <span className="hide-on-small-only">Redo</span>
+        </Button>
+        <Button
+            icon={<Icon className="right">public</Icon>}
+            onClick={_ => handleTemplateSave("private")}
+            className="btn btn-primary" >
+            Make card {true?"a template":"private"}
         </Button>
         <Modal
             header='Preview'
@@ -361,6 +376,7 @@ export default connect(
         updateSetDescription,
         setSaved,
         saveCard,
+        setCardVisibility,
         flipCard,
         undoContent,
         redoContent,

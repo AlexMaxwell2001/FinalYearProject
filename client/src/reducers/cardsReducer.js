@@ -17,8 +17,14 @@ Delete Card
 
 export default function (state = initState(), action) {
     let newState;
-    let index;
+    let index, value, ref;
     switch (action.type) {
+        case "UPDATE_CARD_VALUE":
+            ref = action.payload.ref; //object name
+            value = action.payload.value; //object value
+            newState = state;
+            state[ref] = value;
+            return {...newState, unsaved: true}            
         case "SET_CARDS":
             let cards = action.payload;
             newState = state;

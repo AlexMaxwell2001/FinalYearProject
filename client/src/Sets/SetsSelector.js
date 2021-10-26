@@ -27,12 +27,11 @@ function SetsSelector(props) {
                 return card.createdBy === props.auth.user.id
             }))
             setPublicSets(res.data.allCards.filter(card => {
-            //     return card.createdBy !== props.auth.user.id
-                   return card.visibility === "public"
+                   return card.visibility === "public" && card.createdBy !== props.auth.user.id
            }))
             setLoading(false);
         })
-            .catch(_ => props.addMessage({ message: "Error loadubg Sets", type: 2 }))
+            .catch(_ => props.addMessage({ message: "Error loading Sets", type: 2 }))
     }
     const removeSet = (id) => {
         deleteSet(id).then(_ => {
@@ -100,8 +99,6 @@ function SetsSelector(props) {
                     <Tab title="Public Sets" >
                         <div className="card-grid-container-small">
                             {publicSets.map((value, index) => {
-                                console.log(value)
-                                console.log(value.tags)
                                 return <Link key={index + value._id} to={"/edit-set?id=" + value._id}>
                                     <div style={{ color: '#676767' }} className="card-grid-item" key={index}>
                                         <h5><b>{value.name}</b></h5>

@@ -235,7 +235,8 @@ function EditSet(props) {
                     icon={<Icon className="right">public</Icon>}
                     onClick={_ => handleSave(props.sets.visibility, 1)}
                     className="btn btn-primary" >
-                    Make Set {props.sets.visibility === "public"? "private" : "public" }</Button>
+                    Make Set {props.sets.visibility === "public"? "private" : "public" }
+                </Button>
                 <Modal
                     header='Settings'
                     fixedFooter={true}
