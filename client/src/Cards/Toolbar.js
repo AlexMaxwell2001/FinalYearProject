@@ -229,10 +229,10 @@ function StyleSelector(props) {
                 } />
                 {BODY_OPTIONS.map((value, index) => {
                   let styleValue = validateStyle(body[value[1]]);
-                  return <TextInput key={index} id={props.cardId + "body" + index} s={6} label={value[0]} value={styleValue}
-                    onChange={e => {
+                  return <TextInput key={index} id={props.cardId + "body" + index} s={6} label={value[0]} defaultValue={styleValue}
+                    onBlur={e => {
                       props.updateBody(props.cardId, { [value[1]]: e.target.value });
-                    }} />
+                    }}></TextInput>
                 })}
               </Row>
             </div>

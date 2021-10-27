@@ -31,16 +31,16 @@ export function BackgroundImage(props) {
         <Col s={12}>
         <hr></hr>
         </Col>
-        <Textarea id={"bi" + id + face} s={12} onChange={e=>props.updateStyle(cardId, face, id, { backgroundImage: e.target.value })} 
-              value={validateStyle(styles.backgroundImage)} label="Image URL"></Textarea>
-        <TextInput id={"alt" + id + face}  s={6}  onChange={e=>props.updateStyle(cardId, face, id, { alt: e.target.value })} 
-              label={"Alt Text"} value={validateStyle(styles.alt)}/>
-        <TextInput id={"bf" + id + face}  s={6} onChange={e=>props.updateStyle(cardId, face, id, { backdropFilter: e.target.value })} 
-              label={"Backdrop Filter"} value={validateStyle(styles.backdropFilter)}/>
-        <TextInput id={"bs" + id + face}  s={6} onChange={e=>props.updateStyle(cardId, face, id, { backgroundSize: e.target.value })} 
-              label={"Background Size"} value={validateStyle(styles.backgroundSize)}/>
+        <Textarea id={"bi" + id + face} s={12} onBlur={e=>props.updateStyle(cardId, face, id, { backgroundImage: e.target.value })} 
+              defaultValue={validateStyle(styles.backgroundImage)} label="Image URL"></Textarea>
+        <TextInput id={"alt" + id + face}  s={6}  onBlur={e=>props.updateStyle(cardId, face, id, { alt: e.target.value })} 
+              label={"Alt Text"} defaultValue={validateStyle(styles.alt)}/>
+        <TextInput id={"bf" + id + face}  s={6} onBlur={e=>props.updateStyle(cardId, face, id, { backdropFilter: e.target.value })} 
+              label={"Backdrop Filter"} defaultValue={validateStyle(styles.backdropFilter)}/>
+        <TextInput id={"bs" + id + face}  s={6} onBlur={e=>props.updateStyle(cardId, face, id, { backgroundSize: e.target.value })} 
+              label={"Background Size"} defaultValue={validateStyle(styles.backgroundSize)}/>
         <TextInput id={"br" + id + face}  s={6} onChange={e=>props.updateStyle(cardId, face, id, { backgroundRepeat: e.target.value })} 
-              label={"Background Repeat"} value={validateStyle(styles.backgroundRepeat)}/>
+              label={"Background Repeat"} defaultValue={validateStyle(styles.backgroundRepeat)}/>
     </>
   }
   
@@ -75,18 +75,18 @@ export function BackgroundImage(props) {
         <Col s={12}>
         <hr></hr>
         </Col>
-          <TextInput s={6} id={"Width " + id} label={"Width"}  onChange={e=>props.updateStyle(cardId, face, id, { width: e.target.value })} 
-              value={validateStyle(styles.width)}/>
-          <TextInput s={6} id={"Height " + id} label={"Height"} onChange={e=>props.updateStyle(cardId, face, id, { height: e.target.value })} 
-              value={validateStyle(styles.height)}/>
-          <TextInput s={6} id={"MaxW " + id} label={"Max"}  onChange={e=>props.updateStyle(cardId, face, id, { maxWidth: e.target.value })} 
-              value={validateStyle(styles.maxWidth)}/>
-          <TextInput s={6} id={"MaxH " + id} label={"Max"}  onChange={e=>props.updateStyle(cardId, face, id, { maxHeight: e.target.value })} 
-              value={validateStyle(styles.maxHeight)}/>
-          <TextInput s={6} id={"MinW " + id} label={"Min"}  onChange={e=>props.updateStyle(cardId, face, id, { minWidth: e.target.value })} 
-              value={validateStyle(styles.minWidth)}/>
-          <TextInput s={6} id={"MinH " + id} label={"Min"}  onChange={e=>props.updateStyle(cardId, face, id, { minHeight: e.target.value })} 
-              value={validateStyle(styles.minHeight)}/>
+          <TextInput s={6} id={"Width " + id} label={"Width"}  onBlur={e=>props.updateStyle(cardId, face, id, { width: e.target.value })} 
+              defaultValue={validateStyle(styles.width)}/>
+          <TextInput s={6} id={"Height " + id} label={"Height"} onBlur={e=>props.updateStyle(cardId, face, id, { height: e.target.value })} 
+              defaultValue={validateStyle(styles.height)}/>
+          <TextInput s={6} id={"MaxW " + id} label={"Max"}  onBlur={e=>props.updateStyle(cardId, face, id, { maxWidth: e.target.value })} 
+              defaultValue={validateStyle(styles.maxWidth)}/>
+          <TextInput s={6} id={"MaxH " + id} label={"Max"}  onBlur={e=>props.updateStyle(cardId, face, id, { maxHeight: e.target.value })} 
+              defaultValue={validateStyle(styles.maxHeight)}/>
+          <TextInput s={6} id={"MinW " + id} label={"Min"}  onBlur={e=>props.updateStyle(cardId, face, id, { minWidth: e.target.value })} 
+              defaultValue={validateStyle(styles.minWidth)}/>
+          <TextInput s={6} id={"MinH " + id} label={"Min"}  onBlur={e=>props.updateStyle(cardId, face, id, { minHeight: e.target.value })} 
+              defaultValue={validateStyle(styles.minHeight)}/>
     </>
   }
   
@@ -106,14 +106,14 @@ export function BackgroundImage(props) {
           <option>sticky</option>
           <option>static</option>
         </Select>
-        <TextInput id={"left " + id} onChange={e=>props.updateStyle(cardId, face, id, { left: e.target.value })} 
-              value={validateStyle(styles.left)} s={3} label="left"></TextInput>
-        <TextInput id={"top " + id} onChange={e=>props.updateStyle(cardId, face, id, { top: e.target.value })} 
-              value={validateStyle(styles.top)} s={3} label="top"></TextInput>
-        <TextInput id={"right " + id} onChange={e=>props.updateStyle(cardId, face, id, { right: e.target.value })} 
-              value={validateStyle(styles.right)} s={3} label="right"></TextInput>
-        <TextInput id={"bottom " + id} onChange={e=>props.updateStyle(cardId, face, id, { bottom: e.target.value })} 
-              value={validateStyle(styles.bottom)} s={3} label="bottom"></TextInput>
+        <TextInput id={"left " + id} onBlur={e=>props.updateStyle(cardId, face, id, { left: e.target.value })} 
+              defaultValue={validateStyle(styles.left)} s={3} label="left"></TextInput>
+        <TextInput id={"top " + id} onBlur={e=>props.updateStyle(cardId, face, id, { top: e.target.value })} 
+              defaultValue={validateStyle(styles.top)} s={3} label="top"></TextInput>
+        <TextInput id={"right " + id} onBlur={e=>props.updateStyle(cardId, face, id, { right: e.target.value })} 
+              defaultValue={validateStyle(styles.right)} s={3} label="right"></TextInput>
+        <TextInput id={"bottom " + id} onBlur={e=>props.updateStyle(cardId, face, id, { bottom: e.target.value })} 
+              defaultValue={validateStyle(styles.bottom)} s={3} label="bottom"></TextInput>
    </>
   }
   
@@ -128,12 +128,12 @@ export function BackgroundImage(props) {
         </Col>
         <Row>
           <label>Text</label>
-        <Textarea  onChange={e=>props.updateStyle(cardId, face, id, { text: e.target.value })} 
-              value={validateStyle(styles.text)} className="bordered" s={12}></Textarea>
-        <TextInput id={"fs" + face + id} onChange={e=>props.updateStyle(cardId, face, id, { fontSize: e.target.value })} 
-              value={validateStyle(styles.fontSize)} s={4} label="Font Size"></TextInput>
-        <TextInput id={"lh" + face + id} onChange={e=>props.updateStyle(cardId, face, id, { lineHeight: e.target.value })} 
-              value={validateStyle(styles.lineHeight)} s={4} label="line-height"></TextInput>
+        <Textarea  onBlur={e=>props.updateStyle(cardId, face, id, { text: e.target.value })} 
+              defaultValue={validateStyle(styles.text)} className="bordered" s={12}></Textarea>
+        <TextInput id={"fs" + face + id} onBlur={e=>props.updateStyle(cardId, face, id, { fontSize: e.target.value })} 
+              defaultValue={validateStyle(styles.fontSize)} s={4} label="Font Size"></TextInput>
+        <TextInput id={"lh" + face + id} onBlur={e=>props.updateStyle(cardId, face, id, { lineHeight: e.target.value })} 
+              defaultValue={validateStyle(styles.lineHeight)} s={4} label="line-height"></TextInput>
         <Select id={"fw" + face + id} onChange={e=>props.updateStyle(cardId, face, id, { fontWeight: e.target.value })} 
               value={validateStyle(styles.fontWeight)} s={4} label="weight">
           <option>100</option>
@@ -162,14 +162,14 @@ export function BackgroundImage(props) {
     <Col s={12}>
         <h5>Padding</h5>
         </Col>
-        <TextInput id={"pl" + face + id} s={3} label="left"   onChange={e=>props.updateStyle(cardId, face, id, { paddingLeft: e.target.value })} 
-              value={validateStyle(styles.paddingLeft)}></TextInput>
-        <TextInput id={"pr" + face + id} s={3} label="top"   onChange={e=>props.updateStyle(cardId, face, id, { paddingTop: e.target.value })} 
-              value={validateStyle(styles.paddingTop)}></TextInput>
-        <TextInput id={"pt" + face + id} s={3} label="right"   onChange={e=>props.updateStyle(cardId, face, id, { paddingRight: e.target.value })} 
-              value={validateStyle(styles.paddingRight)}></TextInput>
-        <TextInput id={"pn" + face + id}  s={3} label="bottom"   onChange={e=>props.updateStyle(cardId, face, id, { paddingBottom: e.target.value })} 
-              value={validateStyle(styles.paddingBottom)}></TextInput>
+        <TextInput id={"pl" + face + id} s={3} label="left"   onBlur={e=>props.updateStyle(cardId, face, id, { paddingLeft: e.target.value })} 
+              defaultValue={validateStyle(styles.paddingLeft)}></TextInput>
+        <TextInput id={"pr" + face + id} s={3} label="top"   onBlur={e=>props.updateStyle(cardId, face, id, { paddingTop: e.target.value })} 
+              defaultValue={validateStyle(styles.paddingTop)}></TextInput>
+        <TextInput id={"pt" + face + id} s={3} label="right"   onBlur={e=>props.updateStyle(cardId, face, id, { paddingRight: e.target.value })} 
+              defaultValue={validateStyle(styles.paddingRight)}></TextInput>
+        <TextInput id={"pn" + face + id}  s={3} label="bottom"   onBlur={e=>props.updateStyle(cardId, face, id, { paddingBottom: e.target.value })} 
+              defaultValue={validateStyle(styles.paddingBottom)}></TextInput>
    </>
   }
   
@@ -181,14 +181,14 @@ export function BackgroundImage(props) {
     <Col s={12}>
         <h5>Margin</h5>
         </Col>
-        <TextInput id={"ml" + face + id} s={3} label="left"   onChange={e=>props.updateStyle(cardId, face, id, { marginLeft: e.target.value })} 
-              value={validateStyle(styles.marginLeft)}></TextInput>
-        <TextInput id={"mr" + face + id} s={3} label="top"   onChange={e=>props.updateStyle(cardId, face, id, { marginTop: e.target.value })} 
-              value={validateStyle(styles.marginTop)}></TextInput>
-        <TextInput id={"mt" + face + id} s={3} label="right"   onChange={e=>props.updateStyle(cardId, face, id, { marginRight: e.target.value })} 
-              value={validateStyle(styles.marginRight)}></TextInput>
-        <TextInput id={"mn" + face + id}  s={3} label="bottom"   onChange={e=>props.updateStyle(cardId, face, id, { marginBottom: e.target.value })} 
-              value={validateStyle(styles.marginBottom)}></TextInput>
+        <TextInput id={"ml" + face + id} s={3} label="left"   onBlur={e=>props.updateStyle(cardId, face, id, { marginLeft: e.target.value })} 
+              defaultValue={validateStyle(styles.marginLeft)}></TextInput>
+        <TextInput id={"mr" + face + id} s={3} label="top"   onBlur={e=>props.updateStyle(cardId, face, id, { marginTop: e.target.value })} 
+              defaultValue={validateStyle(styles.marginTop)}></TextInput>
+        <TextInput id={"mt" + face + id} s={3} label="right"   onBlur={e=>props.updateStyle(cardId, face, id, { marginRight: e.target.value })} 
+              defaultValue={validateStyle(styles.marginRight)}></TextInput>
+        <TextInput id={"mn" + face + id}  s={3} label="bottom"   onBlur={e=>props.updateStyle(cardId, face, id, { marginBottom: e.target.value })} 
+              defaultValue={validateStyle(styles.marginBottom)}></TextInput>
    </>
   }
   
@@ -223,8 +223,8 @@ export function BackgroundImage(props) {
           <ColorPicker onColorChange={e=>props.updateStyle(cardId, face, id, { borderColor: e })} color={styles.borderColor || 'rgba(0, 0, 0, 1)'}/>
         </Col>
         <TextInput id={"border-width" + face + id} s={3}   
-              onChange={e=>props.updateStyle(cardId, face, id, { borderWidth: e.target.value })} 
-              value={validateStyle(styles.borderWidth)} label={"Width"}>
+              onBlur={e=>props.updateStyle(cardId, face, id, { borderWidth: e.target.value })} 
+              defaultValue={validateStyle(styles.borderWidth)} label={"Width"}>
         </TextInput>
         <Select id={"fw" + face + id} onChange={e=>props.updateStyle(cardId, face, id, { borderStyle: e.target.value })} 
               value={validateStyle(styles.borderStyle)} s={3} label="Style">
@@ -232,8 +232,8 @@ export function BackgroundImage(props) {
           <option>solid</option>
           <option>dotted</option>
         </Select>
-        <TextInput id={"border-radius" + face + id} s={3}  onChange={e=>props.updateStyle(cardId, face, id, { borderRadius: e.target.value })} 
-              value={validateStyle(styles.borderRadius)} 
+        <TextInput id={"border-radius" + face + id} s={3}  onBlur={e=>props.updateStyle(cardId, face, id, { borderRadius: e.target.value })} 
+              defaultValue={validateStyle(styles.borderRadius)} 
               label={"Radius"}>
         </TextInput>
         </Row>
