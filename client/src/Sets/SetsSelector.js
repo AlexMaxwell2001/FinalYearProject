@@ -98,6 +98,11 @@ function SetsSelector(props) {
                     </Tab>
                     <Tab title="Public Sets" >
                         <div className="card-grid-container-small">
+                            {!publicSets.length && 
+                                <React.Fragment>
+                                    <h5 style={{textAlign: 'center'}}>No public sets yet!</h5>
+                                </React.Fragment>
+                            }
                             {publicSets.map((value, index) => {
                                 return <Link key={index + value._id} to={"/edit-set?id=" + value._id}>
                                     <div style={{ color: '#676767' }} className="card-grid-item" key={index}>

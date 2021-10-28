@@ -55,8 +55,8 @@ const getCard = (id) => {
 }
 
 
-const loadCards = (userID) => {
-    return get(userID);
+const loadCards = () => {
+    return get();
 }
 
 

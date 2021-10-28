@@ -20,9 +20,13 @@ export default function (state = initialState, action) {
     let newState;
     let index, front, type, value, ref;
     if( (JSON.stringify(state).includes("back"))){
-        if(action.type !== "UNDO" && action.type !== "SET_EDITING_STYLE" && action.type !== "REDO" && action.type !== 'UPDATE_EDITOR_STATE' && action.type !== "RESET_EDITOR_STATE" && action.type !== "TOGGLE_DRAWER" && action.type !== "CLOSE_DRAWER"&& action.type !== "EDITOR_SET_VALUE" && action.type !== "UPDATE_CARD_VALUE" && action.type !== "UPDATE_P_CARD"){
-            console.log(action.type)
-            undo.push(JSON.parse(JSON.stringify(state)));
+        if(action.type !== "UNDO" && action.type !== "SET_EDITING_STYLE" && action.type !== "ADD_MESSAGE" && action.type !== "REMOVE_MESSAGE" && action.type !== "REDO" && action.type !== 'UPDATE_EDITOR_STATE' && action.type !== "RESET_EDITOR_STATE" && action.type !== "TOGGLE_DRAWER" && action.type !== "CLOSE_DRAWER"&& action.type !== "EDITOR_SET_VALUE" && action.type !== "UPDATE_CARD_VALUE" && action.type !== "UPDATE_P_CARD"){
+            if(action.type === "UPDATE_STYLE"){
+                if(!JSON.stringify(action.payload.styles).includes("box"))
+                {
+                    undo.push(JSON.parse(JSON.stringify(state)));
+                }
+            }
         }
     }
     switch (action.type) {

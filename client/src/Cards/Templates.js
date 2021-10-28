@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'materialize-css';
 import { connect } from "react-redux";
-import { deleteCard} from "../api/CardsAPI"
+import { loadCards, deleteCard} from "../api/CardsAPI"
 import { logoutUser } from "../actions/authActions";
 import { MOST_RECENT } from '../utils/Constants'
 import { newCard, SelectTemplate } from '../actions/editorActions';
@@ -11,12 +11,28 @@ import { Button, Tab, Tabs, Icon, Pagination } from 'react-materialize';
 import { useHistory } from 'react-router-dom';
 import { removeCard, setCards } from '../actions/cardActions';
 import WarningModal from '../components/WarningModal';
+import LoaderCircle from '../components/LoaderCircle';
+
 
 function Templates(props) {
     const [sort, setSort] = useState(MOST_RECENT)
+    const [cards, setCards] = useState([-1])
+    const [templates, setTemplates] = useState([])
     const [nameFilter, setNameFilter] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
-    const { user } = props.auth;
+    const [loading, setLoading] = useState(false)
+    const loadingCards = () => {
+        setLoading(true);
+        loadCards().then(res => {
+            setCards(res.data.allCards.filter(card => {
+                return card.createdBy === props.auth.user.id
+            }))
+            setTemplates(res.data.allCards.filter(card => {
+                   return card.visibility === "public" && card.createdBy !== props.auth.user.id
+           }))
+           setLoading(false);
+        })
+    }
     let history = useHistory();
     const openCard = (id) => {
         props.closeDrawer()
@@ -29,12 +45,15 @@ function Templates(props) {
                 props.removeCard(id)
             })
             .catch(_ => props.addMessage({ message: "Error deleting Card", type: 2 }))
+            loadingCards();
     }
+    if (!loading && cards[0] === -1)
+        loadingCards()
+    if (loading)
+        return <LoaderCircle />
     let pageSize = 10
     let pageStart = (currentPage - 1) * pageSize;
-    let defaultCards = props.cards.cards.cards.filter(cards => cards.visibility === "public");
-    let myCards = props.cards.cards.cards.filter(cards => cards.createdBy === user.id);
-    const renderDefaultCards = () =>defaultCards
+    const renderDefaultCards = () =>templates
         .filter(v => { return v.name && v.name.toLowerCase().includes(nameFilter.toLowerCase())})
         .map((value, index) => {
         return <div onClick={_ => {openCard(value._id)}} 
@@ -43,7 +62,7 @@ function Templates(props) {
                     <p>{value.description}</p>
                 </div>
     })
-    const renderMyCards = () => myCards
+    const renderMyCards = () => cards
         .filter(v => { return v.name && v.name.toLowerCase().includes(nameFilter.toLowerCase())})
         .sort((a, b) => getSort(a, b, sort))
         .slice(pageStart, pageStart + pageSize)
@@ -90,7 +109,7 @@ function Templates(props) {
                         placeholder="Card Name" 
                         type="text" />
                     <FilterDropDown sort={sort} setSort={setSort} />
-                    {!myCards.length && 
+                    {!cards.length && 
                         <React.Fragment>
                             <h5>No Cards Yet!</h5>
                             <h5>Try adding a new card.</h5>
@@ -100,7 +119,7 @@ function Templates(props) {
                     <Pagination
                         activePage={currentPage}
                         onSelect={page => setCurrentPage(page)}
-                        items={(myCards.length / pageSize) + 1}
+                        items={(cards.length / pageSize) + 1}
                         leftBtn={<Icon>chevron_left</Icon>}
                         maxButtons={8}
                         rightBtn={<Icon>chevron_right</Icon>}
