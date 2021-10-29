@@ -97,7 +97,7 @@ function SetsSelector(props) {
                         </div>
                     </Tab>
                     <Tab title="Public Sets" >
-                        <div className="card-grid-container-small">
+                        <div className="card-grid-container-small" style={{border:"white"}}>
                             {!publicSets.length && 
                                 <React.Fragment>
                                     <h5 style={{textAlign: 'center'}}>No public sets yet!</h5>
