@@ -178,10 +178,11 @@ function SelectSet(props) {
 function ActionBar(props) {
     const [codeOpen, setCodeOpen] = useState(false);
     const [setsOpen, setSetsOpen] = useState(false);
+    const [cards, setCards] = useState([]);
     const [previewOpen, setPreviewOpen] = useState(false);
     const handleTemplateSave = (context) => {
-        if(context === "private")props.setCardVisibility("public")
-        else props.setCardVisibility("private")
+        if(context === "private")setCardVisibility("public")
+        else setCardVisibility("private")
         updateCard(props.editor._id, props.editor)
             .then(_ => { 
                 props.setSaved();
@@ -265,7 +266,7 @@ function ActionBar(props) {
             icon={<Icon className="right">public</Icon>}
             onClick={_ => handleTemplateSave("private")}
             className="btn btn-primary" >
-            Make card {true?"a template":"private"}
+            Make card {cards.visibility === "private"?"a template":"private"}
         </Button>
         <Modal
             header='Preview'
