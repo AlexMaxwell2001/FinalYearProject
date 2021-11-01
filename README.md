@@ -1,6 +1,6 @@
 # Cards without Code
 
-This is a final year project originally developed by Sean Comerford and further developed by myself, Denis Gavrila.
+This is a final year project originally developed by Sean Comerford, Denis Gavrila, and Liam Coffey and further developed by myself, Alex Maxwell.
 
 It's a pedagogical web application to help students develop nice looking CSS cards without having to code.
 
