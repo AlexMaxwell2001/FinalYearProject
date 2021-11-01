@@ -6,7 +6,7 @@ It's a pedagogical web application to help students develop nice looking CSS car
 
 ## Requirements
 
-1. You will firstly need to clone this repository to the machine you wish to run it on with the following command `git clone https://github.com/DenisGavrila/cwc-app.git` or else you can download the zip folder itself through Github itself.
+1. You will firstly need to clone this repository to the machine you wish to run it on with the following command `git clone https://github.com/AlexMaxwell2001/FinalYearProject.git` or else you can download the zip folder itself through Github itself.
 2. The application requires node, I used version 8.11.4 when developing the project, which can be downloaded from [Node.js](https://nodejs.org/en/download/releases/).
 3. For storage purposes the application uses [mongoDB Atlas](https://www.mongodb.com/cloud/atlas) which is provided using a token in the back-end code however you can provide your own DB which will be shown further down.
 
