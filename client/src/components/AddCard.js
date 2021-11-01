@@ -28,7 +28,7 @@ function AddCard(props) {
       })
       .catch(err => props.addMessage({ message: err, type: 1 }))
   }
-  let defaultCards = props.cards.cards.filter(cards => cards.createdBy === "root");
+  let defaultCards = props.cards.cards.filter(cards => cards.visibility === "public");
   return <Modal
     header='New Card'
     fixedFooter={true}

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Checkbox, Icon, Modal, Pagination, Tab, Tabs, Textarea, TextInput } from 'react-materialize';
 import { addMessage } from '../actions/toastActions';
+import CloneCard from '../components/CloneCard';
 import {
      setEditingStyle, flipCard, undoContent,redoContent, updateStyle, setSaved,  updateSetTitle,
      cloneCard, updateSetDescription, addContent 
 } from '../actions/editorActions';
+import CommentBox from '../components/comments/CommentBox';
 import {
     getRedo, getUndo
 } from '../reducers/editorReducer';
@@ -178,6 +180,7 @@ function SelectSet(props) {
 function ActionBar(props) {
     const [codeOpen, setCodeOpen] = useState(false);
     const [setsOpen, setSetsOpen] = useState(false);
+    const [open, setOpen] = useState(false);
     const [previewOpen, setPreviewOpen] = useState(false);
     const handleTemplateSave = (context) => {
         if(context === "private"){
@@ -249,7 +252,7 @@ function ActionBar(props) {
             header='Settings'
             trigger={
                 <Button icon={<Icon className="right">settings</Icon>} className="btn btn-primary" >
-                    <span className="hide-on-small-only">Settings</span>
+                    <span className="hide-on-small-only" tooltip="Visit your settings!">Settings</span>
                 </Button>
             }>
             <h5>Card Name</h5>
@@ -261,20 +264,31 @@ function ActionBar(props) {
                 onChange={e => props.updateSetDescription(e.target.value)}
             />
         </Modal></React.Fragment>}   
-        <Button icon={<Icon className="right">undo</Icon>} onClick={_ => props.undoContent()} className="btn btn-primary"
+        {isOwner && <Button icon={<Icon className="right">undo</Icon>} onClick={_ => props.undoContent()} className="btn btn-primary"
             type="submit" id="undo" tooltip="Undo your last change!" disabled={undoFlag}>
              <span className="hide-on-small-only">Undo</span>
-        </Button>
-        <Button icon={<Icon className="right">redo</Icon>} onClick={_ => props.redoContent()} className="btn btn-primary"
+        </Button>}
+        {isOwner && <Button icon={<Icon className="right">redo</Icon>} onClick={_ => props.redoContent()} className="btn btn-primary"
             type="submit" id="redo"  tooltip="Redo your last undo!" disabled={redoFlag}>
              <span className="hide-on-small-only">Redo</span>
-        </Button>
-        <Button
+        </Button>}
+        {isOwner && <Button
             icon={<Icon className="right">public</Icon>}
             onClick={_ => handleTemplateSave(props.editor.visibility)}
             className="btn btn-primary" >
             Make card {props.editor.visibility === "private"?"a template":"private"}
-        </Button>
+        </Button>}
+        <CloneCard open={open} setOpen={setOpen} info={props.editor}/>
+        {!isOwner &&<Button icon={<Icon className="right">content_copy</Icon>} onClick={_ => setOpen(true)} className="btn btn-primary"
+            type="submit" tooltip="Clone this template!">
+             <span className="hide-on-small-only">Clone this template!</span>
+        </Button>}
+        <Modal header='Card Comments'
+                trigger={<Button icon={<Icon className="right">comments</Icon>} className="btn btn-primary">Comments</Button>}>
+                <CommentBox usersID={props.auth.user.id}
+                    //url={`/comments/card/'${id}/${name}/${props.auth.user.id}`} pollInterval={2000}
+                 />
+        </Modal>
         <Modal
             header='Preview'
             height='100%'

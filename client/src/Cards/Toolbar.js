@@ -204,7 +204,10 @@ function StyleEditor(props) {
 
 function StyleSelector(props) {
   const { front, back, body, backEnabled } = props.editor;
-  return <React.Fragment>
+  const { id} = props.auth.user;
+  let isOwner = props.editor.createdBy === id;
+  if(isOwner){
+    return  <React.Fragment>
     <ToolBarNav {...props} />
     <div className='console'>
       <div className='console-content'>
@@ -353,6 +356,9 @@ function StyleSelector(props) {
       </div>
     </div>
   </React.Fragment>
+  }else{
+    return <span style={{margin : '40px', textAlign : 'center'}}><h2>Clone this card to be able to make changes to it!</h2></span>;
+  }
 }
 function ActionButtons(props) {
   const stopPropAction = (e, fun) => {
