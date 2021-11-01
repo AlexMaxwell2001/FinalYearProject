@@ -8,7 +8,7 @@ import {
 import {
     getRedo, getUndo
 } from '../reducers/editorReducer';
-import {saveCard, setCardVisibility} from '../actions/cardActions'
+import {saveCard} from '../actions/cardActions'
 import { generateFlippableCard, generateSingleCard } from '../Code/CodeGenerator'
 import { updateCard } from '../api/CardsAPI';
 import CardOutput from './CardOutput'
@@ -178,16 +178,23 @@ function SelectSet(props) {
 function ActionBar(props) {
     const [codeOpen, setCodeOpen] = useState(false);
     const [setsOpen, setSetsOpen] = useState(false);
-    const [cards, setCards] = useState([]);
     const [previewOpen, setPreviewOpen] = useState(false);
     const handleTemplateSave = (context) => {
-        if(context === "private")setCardVisibility("public")
-        else setCardVisibility("private")
+        if(context === "private"){
+            props.editor.visibility="public"
+            context="a template"
+        }
+        else{
+            props.editor.visibility="private"
+            context="private"
+        }
         updateCard(props.editor._id, props.editor)
             .then(_ => { 
-                props.setSaved();
+                props.addMessage({ message: "Card is now " + context + "!", type: 1 })
+                window.location.reload()
                 props.saveCard(props.editor._id, props.editor);
             })
+            .catch(e => { props.addMessage({ message: "Failure Saving Card as " + context + "!", type: 2 }) })
     }
     const handleSave = async e => {
         e.preventDefault();
@@ -264,9 +271,9 @@ function ActionBar(props) {
         </Button>
         <Button
             icon={<Icon className="right">public</Icon>}
-            onClick={_ => handleTemplateSave("private")}
+            onClick={_ => handleTemplateSave(props.editor.visibility)}
             className="btn btn-primary" >
-            Make card {cards.visibility === "private"?"a template":"private"}
+            Make card {props.editor.visibility === "private"?"a template":"private"}
         </Button>
         <Modal
             header='Preview'
@@ -377,7 +384,6 @@ export default connect(
         updateSetDescription,
         setSaved,
         saveCard,
-        setCardVisibility,
         flipCard,
         undoContent,
         redoContent,

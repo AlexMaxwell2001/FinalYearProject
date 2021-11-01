@@ -12,17 +12,6 @@ export const setCards = cards => {
     };
   }
 
-  export const setCardVisibility = (visibility) => dispatch => {
-    dispatch({
-      type: "UPDATE_CARD_VALUE",
-      payload: {
-        ref: "visibility",
-        value: visibility
-      }
-    })
-  };
-
-
   export const removeCard = index => {
     return {
       type: "REMOVE_CARD",

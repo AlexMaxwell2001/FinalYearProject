@@ -11,7 +11,6 @@ import { Button, Tab, Tabs, Icon, Pagination } from 'react-materialize';
 import { useHistory } from 'react-router-dom';
 import { removeCard, setCards } from '../actions/cardActions';
 import WarningModal from '../components/WarningModal';
-import LoaderCircle from '../components/LoaderCircle';
 
 
 function Templates(props) {
@@ -49,8 +48,6 @@ function Templates(props) {
     }
     if (!loading && cards[0] === -1)
         loadingCards()
-    if (loading)
-        return <LoaderCircle />
     let pageSize = 10
     let pageStart = (currentPage - 1) * pageSize;
     const renderDefaultCards = () =>templates

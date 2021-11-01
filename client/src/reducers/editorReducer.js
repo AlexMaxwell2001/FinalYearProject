@@ -26,6 +26,8 @@ export default function (state = initialState, action) {
                 {
                     undo.push(JSON.parse(JSON.stringify(state)));
                 }
+            }else{
+                undo.push(JSON.parse(JSON.stringify(state)));
             }
         }
     }
