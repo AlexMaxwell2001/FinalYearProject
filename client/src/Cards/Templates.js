@@ -17,7 +17,8 @@ function Templates(props) {
     const [sort, setSort] = useState(MOST_RECENT)
     const [cards, setCards] = useState([-1])
     const [templates, setTemplates] = useState([])
-    const [nameFilter, setNameFilter] = useState("")
+    const [publicCardsFilter, setPublicCardsFilter] = useState("")
+    const [myCardsFilter, setMyCardsFilter] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
     const [loading, setLoading] = useState(false)
     const loadingCards = () => {
@@ -27,7 +28,7 @@ function Templates(props) {
                 return card.createdBy === props.auth.user.id
             }))
             setTemplates(res.data.allCards.filter(card => {
-                   return card.visibility === "public" && card.createdBy !== props.auth.user.id
+                   return card.visibility === "public"
            }))
            setLoading(false);
         })
@@ -51,7 +52,7 @@ function Templates(props) {
     let pageSize = 10
     let pageStart = (currentPage - 1) * pageSize;
     const renderDefaultCards = () =>templates
-        .filter(v => { return v.name && v.name.toLowerCase().includes(nameFilter.toLowerCase())})
+        .filter(v => { return v.name && v.name.toLowerCase().includes(publicCardsFilter.toLowerCase())})
         .map((value, index) => {
         return <div onClick={_ => {openCard(value._id)}} 
                     className="card-grid-item" key={index}>
@@ -60,7 +61,7 @@ function Templates(props) {
                 </div>
     })
     const renderMyCards = () => cards
-        .filter(v => { return v.name && v.name.toLowerCase().includes(nameFilter.toLowerCase())})
+        .filter(v => { return v.name && v.name.toLowerCase().includes(myCardsFilter.toLowerCase())})
         .sort((a, b) => getSort(a, b, sort))
         .slice(pageStart, pageStart + pageSize)
         .map((value, index) => {
@@ -86,22 +87,11 @@ function Templates(props) {
     return <div style={{ padding: 20, textAlign: "center" }} className='components'>
         <h3 className="black-text">Card Library</h3>
         <Tabs className='tab-demo z-depth-1'>
-            <Tab title="Templates">
-                <div className="card-grid-container">
-                    <b style={{ fontSize: 18 }}>Search:</b>
-                    <input value={nameFilter} 
-                        onChange={e => setNameFilter(e.target.value)} 
-                        className="bordered" 
-                        placeholder="Template Name" 
-                        type="text" />
-                    {renderDefaultCards()}
-                </div>
-            </Tab>
             <Tab title="My Cards">
                 <div className="card-grid-container">
                     <b style={{ fontSize: 18 }}>Search:</b>
-                    <input value={nameFilter} 
-                        onChange={e => setNameFilter(e.target.value)} 
+                    <input value={myCardsFilter} 
+                        onChange={e => setMyCardsFilter(e.target.value)} 
                         className="bordered" 
                         placeholder="Card Name" 
                         type="text" />
@@ -121,6 +111,17 @@ function Templates(props) {
                         maxButtons={8}
                         rightBtn={<Icon>chevron_right</Icon>}
                     />
+                </div>
+            </Tab>
+            <Tab title="Public Cards">
+                <div className="card-grid-container">
+                    <b style={{ fontSize: 18 }}>Search:</b>
+                    <input value1={publicCardsFilter} 
+                        onChange={e => setPublicCardsFilter(e.target.value)} 
+                        className="bordered" 
+                        placeholder="Card Name" 
+                        type="text" />
+                    {renderDefaultCards()}
                 </div>
             </Tab>
         </Tabs>

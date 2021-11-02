@@ -15,7 +15,8 @@ import AddSet from '../components/AddSet'
 function SetsSelector(props) {
     const [sets, setSets] = useState([-1])
     const [publicSets, setPublicSets] = useState([])
-    const [nameFilter, setNameFilter] = useState("")
+    const [publicSetsFilter, setPublicSetsFilter] = useState("")
+    const [mySetsFilter, setMySetsFilter] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
     const [sort, setSort] = useState(MOST_RECENT)
     const [privacyFilter, setPrivacyFilter] = useState(1)
@@ -27,7 +28,7 @@ function SetsSelector(props) {
                 return card.createdBy === props.auth.user.id
             }))
             setPublicSets(res.data.allCards.filter(card => {
-                   return card.visibility === "public" && card.createdBy !== props.auth.user.id
+                   return card.visibility === "public"
            }))
             setLoading(false);
         })
@@ -66,14 +67,14 @@ function SetsSelector(props) {
                     <Tab title="My Sets" >
                         <div style={{ padding: 20 }}>
                             <b style={{ fontSize: 18, marginBottom: 10 }}>Search:</b>
-                            <input style={{ marginBottom: 17, marginTop: 5 }} value={nameFilter} onChange={e => setNameFilter(e.target.value)} className="bordered" placeholder="Set Name" type="text" id="TextInput-S3" />
+                            <input style={{ marginBottom: 17, marginTop: 5 }} value={mySetsFilter} onChange={e => setMySetsFilter(e.target.value)} className="bordered" placeholder="Set Name" type="text" id="TextInput-S3" />
                             <div style={{ display: "flex" }}>
                                 <FilterDropDown sort={sort} setSort={setSort} />
                                 <FilterPrivacy sort={privacyFilter} setSort={setPrivacyFilter} />
                             </div>
                             <div style={{ marginBottom: 30, marginTop: 15 }}>
                                 {sets.filter(v => {
-                                    return privacyFinder(v, privacyFilter) && v.name && v.name.toLowerCase().includes(nameFilter.toLowerCase());
+                                    return privacyFinder(v, privacyFilter) && v.name && v.name.toLowerCase().includes(mySetsFilter.toLowerCase());
                                 }).sort((a, b) => getSort(a, b, sort)).slice(pageStart, pageStart + 10).map((value, index) => {
                                     return <div key={index} style={{ padding: 10, marginBottom: 15, marginTop: 10 }} className="raise-element square">
                                         <b style={{ color: '#535353', fontSize: 18, paddingLeft: 10 }}>{value.name}</b>
@@ -97,13 +98,20 @@ function SetsSelector(props) {
                         </div>
                     </Tab>
                     <Tab title="Public Sets" >
+                    <div className="element" style={{ backgroundColor: "white",border:"white", width: "100%", marginTop: 20 }}>
+                        <b style={{ fontSize: 18, marginBottom: 10 }}>Search:</b>
+                        <input style={{ marginBottom: 17, marginTop: 5 }} value={publicSetsFilter} onChange={e => setPublicSetsFilter(e.target.value)} className="bordered" placeholder="Set Name" type="text" id="TextInput-S3" /> 
                         <div className="card-grid-container-small" style={{border:"white"}}>
                             {!publicSets.length && 
                                 <React.Fragment>
                                     <h5 style={{textAlign: 'center'}}>No public sets yet!</h5>
                                 </React.Fragment>
                             }
-                            {publicSets.map((value, index) => {
+                            {publicSets
+                            .filter(v => {
+                                return privacyFinder(v, privacyFilter) && v.name && v.name.toLowerCase().includes(publicSetsFilter.toLowerCase());
+                            })
+                            .map((value, index) => {
                                 return <Link key={index + value._id} to={"/edit-set?id=" + value._id}>
                                     <div style={{ color: '#676767' }} className="card-grid-item" key={index}>
                                         <h5><b>{value.name}</b></h5>
@@ -113,6 +121,7 @@ function SetsSelector(props) {
                                 </Link>
                             })}
                         </div>
+                    </div>
                     </Tab>
                 </Tabs>
             </div>

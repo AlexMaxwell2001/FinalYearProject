@@ -45,7 +45,7 @@ function AddCard(props) {
     <input className="bordered" value={title} onChange={e => setTitle(e.target.value)} placeholder="Card Name"/>
     <b>Card Description </b><b style={{color:"#e83b3b"}}>*</b>
     <input className="bordered" value={description} onChange={e => setDescription(e.target.value)} placeholder="Card Name"/>
-    <h5>Template</h5>
+    <h5>Public Cards</h5>
     <div className="card-grid-container-wide">
       {defaultCards.map((value, index) => {
         let isSelected = selectedTemplate === index;

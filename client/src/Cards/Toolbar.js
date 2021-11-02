@@ -357,7 +357,159 @@ function StyleSelector(props) {
     </div>
   </React.Fragment>
   }else{
-    return <span style={{margin : '40px', textAlign : 'center'}}><h2>Clone this card to be able to make changes to it!</h2></span>;
+    return <React.Fragment>
+    <div style={{ pointerEvents: "none"}}>
+    <ToolBarNav {...props} />
+    <br></br>
+    <h6 style={{ fontWeight:"1000", padding:"30px", color:"red"}}>Clone this card to edit it and make it your own!</h6>
+    <div className='console'>
+      <div className='console-content'>
+        <h5 className="black-text">
+          Card Body
+          <InfoModal title="Card Body" trigger={
+            <span className="material-icons right card-toolbar-help">
+              help
+            </span>
+          }>
+            <p>The card body is a container for elements. It contains all content on the front and back of your card. It is required by default, but not having any styles active is possible.</p>
+            <p>To edit your card body's style, click on "body", and options will appear.</p>
+          </InfoModal>
+        </h5>
+        <Collapsible accordion>
+          <CollapsibleItem header={<b style={{ textAlign: "center", width: "60%" }}>Body</b>}
+            icon={<i className="material-icons">dashboard</i>} >
+            <div className='componentEditor'>
+              <Row>
+                <StyleModal trigger={
+                  <Col style={{ marginBottom: 15 }} s={12}><div style={{ textDecoration: "underline", color:"blue", cursor:"pointer" }}>What do these mean?</div></Col>
+                } />
+                {BODY_OPTIONS.map((value, index) => {
+                  let styleValue = validateStyle(body[value[1]]);
+                  return <TextInput key={index} id={props.cardId + "body" + index} s={6} label={value[0]} defaultValue={styleValue}
+                    onBlur={e => {
+                      props.updateBody(props.cardId, { [value[1]]: e.target.value });
+                    }}></TextInput>
+                })}
+              </Row>
+            </div>
+          </CollapsibleItem>
+        </Collapsible>
+        <h5 className="black-text">
+          Card Front
+          <InfoModal title="Card Front" trigger={
+            <span className="material-icons right card-toolbar-help">
+              help
+            </span>
+          }>
+            <p>The front of your card consists of elements visible initially. A real-world example of this would be the front of a credit card (the side with the card number).</p>
+            <p>To add content to the front of your card, and click "Add Element" below.</p>
+          </InfoModal>
+        </h5>
+        <Collection className="raise-element square">
+          {front.styles.map((option, index) => {
+            return <React.Fragment key={index}>
+              <LookUpComponent {...props} front={true} name={option.data.name} id={index} />
+            </React.Fragment>
+          })}
+        </Collection>
+        <AddContent trigger={
+          <Button className="btn right hoverable btn-primary full-width" style={{ marginBottom: 20 }}>
+            Add Element<i className="material-icons right">add</i>
+          </Button>
+        } front={true} {...props} />
+        <h5 className="black-text ">
+          Card Back
+          <InfoModal title="Card Back" trigger={
+            <span className="material-icons right card-toolbar-help">
+              help
+            </span>
+          }>
+            <p>Your card's back consists of elements visible once the card is flipped. A real-world example of this would be the back of a credit card (the side with a security code).</p>
+            <p>To add content to the back of your card, set the switch to "on" and click "Add Element."</p>
+          </InfoModal>
+        </h5>
+        <div style={{ marginBottom: 20 }}>
+          <Switch
+            id="Switch-11"
+            offLabel="Off"
+            checked={backEnabled}
+            onChange={_ => { props.toggleOption(props.cardId, "backEnabled") }}
+            onLabel="On"
+          />
+        </div>
+        {backEnabled && <React.Fragment>
+          <Collection className="raise-element square">
+            {back.styles.map((option, index) => {
+              return <React.Fragment key={index}>
+                <LookUpComponent {...props} front={false} name={option.data.name} id={index} />
+              </React.Fragment>
+            })}
+          </Collection>
+          <AddContent trigger={
+            <Button className="btn right hoverable btn-primary full-width" style={{ marginBottom: 20 }}>
+              Add Element<i className="material-icons right">add</i>
+            </Button>
+          } front={false} {...props} />
+          <h5 className="black-text ">
+            Triggers
+            <InfoModal title="Triggers" trigger={
+              <span className="material-icons right card-toolbar-help">
+                help
+              </span>}>
+              <p>Triggers determine what element will cause the card to flip faces. For example, if you pick "body" as a trigger, the card will flip on a Card Body click.</p>
+              <p><b>Front Transition Trigger:</b> What element on the front causes the card to flip.</p>
+              <p><b>Back Transition Trigger:</b> What element on the back causes the card to flip.</p>
+            </InfoModal>
+          </h5>
+          <div className="full-width">
+            <Select2
+              id="Select-9"
+              label="Front transition trigger"
+              className="full-width"
+              multiple={false}
+              onChange={e => { props.setFlipTrigger(props.cardId, true, e.target.value) }}
+              icon={false}
+              value="2">
+              <option value={0}>Body</option>
+              {front.styles.map((style, index) => {
+                return <option key={index} value={index}>{style.data.name}</option>
+              })}
+            </Select2>
+          </div>
+          <div className="full-width">
+            <Select2
+              id="Select-9"
+              label="Back transition trigger"
+              multiple={false}
+              icon={false}
+              onChange={e => { props.setFlipTrigger(props.cardId, false, e.target.value) }}
+              value="2">
+              <option value={0}>Body</option>
+              {back.styles.map((style, index) => {
+                return <option key={index} value={index}>{style.data.name}</option>
+              })}
+            </Select2>
+            <h5 className="black-text ">
+              Flip Direction
+            </h5>
+            <div style={{ marginBottom: 20 }}>
+              <Select2
+                id="Select-10"
+                label="Flip Direction"
+                multiple={false}
+                icon={false}
+                onChange={e => { props.setFlipDirection(e.target.value) }}
+                value={props.editor.flipDirection}>
+                <option value={true}>Vertical</option>
+                <option value={false}>Horizontal</option>
+              </Select2>
+            </div>
+          </div>
+        </React.Fragment>}
+      </div>
+    </div>
+  </div>
+    </React.Fragment>
   }
 }
 function ActionButtons(props) {

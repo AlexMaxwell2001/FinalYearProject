@@ -185,7 +185,7 @@ function ActionBar(props) {
     const handleTemplateSave = (context) => {
         if(context === "private"){
             props.editor.visibility="public"
-            context="a template"
+            context="public"
         }
         else{
             props.editor.visibility="private"
@@ -210,6 +210,7 @@ function ActionBar(props) {
             .catch(e => { props.addMessage({ message: "Failure Saving Card!" + e, type: 2 }) })
     };
     const { id} = props.auth.user;
+    let { name } = props.editor;
     let isOwner = props.editor.createdBy === id;
     var undoFlag=true;
     var redoFlag=true;
@@ -276,18 +277,18 @@ function ActionBar(props) {
             icon={<Icon className="right">public</Icon>}
             onClick={_ => handleTemplateSave(props.editor.visibility)}
             className="btn btn-primary" >
-            Make card {props.editor.visibility === "private"?"a template":"private"}
+            Make card {props.editor.visibility === "private"?"public":"private"}
         </Button>}
-        <CloneCard open={open} setOpen={setOpen} info={props.editor}/>
+        <CloneCard open={open} setOpen={setOpen} />
         {!isOwner &&<Button icon={<Icon className="right">content_copy</Icon>} onClick={_ => setOpen(true)} className="btn btn-primary"
-            type="submit" tooltip="Clone this template!">
-             <span className="hide-on-small-only">Clone this template!</span>
+            type="submit" tooltip="Clone this card!">
+             <span className="hide-on-small-only">Clone this card!</span>
         </Button>}
         <Modal header='Card Comments'
                 trigger={<Button icon={<Icon className="right">comments</Icon>} className="btn btn-primary">Comments</Button>}>
                 <CommentBox usersID={props.auth.user.id}
-                    //url={`/comments/card/'${id}/${name}/${props.auth.user.id}`} pollInterval={2000}
-                 />
+                    url={`/comments/card/'${id}/${name}/${props.auth.user.id}`}
+                    pollInterval={2000} />
         </Modal>
         <Modal
             header='Preview'
@@ -369,7 +370,6 @@ function CardsView(props) {
     })
     return <React.Fragment>
         <ActionBar {...props} />
-
         <div className='card-render' style={{padding:0, paddingRight:18}}>
             <div style={{width:'100%', height:'100%', overflow:'auto', padding:20}}>
                     <div onMouseLeave={_=>setMouseOverStyle(-1)} className="card-body" style={props.editor.body} >

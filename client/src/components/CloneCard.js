@@ -10,7 +10,6 @@ function CloneCard(props) {
   const [description, setDescription] = useState("");
   if(!props.cards)
     return null;
-  console.log(props)
   return <Modal
     header='Save this template as a card'
     fixedFooter={true}

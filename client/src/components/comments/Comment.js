@@ -59,10 +59,10 @@ class Comment extends Component {
     if(this.props.usersID === this.props.authorId){
       return (
         <div style={ style.comment }>
-          <h3>{this.props.author}</h3>
-          <span dangerouslySetInnerHTML={ this.rawMarkup() } />
-          <button class="btn btn-primary" style={{background:"green"}}onClick={ this.updateComment }>update</button>
-          <button class="btn btn-danger" style={{margin:10}} onClick={ this.deleteComment }>delete</button>
+          <h4 style={{decoration: 'underline' }}dangerouslySetInnerHTML={ this.rawMarkup() } />
+          <span>by  <b style={{color:"red"}}>{this.props.author}</b></span>
+          <button className="btn btn-primary" style={{background:"green"}}onClick={ this.updateComment }>update</button>
+          <button className="btn btn-danger" style={{margin:10}} onClick={ this.deleteComment }>delete</button>
           { (this.state.toBeUpdated)
             ? (<form onSubmit={ this.handleCommentUpdate }>
                 <StarRatings
@@ -83,10 +83,11 @@ class Comment extends Component {
                   style={ style.commentFormText }
                   value={ this.state.text }
                   onChange={ this.handleTextChange } />
-                <input
+                <button
                   type='submit'
-                  style={ style.commentFormPost }
-                  value='Update' />
+                  className='btn btn-primary'
+                  style={{ backgroundColor:"green"}}
+                 >Update</button>
               </form>)
             : null}
         </div>
@@ -94,8 +95,8 @@ class Comment extends Component {
     } else {
       return (
         <div style={ style.comment }>
-          <h3>{this.props.author}</h3>
-          <span dangerouslySetInnerHTML={ this.rawMarkup() } />
+          <h3 style={{decoration: 'underline' }} dangerouslySetInnerHTML={ this.rawMarkup() } />
+          <span>by <b style={{color:"red"}}>{this.props.author}</b></span>
         </div>
       )
     }
