@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Icon, Modal} from 'react-materialize'
-import { addCard } from '../api/CardsAPI'
+import { addCard, loadCards } from '../api/CardsAPI'
 import {addCard as newCard} from '../actions/cardActions'
 import { addMessage } from '../actions/toastActions'
 import { connect } from 'react-redux'
@@ -10,11 +10,17 @@ import { useHistory } from 'react-router-dom'
 function AddCard(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [cards, setCards] = useState([-1])
   const [selectedTemplate, setSelectedTemplate] = useState(0);
   const { user } = props.auth;
   let history = useHistory();
-  if(!props.cards)
-    return null;
+  const loadingCards = () => {
+    loadCards().then(res => {
+      setCards(res.data.allCards.filter(cards => {
+            return cards.createdBy === "root"
+      }))
+  })
+  }
   const newCardWithTemplate = (card, title, description, uuid) => {
     let cardCopy = {...card, description, createdBy: uuid, name: title};
     addCard(uuid, cardCopy)
@@ -27,8 +33,10 @@ function AddCard(props) {
         history.push("/edit-card?id=" + res.data.updated._id);
       })
       .catch(err => props.addMessage({ message: err, type: 1 }))
+      loadingCards()
   }
-  let defaultCards = props.cards.cards.filter(cards => cards.visibility === "public");
+  if (cards[0] === -1)
+  loadingCards()
   return <Modal
     header='New Card'
     fixedFooter={true}
@@ -45,9 +53,9 @@ function AddCard(props) {
     <input className="bordered" value={title} onChange={e => setTitle(e.target.value)} placeholder="Card Name"/>
     <b>Card Description </b><b style={{color:"#e83b3b"}}>*</b>
     <input className="bordered" value={description} onChange={e => setDescription(e.target.value)} placeholder="Card Name"/>
-    <h5>Public Cards</h5>
+    <h5>Templates</h5>
     <div className="card-grid-container-wide">
-      {defaultCards.map((value, index) => {
+      {cards.map((value, index) => {
         let isSelected = selectedTemplate === index;
         let className = isSelected ? "full-width btn-primary mobile-height bold" : "full-width btn-outline mobile-height"
         let text = isSelected ? "Selected" : "Select"
@@ -60,7 +68,7 @@ function AddCard(props) {
     </div>
     <Button disabled={title === "" || description === ""} style={{ marginTop: 10 }}
       onClick={_ => {
-        newCardWithTemplate(defaultCards[selectedTemplate], title, description, user.id)
+        newCardWithTemplate(cards[selectedTemplate], title, description, user.id)
       }}
       modal="close"
       icon={<Icon className="right">add</Icon>}

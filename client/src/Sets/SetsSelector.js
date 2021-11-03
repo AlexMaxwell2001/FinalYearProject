@@ -82,7 +82,7 @@ function SetsSelector(props) {
                                             <Icon className="right">edit</Icon>
                                         </Link>
                                         <WarningModal warningText="This will delete your Set permanently. Are you sure?" action_name="Delete" title="Delete Set" continueAction={_ => removeSet(value._id)} trigger={
-                                            <i className="material-icons right" onClick={_ => removeSet(value._id)} >delete</i>
+                                            <i className="material-icons right" style={{cursor:"pointer"}} onClick={_ => removeSet(value._id)} >delete</i>
                                         } />
                                     </div>
                                 })}
