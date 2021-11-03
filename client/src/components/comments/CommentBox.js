@@ -67,6 +67,7 @@ class CommentBox extends Component {
         {/*<h2 style={ style.title }>Comments:</h2>*/}
       <CommentList
         usersID={ this.props.usersID }
+        userInfo={this.props.userInfo}
         onCommentDelete={ this.handleCommentDelete }
         onCommentUpdate={ this.handleCommentUpdate }
         data={ this.state.data }/>

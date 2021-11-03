@@ -52,7 +52,7 @@ function AddCard(props) {
     <b>Card Name </b><b style={{color:"#e83b3b"}}>*</b>
     <input className="bordered" value={title} onChange={e => setTitle(e.target.value)} placeholder="Card Name"/>
     <b>Card Description </b><b style={{color:"#e83b3b"}}>*</b>
-    <input className="bordered" value={description} onChange={e => setDescription(e.target.value)} placeholder="Card Name"/>
+    <input className="bordered" value={description} onChange={e => setDescription(e.target.value)} placeholder="Card Description"/>
     <h5>Templates</h5>
     <div className="card-grid-container-wide">
       {cards.map((value, index) => {

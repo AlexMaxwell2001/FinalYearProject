@@ -21,6 +21,8 @@ import { loadSets, newSet, saveSet } from '../api/CardSets';
 import { MOST_RECENT } from '../utils/Constants';
 import { FilterDropDown, FilterPrivacy, getSort } from '../components/Sort';
 import { useHistory } from 'react-router';
+import CloneModal from '../components/CloneModal'
+
 
 const Iframe = (props) => {
     const writeHTML = (frame) => {
@@ -280,13 +282,16 @@ function ActionBar(props) {
             Make card {props.editor.visibility === "private"?"public":"private"}
         </Button>}
         <CloneCard open={open} setOpen={setOpen} />
-        {!isOwner &&<Button icon={<Icon className="right">content_copy</Icon>} onClick={_ => setOpen(true)} className="btn btn-primary"
-            type="submit" tooltip="Clone this card!">
-             <span className="hide-on-small-only">Clone this card!</span>
-        </Button>}
+        {!isOwner &&
+            <CloneModal usersID={props.auth.user.id} cardEditor={props.editor} action_name="Save Card" title="Clone card"  trigger={
+                <Button icon={<Icon className="right">content_copy</Icon>} className="btn btn-primary" type="submit" tooltip="Clone this card!">
+                    <span className="hide-on-small-only">Clone this card!</span>
+                </Button>                              
+            } />
+        }
         <Modal header='Card Comments'
-                trigger={<Button icon={<Icon className="right">comments</Icon>} className="btn btn-primary">Comments</Button>}>
-                <CommentBox usersID={props.auth.user.id}
+                trigger={<Button  tooltip="Comment on this card!" icon={<Icon className="right">comments</Icon>} className="btn btn-primary">Comments</Button>}>
+                <CommentBox usersID={props.auth.user.id} userInfo={props.auth.user.name}
                     url={`/comments/card/'${id}/${name}/${props.auth.user.id}`}
                     pollInterval={2000} />
         </Modal>

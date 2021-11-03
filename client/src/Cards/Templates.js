@@ -28,7 +28,7 @@ function Templates(props) {
                 return card.createdBy === props.auth.user.id
             }))
             setTemplates(res.data.allCards.filter(card => {
-                   return card.visibility === "public"
+                   return card.visibility === "public" && card.createdBy !== "root"
            }))
            setLoading(false);
         })
