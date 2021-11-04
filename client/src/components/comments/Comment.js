@@ -60,7 +60,7 @@ class Comment extends Component {
       return (
         <div style={ style.comment }>
           <h4 style={{decoration: 'underline' }}dangerouslySetInnerHTML={ this.rawMarkup() } />
-          <span>by  <b>{this.props.usersName}(you)</b></span><br></br>
+          <span>by  <b>You</b></span><br></br>
           <button className="btn btn-primary" style={{background:"green"}}onClick={ this.updateComment }>update</button>
           <button className="btn btn-danger" style={{margin:10}} onClick={ this.deleteComment }>delete</button>
           { (this.state.toBeUpdated)
@@ -96,7 +96,7 @@ class Comment extends Component {
       return (
         <div style={ style.comment }>
           <h3 style={{decoration: 'underline' }} dangerouslySetInnerHTML={ this.rawMarkup() } />
-          <span>by <b>{this.props.usersName}</b></span><br></br>
+          <span>by <b>{"Anonymous"}</b></span><br></br>
         </div>
       )
     }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Checkbox, Icon, Modal, Pagination, Tab, Tabs, Textarea, TextInput } from 'react-materialize';
 import { addMessage } from '../actions/toastActions';
-import CloneCard from '../components/CloneCard';
 import {
      setEditingStyle, flipCard, undoContent,redoContent, updateStyle, setSaved,  updateSetTitle,
      cloneCard, updateSetDescription, addContent 
@@ -22,6 +21,9 @@ import { MOST_RECENT } from '../utils/Constants';
 import { FilterDropDown, FilterPrivacy, getSort } from '../components/Sort';
 import { useHistory } from 'react-router';
 import CloneModal from '../components/CloneModal'
+import WarningModal from '../components/WarningModal'
+
+
 
 
 const Iframe = (props) => {
@@ -182,7 +184,6 @@ function SelectSet(props) {
 function ActionBar(props) {
     const [codeOpen, setCodeOpen] = useState(false);
     const [setsOpen, setSetsOpen] = useState(false);
-    const [open, setOpen] = useState(false);
     const [previewOpen, setPreviewOpen] = useState(false);
     const handleTemplateSave = (context) => {
         if(context === "private"){
@@ -214,6 +215,7 @@ function ActionBar(props) {
     const { id} = props.auth.user;
     let { name } = props.editor;
     let isOwner = props.editor.createdBy === id;
+    let cardID = new URLSearchParams(window.location.search).get("id")
     var undoFlag=true;
     var redoFlag=true;
     if(!getUndo())undoFlag=false;
@@ -246,11 +248,10 @@ function ActionBar(props) {
                 type="submit" tooltip="Flip the card to its front or back">
                  <span className="hide-on-small-only">Flip Card</span>
         </Button>}
-        {isOwner && <React.Fragment><Button icon={<Icon className="right">save</Icon>} className="btn btn-primary"
-            onClick={e => handleSave(e)}
-            type="submit" tooltip="Save current card changes">
-             <span className="hide-on-small-only">Save</span>
-        </Button>
+        {isOwner && <React.Fragment><WarningModal warningText="This will save your card and remove the history from the undo and redo stacks. Are you sure you want to save?" action_name="Save" title="Save card" continueAction={e => handleSave(e)} trigger={
+            <Button icon={<Icon className="right">save</Icon>} className="btn btn-primary" onClick={e => handleSave(e)} type="submit" tooltip="Save current card changes">
+                <span className="hide-on-small-only">Save</span>
+            </Button>}/>
         <Modal
             header='Settings'
             trigger={
@@ -275,13 +276,16 @@ function ActionBar(props) {
             type="submit" id="redo"  tooltip="Redo your last undo!" disabled={redoFlag}>
              <span className="hide-on-small-only">Redo</span>
         </Button>}
-        {isOwner && <Button
-            icon={<Icon className="right">public</Icon>}
-            onClick={_ => handleTemplateSave(props.editor.visibility)}
-            className="btn btn-primary" >
-            Make card {props.editor.visibility === "private"?"public":"private"}
-        </Button>}
-        <CloneCard open={open} setOpen={setOpen} />
+        {isOwner && 
+            <WarningModal warningText="As you are saving the card as a different visibility, this will save your card and remove the history from the undo and redo stacks. Are you sure you want to save?" action_name="Save" title="Save card" continueAction={_ => handleTemplateSave(props.editor.visibility)} trigger={
+                <Button
+                    icon={<Icon className="right">public</Icon>}
+                    onClick={_ => handleTemplateSave(props.editor.visibility)}
+                    className="btn btn-primary" >
+                    Make card {props.editor.visibility === "private"?"public":"private"}
+                </Button>
+            }/>
+        }
         {!isOwner &&
             <CloneModal usersID={props.auth.user.id} cardEditor={props.editor} action_name="Save Card" title="Clone card"  trigger={
                 <Button icon={<Icon className="right">content_copy</Icon>} className="btn btn-primary" type="submit" tooltip="Clone this card!">
@@ -291,8 +295,8 @@ function ActionBar(props) {
         }
         <Modal header='Card Comments'
                 trigger={<Button  tooltip="Comment on this card!" icon={<Icon className="right">comments</Icon>} className="btn btn-primary">Comments</Button>}>
-                <CommentBox usersID={props.auth.user.id} userInfo={props.auth.user.name}
-                    url={`/comments/card/'${id}/${name}/${props.auth.user.id}`}
+                <CommentBox cardEditor={props.editor} usersID={props.auth.user.id} userInfo={props.auth.user.name}
+                    url={`/comments/card/'${cardID}/${name}/${props.auth.user.id}`}
                     pollInterval={2000} />
         </Modal>
         <Modal

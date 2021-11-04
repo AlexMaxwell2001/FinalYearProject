@@ -62,19 +62,41 @@ class CommentBox extends Component {
   this.pollInterval = null;
 }
   render() {
-    return (
-      <div style={ style.commentBox }>
-        {/*<h2 style={ style.title }>Comments:</h2>*/}
-      <CommentList
-        usersID={ this.props.usersID }
-        userInfo={this.props.userInfo}
-        onCommentDelete={ this.handleCommentDelete }
-        onCommentUpdate={ this.handleCommentUpdate }
-        data={ this.state.data }/>
-        
-      <CommentForm onCommentSubmit={ this.handleCommentSubmit }/>
-      </div>
-    )
+    if(this.props.cardEditor.createdBy === this.props.usersID && this.state.data.length !==0){
+      return (
+        <div style={ style.commentBox }>
+          <CommentList
+            usersID={ this.props.usersID }
+            userInfo={"Anonymous"}
+            onCommentDelete={ this.handleCommentDelete }
+            onCommentUpdate={ this.handleCommentUpdate }
+            data={ this.state.data }/>
+          
+        </div>
+      )
+    }else if(this.props.cardEditor.createdBy === this.props.usersID && this.state.data.length ===0){
+      return(
+        <h5 style={{ textAlign: "center", marginTop: 50}}>No comments yet!</h5>
+      )
+    }else if(this.props.cardEditor.createdBy !== this.props.usersID && this.state.data.length ===0){
+      return(
+        <div style={{marginTop:50}}>    
+          <CommentForm onCommentSubmit={ this.handleCommentSubmit }/>
+        </div>
+      )
+    }else{
+      return (
+        <div style={ style.commentBox }>
+        <CommentList
+          usersID={ this.props.usersID }
+          userInfo={this.props.userInfo}
+          onCommentDelete={ this.handleCommentDelete }
+          onCommentUpdate={ this.handleCommentUpdate }
+          data={ this.state.data }/>      
+        <CommentForm userInfo={this.props.userInfo} onCommentSubmit={ this.handleCommentSubmit }/>
+        </div>
+      )
+    }
   }
 }
 

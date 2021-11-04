@@ -23,11 +23,10 @@ class CommentForm extends Component {
     e.preventDefault();
     let text = this.state.text.trim();
     let rating = this.state.rating;
-
     if (!text || !rating) {
       return;
     }
-    this.props.onCommentSubmit({ text: text, rating: rating });
+    this.props.onCommentSubmit({ username:this.props.userInfo,text: text, rating: rating });
     this.setState({ text: '', rating: 0 });
   }
   render() {
@@ -52,6 +51,7 @@ class CommentForm extends Component {
           value={ this.state.text }
           onChange={ this.handleTextChange } />
         <button
+          disabled={this.state.text === "" || this.state.rating === 0}
           type='submit'
           className='btn btn-primary'
           >POST</button>

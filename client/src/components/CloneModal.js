@@ -7,10 +7,9 @@ export default function CloneModal(props) {
     const [description, setDescription] = useState("");
     let history = useHistory();
     const newCardWithTemplate = (card, title, description, uuid) => {
-        let cardCopy = {...card, description, createdBy: uuid, name: title};
+        let cardCopy = {...card, description, createdBy: uuid, name: title, visibility: "private"};
         addCard(uuid, cardCopy)
           .then(res => {
-            props.newCard(res.data.updated);
             setTitle("");
             setDescription("");
             history.push("/edit-card?id=" + res.data.updated._id);
@@ -20,7 +19,7 @@ export default function CloneModal(props) {
         height="100%"
         actions={[
             <React.Fragment><Button style={{marginRight: 10, marginLeft: 10, paddingLeft: 30, paddingRight: 30, marginBottom:40}} modal="close" className="btn-danger" node="button">Cancel</Button>
-            <Button style={{marginRight: 20, marginLeft: 10, paddingLeft: 30, paddingRight: 30, marginBottom:40}} onClick={_ => {newCardWithTemplate(props.cardEditor, title, description, props.usersID)}} className="btn-primary" modal="close" node="button">{props.action_name}</Button></React.Fragment>
+            <Button  disabled={title === "" || description === ""} style={{marginRight: 20, marginLeft: 10, paddingLeft: 30, paddingRight: 30, marginBottom:40}} onClick={_ => {newCardWithTemplate(props.cardEditor, title, description, props.usersID)}} className="btn-primary" modal="close" node="button">{props.action_name}</Button></React.Fragment>
         ]}
         trigger={
             props.trigger

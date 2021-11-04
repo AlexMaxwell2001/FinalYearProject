@@ -203,7 +203,7 @@ function EditSet(props) {
             </Modal>
             <Modal header='Card Comments'
                 trigger={<Button  tooltip="Comment on this set!" icon={<Icon className="right">comments</Icon>} className="btn btn-primary">Comments</Button>}>
-                <CommentBox usersID={props.auth.user.id}
+                <CommentBox cardEditor={props.sets} usersID={props.auth.user.id} userInfo={props.auth.user.name}
                     url={`/comments/card/'${id}/${name}/${props.auth.user.id}`}
                     pollInterval={2000} />
             </Modal>
