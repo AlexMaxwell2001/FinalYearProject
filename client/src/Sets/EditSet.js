@@ -207,14 +207,14 @@ function EditSet(props) {
                     url={`/comments/card/'${id}/${name}/${props.auth.user.id}`}
                     pollInterval={2000} />
             </Modal>
-            {!isOwner && <Button icon={<Icon className="right">save</Icon>} onClick={_ => {
+            {!isOwner && <Button icon={<Icon className="right">content_copy</Icon>} onClick={_ => {
                 copySet(props.auth.user.id, props.sets).then(_ => {
                     props.addMessage({ message: "Card set copied to your Library!", type: 1 })
                 })
                     .catch(_ => props.addMessage({ message: "Error saving Card", type: 2 }))
             }} className="btn btn-primary"
-                type="submit" tooltip="Save current card changes">
-                Save to Library
+                type="submit" tooltip="Clone this set">
+                Clone this set!
                 </Button>}
             {isOwner && <React.Fragment><Button className="btn btn-primary"
                 onClick={e => handleSave(e)}
