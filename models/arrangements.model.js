@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 const setSchema = new Schema({
     name: { type: String, required: true },
     createdBy: { type: String, required: true },
+    visibility: { type: String, default: 'private' },
     cardSet: { type: String },
     responsive: { type: Boolean },
     min_width: { type: String },

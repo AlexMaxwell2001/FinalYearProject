@@ -60,7 +60,7 @@ router.route('/template/:id').get((req, res) => {
 // });
 
 router.route('/update/:id').post((req, res) => {
-    arrangements.findByIdAndUpdate({_id: req.body.id},{...req.body.config, _id: req.body.id}, function(err, result){
+    arrangements.findByIdAndUpdate({_id: req.body.id},{...req.body.config, _id: req.body.id}, function(err){
         if(err){
             res.json('[POST] | /cards/update/:id | Card successfully updated!')
         }

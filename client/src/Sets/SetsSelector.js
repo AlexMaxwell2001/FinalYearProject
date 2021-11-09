@@ -109,7 +109,7 @@ function SetsSelector(props) {
                             }
                             {publicSets
                             .filter(v => {
-                                return privacyFinder(v, privacyFilter) && v.name && v.name.toLowerCase().includes(publicSetsFilter.toLowerCase());
+                                return v.name && v.name.toLowerCase().includes(publicSetsFilter.toLowerCase());
                             })
                             .map((value, index) => {
                                 return <Link key={index + value._id} to={"/edit-set?id=" + value._id}>
