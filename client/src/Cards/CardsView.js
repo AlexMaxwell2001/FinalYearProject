@@ -11,7 +11,7 @@ import {
 } from '../reducers/editorReducer';
 import {saveCard} from '../actions/cardActions'
 import { generateFlippableCard, generateSingleCard } from '../Code/CodeGenerator'
-import { updateCard } from '../api/CardsAPI';
+import { updateCard} from '../api/CardsAPI';
 import CardOutput from './CardOutput'
 import { connect } from 'react-redux'
 import './CardTemplate.css';
@@ -185,22 +185,15 @@ function ActionBar(props) {
     const [codeOpen, setCodeOpen] = useState(false);
     const [setsOpen, setSetsOpen] = useState(false);
     const [previewOpen, setPreviewOpen] = useState(false);
-    const handleTemplateSave = (context) => {
+    const handlePublicSave = (context) => {
         if(context === "private"){
             props.editor.visibility="public"
-            context="public"
         }
         else{
             props.editor.visibility="private"
-            context="private"
         }
         updateCard(props.editor._id, props.editor)
-            .then(_ => { 
-                props.addMessage({ message: "Card is now " + context + "!", type: 1 })
-                window.location.reload()
-                props.saveCard(props.editor._id, props.editor);
-            })
-            .catch(e => { props.addMessage({ message: "Failure Saving Card as " + context + "!", type: 2 }) })
+        window.location.reload();
     }
     const handleSave = async e => {
         e.preventDefault();
@@ -277,10 +270,10 @@ function ActionBar(props) {
              <span className="hide-on-small-only">Redo</span>
         </Button>}
         {isOwner && 
-            <WarningModal warningText="As you are saving the card as a different visibility, this will save your card and remove the history from the undo and redo stacks. Are you sure you want to save?" action_name="Save" title="Save card" continueAction={_ => handleTemplateSave(props.editor.visibility)} trigger={
+            <WarningModal warningText="As you are saving the card as a different visibility, this will save your card and remove the history from the undo and redo stacks. Are you sure you want to save?" action_name="Save" title="Save card" continueAction={_ => handlePublicSave(props.editor.visibility)} trigger={
                 <Button
                     icon={<Icon className="right">public</Icon>}
-                    onClick={_ => handleTemplateSave(props.editor.visibility)}
+                    onClick={_ => handlePublicSave(props.editor.visibility)}
                     className="btn btn-primary" >
                     Make card {props.editor.visibility === "private"?"public":"private"}
                 </Button>

@@ -13,6 +13,13 @@ export const setArrangement = arrangement => {
     };
   };
 
+  export const saveArrange = (id, card) => {
+    return {
+      type: "SET_ARRANGEMENT_SAVED",
+      payload: {card, id}
+    };
+  }
+
 
   export const updateGridValue = (index, ref, value) => {
     return {

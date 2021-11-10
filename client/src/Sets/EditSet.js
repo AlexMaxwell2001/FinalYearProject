@@ -21,6 +21,7 @@ import { CONTAINER_OPTIONS } from '../utils/Constants';
 import StyleModal from '../components/StyleModal';
 import { useHistory } from 'react-router';
 import InfoModal from '../components/InfoModal';
+import WarningModal from '../components/WarningModal';
 import EditorLayout from '../Layout/EditorLayout';
 import InsertCard from './InsertCard';
 
@@ -167,11 +168,14 @@ function EditSet(props) {
         if(offset === 1){
             if(context === "private")props.setVisibility("public")
             else props.setVisibility("private")
+            saveSet(id, props.sets)
+            loadCardSets()
+        }else{
+            props.setUnsaved();
+            saveSet(id, props.sets)
+                .then(_ => props.addMessage({ message: "Set Saved Successfully!", type: 1 }))
+                .catch(_ => props.addMessage({ message: "Error Saving Cards!", type: 2 }))
         }
-        props.setUnsaved();
-        saveSet(id, props.sets)
-            .then(_ => props.addMessage({ message: "Set Saved Successfully!", type: 1 }))
-            .catch(_ => props.addMessage({ message: "Error Saving Cards!", type: 2 }))
     }
     function renderToptoolbar() {
         return <div>
@@ -231,12 +235,14 @@ function EditSet(props) {
                     open={codeOpen}>
                     <SetOutput open={codeOpen} sets={props.sets} />
                 </Modal>
+                <WarningModal warningText="As you are saving the set as a different visibility, this will save your set. Are you sure you want to save?" action_name="Save" title="Save card" continueAction={_ => handleSave(props.sets.visibility,1)} trigger={
                 <Button
                     icon={<Icon className="right">public</Icon>}
                     onClick={_ => handleSave(props.sets.visibility, 1)}
                     className="btn btn-primary" >
                     Make Set {props.sets.visibility === "public"? "private" : "public" }
                 </Button>
+                }/>
                 <Modal
                     header='Settings'
                     fixedFooter={true}

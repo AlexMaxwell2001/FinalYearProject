@@ -18,6 +18,7 @@ import WarningModal from '../components/WarningModal';
 import EditorLayout from '../Layout/EditorLayout';
 import { css, js } from 'js-beautify';
 import InfoModal from '../components/InfoModal';
+import {saveArrange} from '../actions/arrangementActions';
 
 
   const Iframe = (props) => {
@@ -300,7 +301,18 @@ function EditArrangements(props) {
             </div>
         </div></React.Fragment>
     }
+    const handlePublicSave = (context) => {
+        if(context === "private"){
+            props.arrangements.config[0].visibility="public"
+        }
+        else{
+            props.arrangements.config[0].visibility="private"
+        }
+        saveArrangement(props.arrangements.config[0]._id, props.arrangements.config[0])
+        loadCardSets()
+    }
     const handleSave = () => {
+        props.arrangements.config[0].visibility="public"
         props.setUnsaved();
         saveArrangement(id, props.arrangements.config[0]).then(_ => {
             props.addMessage({message: "Arrangement Saved Successfully!", type: 1})
@@ -309,6 +321,7 @@ function EditArrangements(props) {
             props.addMessage({message: "Error Saving Arrangement!", type: 2})
         })
     }
+    let isOwner = props.arrangements.config[0].createdBy === props.auth.user.id;
     function renderToptoolbar() {
         return <div>
                 <Button icon={<Icon className="right">code</Icon>} onClick={_=>setCodeOpen(true)} style={{lineHeight:"12px"}} className="btn btn-outline" >VIEW CODE</Button>
@@ -332,6 +345,16 @@ function EditArrangements(props) {
                     <h5>Arrangement Name</h5>
                     <TextInput onChange={e=>props.updateTitle(e.target.value)} value={props.arrangements.config[0].name} className="bordered"  placeholder="Card Name" />
                 </Modal>
+                {isOwner && 
+                    <WarningModal warningText="As you are saving the arrangement as a different visibility, this will save your arrangement. Are you sure you want to save?" action_name="Save" title="Save card" continueAction={_ => handlePublicSave(props.arrangements.config[0].visibility)} trigger={
+                    <Button
+                        icon={<Icon className="right">public</Icon>}
+                        onClick={_ => handlePublicSave(props.arrangements.config[0].visibility)}
+                        className="btn btn-primary" >
+                        Make Arrangment {props.arrangements.config[0].visibility === "private"?"public":"private"}
+                    </Button>
+                }/>
+        }
         </div>
     }
     function renderCards() {
@@ -361,7 +384,7 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { setArrangement, switchSet, addMessage, updateTitle, updateType,
+    { setArrangement, saveArrange, switchSet, addMessage, updateTitle, updateType,
         setResponsive, updateGridValue, setUnsaved, resetArrangements, updateRowSpacing,
         updateColSpacing, updateMinWidth }
 )(EditArrangements);

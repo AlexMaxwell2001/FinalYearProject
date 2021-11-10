@@ -5,7 +5,7 @@ import { loadCards, deleteCard} from "../api/CardsAPI"
 import { logoutUser } from "../actions/authActions";
 import { MOST_RECENT } from '../utils/Constants'
 import { newCard, SelectTemplate } from '../actions/editorActions';
-import { FilterDropDown, getSort } from '../components/Sort';
+import { FilterDropDown, FilterPrivacy, getSort, privacyFinder } from '../components/Sort';
 import { addMessage } from '../actions/toastActions';
 import { Button, Tab, Tabs, Icon, Pagination } from 'react-materialize';
 import { useHistory } from 'react-router-dom';
@@ -19,6 +19,7 @@ function Templates(props) {
     const [templates, setTemplates] = useState([])
     const [publicCardsFilter, setPublicCardsFilter] = useState("")
     const [myCardsFilter, setMyCardsFilter] = useState("")
+    const [privacyFilter, setPrivacyFilter] = useState(1)
     const [currentPage, setCurrentPage] = useState(1)
     const [loading, setLoading] = useState(false)
     const loadingCards = () => {
@@ -61,7 +62,7 @@ function Templates(props) {
                 </div>
     })
     const renderMyCards = () => cards
-        .filter(v => { return v.name && v.name.toLowerCase().includes(myCardsFilter.toLowerCase())})
+        .filter(v => { return privacyFinder(v, privacyFilter) && v.name && v.name.toLowerCase().includes(myCardsFilter.toLowerCase())})
         .sort((a, b) => getSort(a, b, sort))
         .slice(pageStart, pageStart + pageSize)
         .map((value, index) => {
@@ -95,7 +96,10 @@ function Templates(props) {
                         className="bordered" 
                         placeholder="Card Name" 
                         type="text" />
-                    <FilterDropDown sort={sort} setSort={setSort} />
+                    <div style={{ display: "flex", cursor: "pointer" }}>
+                            <FilterDropDown sort={sort} setSort={setSort} />
+                            <FilterPrivacy sort={privacyFilter} setSort={setPrivacyFilter} />
+                    </div>
                     {!cards.length && 
                         <React.Fragment>
                             <h5>No Cards Yet!</h5>

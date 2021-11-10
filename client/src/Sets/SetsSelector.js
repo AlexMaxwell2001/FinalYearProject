@@ -68,7 +68,7 @@ function SetsSelector(props) {
                         <div style={{ padding: 20 }}>
                             <b style={{ fontSize: 18, marginBottom: 10 }}>Search:</b>
                             <input style={{ marginBottom: 17, marginTop: 5 }} value={mySetsFilter} onChange={e => setMySetsFilter(e.target.value)} className="bordered" placeholder="Set Name" type="text" id="TextInput-S3" />
-                            <div style={{ display: "flex" }}>
+                            <div style={{ display: "flex", cursor: "pointer" }}>
                                 <FilterDropDown sort={sort} setSort={setSort} />
                                 <FilterPrivacy sort={privacyFilter} setSort={setPrivacyFilter} />
                             </div>
