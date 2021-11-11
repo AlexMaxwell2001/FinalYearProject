@@ -162,7 +162,7 @@ function EditSet(props) {
                     } />
 
                 </div>
-            </div></React.Fragment>
+            </div></React.Fragment> 
     }
     const handleSave = (context, offset) => {
         if(offset === 1){
@@ -245,18 +245,20 @@ function EditSet(props) {
                 }/>
                 <Modal
                     header='Settings'
-                    fixedFooter={true}
                     trigger={<Button icon={<Icon className="right">settings</Icon>} className="btn btn-primary" >Settings</Button>}>
                     <h5>Card Name</h5>
-                    <TextInput id="set-name-3" className="bordered" onChange={e => props.setName(e.target.value)} value={props.sets.name} placeholder="Card Name" />
+                    <TextInput id="set-name-3" className="bordered" onChange={e => props.setName(e.target.value)} value={props.sets.name} placeholder="Set Name" />
                     <h5>Card Description</h5>
                     <Textarea className="bordered"
-                        placeholder="Card Description"
+                        placeholder="Set Description"
                         onChange={e => props.setDescription(e.target.value)}
                         value={props.sets.description}
                     />
                     <TagSelector tags={props.sets.tags} setTags={props.setTags} />
                     <TagDisplay tags={props.sets.tags} setTags={props.setTags} deleteable={true} />
+                    <Button modal="close" style={{width: '100%', marginTop:60}} icon={<Icon className="right">save</Icon>} onClick={e => handleSave(e)}  className="btn btn-primary" >
+                        <span className="hide-on-small-only" tooltip="Save your settings!">Save Settings</span>
+                    </Button>
                 </Modal></React.Fragment>}
         </div>
     }

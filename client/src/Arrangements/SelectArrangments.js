@@ -22,8 +22,9 @@ function SelectArrangements(props) {
     const [sort, setSort] = useState(MOST_RECENT)
     const loadCardSets = () => {
         setLoading(true);
-        loadArrangements(props.auth.user.id)
+        loadArrangements("")
             .then(res => {
+                console.log(res)
                 setArrangements(res.data.allCards.filter(card => {
                     return card.createdBy === props.auth.user.id
                 }))
@@ -45,6 +46,7 @@ function SelectArrangements(props) {
             .catch(err => {
                 props.addMessage({ message: "Error:" + err, type: 2 })
             })
+        loadCardSets()
     }
     if (!loading && arrangements[0] === -1)
         loadCardSets()

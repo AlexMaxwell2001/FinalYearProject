@@ -253,13 +253,17 @@ function ActionBar(props) {
                 </Button>
             }>
             <h5>Card Name</h5>
-            <TextInput id="set-name-2" onChange={e => props.updateSetTitle(e.target.value)} value={props.editor.name} placeholder="Card Name" />
+            <TextInput id="set-name-3" className="bordered" onChange={e => props.updateSetTitle(e.target.value)} value={props.editor.name} placeholder="Card Name" />
             <h5>Card Description</h5>
             <Textarea
+                className="bordered"
                 placeholder="Card Name"
                 value={props.editor.description}
                 onChange={e => props.updateSetDescription(e.target.value)}
             />
+            <Button modal="close" style={{width: '100%'}} icon={<Icon className="right">save</Icon>} onClick={e => handleSave(e)}  className="btn btn-primary" >
+                <span className="hide-on-small-only" tooltip="Save your settings!">Save Settings</span>
+            </Button>
         </Modal></React.Fragment>}   
         {isOwner && <Button icon={<Icon className="right">undo</Icon>} onClick={_ => props.undoContent()} className="btn btn-primary"
             type="submit" id="undo" tooltip="Undo your last change!" disabled={undoFlag}>

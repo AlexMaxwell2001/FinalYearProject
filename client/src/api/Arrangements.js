@@ -33,8 +33,8 @@ export const newArrangement = (id, arrangement) => {
     return post('add/', {id, arrangement})
 }
 
-export const loadArrangements = (userID) => {
-    return get(userID);
+export const loadArrangements = () => {
+    return get();
 }
 
 export const getArrangement = (id) => {

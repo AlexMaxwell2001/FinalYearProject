@@ -43,6 +43,7 @@ function SetsSelector(props) {
         }).catch(err => {
             props.addMessage({ message: "Error:" + err, type: 2 })
         })
+        loadCardSets();
     }
     if (!loading && sets[0] === -1)
         loadCardSets()

@@ -10,6 +10,7 @@ import {
     resetArrangements, setArrangement, setResponsive, setUnsaved, switchSet, updateColSpacing,
     updateGridValue, updateMinWidth, updateRowSpacing, updateTitle, updateType 
 } from '../actions/arrangementActions';
+import CommentBox from '../components/comments/CommentBox';
 import ArrangeOutput from './ArrangeOutput';
 import { FilterDropDown, FilterPrivacy, getSort } from '../components/Sort';
 import { MOST_RECENT } from '../utils/Constants';
@@ -344,17 +345,25 @@ function EditArrangements(props) {
                     trigger={<Button icon={<Icon className="right">settings</Icon>} className="btn btn-primary" >Settings</Button>}>
                     <h5>Arrangement Name</h5>
                     <TextInput onChange={e=>props.updateTitle(e.target.value)} value={props.arrangements.config[0].name} className="bordered"  placeholder="Card Name" />
+                    <Button modal="close" style={{width: '100%'}} icon={<Icon className="right">save</Icon>} onClick={e => handleSave(e)}  className="btn btn-primary" >
+                        <span className="hide-on-small-only" tooltip="Save your settings!">Save Settings</span>
+                    </Button>
                 </Modal>
                 {isOwner && 
                     <WarningModal warningText="As you are saving the arrangement as a different visibility, this will save your arrangement. Are you sure you want to save?" action_name="Save" title="Save card" continueAction={_ => handlePublicSave(props.arrangements.config[0].visibility)} trigger={
-                    <Button
-                        icon={<Icon className="right">public</Icon>}
-                        onClick={_ => handlePublicSave(props.arrangements.config[0].visibility)}
-                        className="btn btn-primary" >
-                        Make Arrangment {props.arrangements.config[0].visibility === "private"?"public":"private"}
-                    </Button>
-                }/>
-        }
+                        <Button
+                            icon={<Icon className="right">public</Icon>}
+                            onClick={_ => handlePublicSave(props.arrangements.config[0].visibility)}
+                            className="btn btn-primary" >
+                            Make Arrangment {props.arrangements.config[0].visibility === "private"?"public":"private"}
+                        </Button>
+                    }/>
+                }
+                <Modal header='Card Comments' trigger={<Button  tooltip="Comment on this set!" icon={<Icon className="right">comments</Icon>} className="btn btn-primary">Comments</Button>}>
+                    <CommentBox cardEditor={props.arrangements.config[0]} usersID={props.auth.user.id} userInfo={props.auth.user.name}
+                        url={`/comments/card/'${id}/${name}/${props.auth.user.id}`}
+                        pollInterval={2000} />
+                </Modal>
         </div>
     }
     function renderCards() {
