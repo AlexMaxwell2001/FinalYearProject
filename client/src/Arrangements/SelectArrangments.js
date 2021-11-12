@@ -22,9 +22,8 @@ function SelectArrangements(props) {
     const [sort, setSort] = useState(MOST_RECENT)
     const loadCardSets = () => {
         setLoading(true);
-        loadArrangements("")
+        loadArrangements()
             .then(res => {
-                console.log(res)
                 setArrangements(res.data.allCards.filter(card => {
                     return card.createdBy === props.auth.user.id
                 }))
@@ -117,7 +116,7 @@ function SelectArrangements(props) {
                                 return v.name && v.name.toLowerCase().includes(publicArrangementsFilter.toLowerCase());
                             })
                             .map((value, index) => {
-                                return <Link key={index + value._id} to={"/edit-set?id=" + value._id}>
+                                return <Link key={index + value._id} to={"/edit-arrangement?id=" + value._id}>
                                     <div style={{ color: '#676767' }} className="card-grid-item" key={index}>
                                         <h5><b>{value.name}</b></h5>
                                         <p>{value.description}</p>

@@ -28,23 +28,30 @@ const post = (apiRoute, payload) => {
     });
 }
    
-
-export const newArrangement = (id, arrangement) => {
+const newArrangement = (id, arrangement) => {
     return post('add/', {id, arrangement})
 }
 
-export const loadArrangements = () => {
+const loadArrangements = () => {
     return get();
 }
 
-export const getArrangement = (id) => {
+const getArrangement = (id) => {
     return get('get/' + id)
 }
 
-export const saveArrangement = (id, config) => {
+const saveArrangement = (id, config) => {
     return post('update/' + id, {id, config})
 }
 
-export const deleteArrangement = (id) => {
+const deleteArrangement = (id) => {
     return post('delete/' + id, {id})
+}
+
+export {
+    newArrangement,
+    loadArrangements,
+    getArrangement,
+    saveArrangement,
+    deleteArrangement
 }

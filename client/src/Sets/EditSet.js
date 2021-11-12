@@ -8,7 +8,8 @@ import {
     addToSet, flipCard, setTags, updateSet, setName, setDescription, removeCard,
     resetState, setVisibility, setText, updateContainerStyle, setUnsaved
 } from '../actions/setActions'
-import { copySet, getSet, saveSet } from '../api/CardSets';
+import { getSet, saveSet } from '../api/CardSets';
+import CloneModalSet from '../components/CloneModalSet'
 import { addCard } from '../api/CardsAPI';
 import LoaderCircle from '../components/LoaderCircle';
 import CommentBox from '../components/comments/CommentBox';
@@ -205,21 +206,13 @@ function EditSet(props) {
                     <Preview open={previewOpen} {...props} />
                 </div>
             </Modal>
-            <Modal header='Card Comments'
-                trigger={<Button  tooltip="Comment on this set!" icon={<Icon className="right">comments</Icon>} className="btn btn-primary">Comments</Button>}>
-                <CommentBox cardEditor={props.sets} usersID={props.auth.user.id} userInfo={props.auth.user.name}
-                    url={`/comments/card/'${id}/${name}/${props.auth.user.id}`}
-                    pollInterval={2000} />
-            </Modal>
-            {!isOwner && <Button icon={<Icon className="right">content_copy</Icon>} onClick={_ => {
-                copySet(props.auth.user.id, props.sets).then(_ => {
-                    props.addMessage({ message: "Card set copied to your Library!", type: 1 })
-                })
-                    .catch(_ => props.addMessage({ message: "Error saving Card", type: 2 }))
-            }} className="btn btn-primary"
-                type="submit" tooltip="Clone this set">
-                Clone this set!
-                </Button>}
+            {!isOwner &&
+            <CloneModalSet usersID={props.auth.user.id} cardEditor={props.sets} action_name="Save Set" title="Clone set"  trigger={
+                <Button icon={<Icon className="right">content_copy</Icon>} className="btn btn-primary" type="submit" tooltip="Clone this set!">
+                    <span className="hide-on-small-only">Clone this set!</span>
+                </Button>                              
+            } />
+        }
             {isOwner && <React.Fragment><Button className="btn btn-primary"
                 onClick={e => handleSave(e)}
                 icon={<Icon className="right">save</Icon>}
@@ -260,6 +253,12 @@ function EditSet(props) {
                         <span className="hide-on-small-only" tooltip="Save your settings!">Save Settings</span>
                     </Button>
                 </Modal></React.Fragment>}
+                <Modal header='Card Comments'
+                trigger={<Button  tooltip="Comment on this set!" icon={<Icon className="right">comments</Icon>} className="btn btn-primary">Comments</Button>}>
+                <CommentBox cardEditor={props.sets} usersID={props.auth.user.id} userInfo={props.auth.user.name}
+                    url={`/comments/card/'${id}/${name}/${props.auth.user.id}`}
+                    pollInterval={2000} />
+                </Modal>
         </div>
     }
     function renderCards() {

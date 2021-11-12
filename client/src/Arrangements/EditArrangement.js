@@ -20,6 +20,7 @@ import EditorLayout from '../Layout/EditorLayout';
 import { css, js } from 'js-beautify';
 import InfoModal from '../components/InfoModal';
 import {saveArrange} from '../actions/arrangementActions';
+import CloneModalArrangements from '../components/CloneModalArrangements';
 
 
   const Iframe = (props) => {
@@ -326,12 +327,12 @@ function EditArrangements(props) {
     function renderToptoolbar() {
         return <div>
                 <Button icon={<Icon className="right">code</Icon>} onClick={_=>setCodeOpen(true)} style={{lineHeight:"12px"}} className="btn btn-outline" >VIEW CODE</Button>
-                <Button className="btn btn-primary" 
+                {isOwner && <Button className="btn btn-primary" 
                     onClick={_=>handleSave()}
                     icon={<Icon className="right">save</Icon>}
                     type="submit" tooltip="Save current card changes">
                     Save
-                </Button>
+                </Button>}
                 <Modal
                     header='View Code'
                     options={{
@@ -359,6 +360,11 @@ function EditArrangements(props) {
                         </Button>
                     }/>
                 }
+        	    <CloneModalArrangements usersID={props.auth.user.id} cardEditor={props.arrangements.config[0]} action_name="Save arrangement" title="Clone arrangement"  trigger={
+                    <Button icon={<Icon className="right">content_copy</Icon>} className="btn btn-primary" type="submit" tooltip="Clone this Arrangement!">
+                        <span className="hide-on-small-only">Clone this Arrangement!</span>
+                    </Button>                              
+                } />
                 <Modal header='Card Comments' trigger={<Button  tooltip="Comment on this set!" icon={<Icon className="right">comments</Icon>} className="btn btn-primary">Comments</Button>}>
                     <CommentBox cardEditor={props.arrangements.config[0]} usersID={props.auth.user.id} userInfo={props.auth.user.name}
                         url={`/comments/card/'${id}/${name}/${props.auth.user.id}`}
