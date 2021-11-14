@@ -2,7 +2,6 @@ import React, { useState, } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button,Tabs, Tab, Pagination, Icon, Row, Col } from 'react-materialize'
-
 import { deleteArrangement, loadArrangements } from '../api/Arrangements'
 import LoaderCircle from '../components/LoaderCircle';
 import { addMessage } from '../actions/toastActions'
@@ -102,9 +101,9 @@ function SelectArrangements(props) {
                 </div>
                 </Tab>
                 <Tab title="Public Arrangements" >
-                    <div className="element" style={{ backgroundColor: "white",border:"white", width: "100%", marginTop: 20 }}>
-                        <b style={{ fontSize: 18, marginBottom: 10 , marginLeft: 20, marginRight: 20 }}>Search:</b>
-                        <input style={{ marginBottom: 17, marginTop: 5 , marginLeft: 20, marignRight: 20 }} value={publicArrangementsFilter} onChange={e => setPublicArrangementsFilter(e.target.value)} className="bordered" placeholder="Arrangement Name" type="text" id="TextInput-S3" /> 
+                    <div style={{padding:20}}>
+                        <b style={{ fontSize: 18, marginBottom: 10 }}>Search:</b>
+                        <input style={{ marginBottom: 17, marginTop: 5 }} value={publicArrangementsFilter} onChange={e => setPublicArrangementsFilter(e.target.value)} className="bordered" placeholder="Arrangement Name" type="text" id="TextInput-S3" /> 
                         <div className="card-grid-container-small" style={{border:"white"}}>
                             {!publicArrangements.length && 
                                 <React.Fragment>

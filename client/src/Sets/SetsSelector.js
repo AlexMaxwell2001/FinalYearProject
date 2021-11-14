@@ -99,10 +99,10 @@ function SetsSelector(props) {
                         </div>
                     </Tab>
                     <Tab title="Public Sets" >
-                    <div className="element" style={{ backgroundColor: "white",border:"white", width: "100%", marginTop: 20 }}>
-                        <b style={{ fontSize: 18, marginBottom: 10 , marginLeft: 20, marginRight: 20 }}>Search:</b>
-                        <input style={{ marginBottom: 17, marginTop: 5 , marginLeft: 20, marignRight: 20 }} value={publicSetsFilter} onChange={e => setPublicSetsFilter(e.target.value)} className="bordered" placeholder="Set Name" type="text" id="TextInput-S3" /> 
-                        <div className="card-grid-container-small" style={{border:"white"}}>
+                        <div style={{padding:20}}>
+                        <b style={{ fontSize: 18, marginBottom: 10 }}>Search:</b>
+                        <input style={{ marginBottom: 17, marginTop: 5 }} value={publicSetsFilter} onChange={e => setPublicSetsFilter(e.target.value)} className="bordered" placeholder="Set Name" type="text" id="TextInput-S3" /> 
+                        <div className="card-grid-container" style={{border:"white"}}>
                             {!publicSets.length && 
                                 <React.Fragment>
                                     <h5 style={{textAlign: 'center'}}>No public sets yet!</h5>

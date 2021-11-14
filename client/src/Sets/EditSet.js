@@ -170,7 +170,6 @@ function EditSet(props) {
             if(context === "private")props.setVisibility("public")
             else props.setVisibility("private")
             saveSet(id, props.sets)
-            loadCardSets()
         }else{
             props.setUnsaved();
             saveSet(id, props.sets)
