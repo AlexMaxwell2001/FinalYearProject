@@ -25,7 +25,6 @@ import InfoModal from '../components/InfoModal';
 import WarningModal from '../components/WarningModal';
 import EditorLayout from '../Layout/EditorLayout';
 import InsertCard from './InsertCard';
-
 function validateStyle(styleValue) {
     if (styleValue === undefined)
         return "";
@@ -111,59 +110,133 @@ function EditSet(props) {
         })
     }
     function renderToolbar() {
-        return <React.Fragment><nav className="bg-primary">
-            <div style={{ display: 'flex', paddingLeft: 20 }} className="nav-wrapper">
-                <h5 className="truncate" style={{ lineHeight: "32px" }}>{name}</h5>
-            </div>
-        </nav><div className='console'>
-                <div className='console-content'>
-                    <h5 className="black-text">
-                        Container
-                <InfoModal title="Container" trigger={
-                            <span className="material-icons right card-toolbar-help">
-                                help
-                        </span>
-                        }>
-                            <p>A container is an element wrapper around your cards. The most common use is to give your card sets a background and padding around all of the cards. </p>
-                        </InfoModal>
-                    </h5>
-                    <Collapsible accordion>
-                        <CollapsibleItem header={<b style={{ textAlign: "center", width: "60%" }}>Container</b>}
-                            icon={<i className="material-icons">dashboard</i>} >
-                            <div className='componentEditor'>
-                                <Row>
-                                    <StyleModal trigger={
-                                        <Col style={{ marginBottom: 15 }} s={12}><div style={{ textDecoration: "underline",color:"blue", cursor:"pointer" }}>What do these mean?</div></Col>
-                                    } />
-                                    {CONTAINER_OPTIONS.map((value, index) => {
-                                        let styleValue = validateStyle(props.sets.container[value[1]]);
-                                        return <TextInput key={index} id={"container-" + index} value={styleValue} s={6} label={value[0]}
-                                            onChange={e => props.updateContainerStyle(value[1], e.target.value)}
-                                        />
-                                    })}
-                                </Row>
-                            </div>
-                        </CollapsibleItem>
-                    </Collapsible>
-                    <h5 className="black-text">
-                        Cards
-                    <InfoModal title="Cards" trigger={
-                            <span className="material-icons right card-toolbar-help">
-                                help
-                        </span>
-                        }>
-                            <p>The card selector allows you to add your pre-made cards to the set. Text is available to change by clicking on it. </p>
-                        </InfoModal>
-                    </h5>
-                    <Collection className="card-collection">
-                        {renderCardSelectors()}
-                    </Collection>
-                    <InsertCard {...props} trigger={
-                        <Button icon={<Icon className="right">add</Icon>} className="btn btn-primary full-width">Insert Card</Button>
-                    } />
-
+        if(isOwner){
+            return <React.Fragment>
+            <div>
+                <nav className="bg-primary">
+                    <div style={{ display: 'flex', paddingLeft: 20 }} className="nav-wrapper">
+                        <h5 className="truncate" style={{ lineHeight: "32px" }}>{name}</h5>
+                    </div>
+                </nav>
+                <div className='console'>
+                    <div className='console-content'>
+                        <h5 className="black-text">
+                            Container
+                            <InfoModal title="Container" trigger={
+                                <span className="material-icons right card-toolbar-help">
+                                    help
+                                </span>
+                            }>
+                                <p>A container is an element wrapper around your cards. The most common use is to give your card sets a background and padding around all of the cards. </p>
+                            </InfoModal>
+                        </h5>
+                        <Collapsible accordion>
+                            <CollapsibleItem header={<b style={{ textAlign: "center", width: "60%" }}>Container</b>}
+                                icon={<i className="material-icons">dashboard</i>} >
+                                <div className='componentEditor'>
+                                    <Row>
+                                        <StyleModal trigger={
+                                            <Col style={{ marginBottom: 15 }} s={12}><div style={{ textDecoration: "underline",color:"blue", cursor:"pointer" }}>What do these mean?</div></Col>
+                                        } />
+                                        {CONTAINER_OPTIONS.map((value, index) => {
+                                            let styleValue = validateStyle(props.sets.container[value[1]]);
+                                            return <TextInput key={index} id={"container-" + index} value={styleValue} s={6} label={value[0]}
+                                                onChange={e => props.updateContainerStyle(value[1], e.target.value)}
+                                            />
+                                        })}
+                                    </Row>
+                                </div>
+                            </CollapsibleItem>
+                        </Collapsible>
+                        <h5 className="black-text">
+                            Cards
+                            <InfoModal title="Cards" trigger={
+                                <span className="material-icons right card-toolbar-help">
+                                    help
+                                </span>
+                            }>
+                                <p>The card selector allows you to add your pre-made cards to the set. Text is available to change by clicking on it. </p>
+                            </InfoModal>
+                        </h5>
+                        <Collection className="card-collection">
+                            {renderCardSelectors()}
+                        </Collection>
+                        <InsertCard {...props} trigger={
+                            <Button icon={<Icon className="right">add</Icon>} className="btn btn-primary full-width">Insert Card</Button>
+                        } />
+                    </div>
                 </div>
             </div></React.Fragment> 
+        }else{
+            return <React.Fragment>
+            <div>
+                <nav className="bg-primary">
+                    <div style={{ display: 'flex', paddingLeft: 20 }} className="nav-wrapper">
+                        <h5 className="truncate" style={{ lineHeight: "32px" }}>{name}</h5>
+                    </div>
+                </nav>
+                <h6 style={{ fontWeight:"1000", padding:"30px", color:"red", textAlign:"center" }}>Clone this set to edit it and make it your own!</h6>
+                <div className='console' style={{marginBottom:0, height:0, overflow:"hidden"}}>
+                    <div className='console-content' style={{marginBottom:0, height:0, overflow:"hidden"}}>
+                        <CloneModalSet usersID={props.auth.user.id} cardEditor={props.editor} trigger={
+                        <Button icon={<Icon className="right">content_copy</Icon>} className="btn btn-primary full-width" type="submit" tooltip="Clone this set!">
+                            <span className="hide-on-small-only">Clone this set!</span>
+                        </Button>                              
+                        } />
+                    </div>
+                </div>
+                <div id="uneditableContainer" style={{pointerEvents:"none"}}>
+                    <div className='console'>
+                        <div className='console-content'>
+                            <h5 className="black-text">
+                                Container
+                                <InfoModal title="Container" trigger={
+                                    <span className="material-icons right card-toolbar-help">
+                                        help
+                                    </span>
+                                }>
+                                    <p>A container is an element wrapper around your cards. The most common use is to give your card sets a background and padding around all of the cards. </p>
+                                </InfoModal>
+                            </h5>
+                            <Collapsible accordion>
+                                <CollapsibleItem header={<b style={{ textAlign: "center", width: "60%" }}>Container</b>}
+                                    icon={<i className="material-icons">dashboard</i>} >
+                                    <div className='componentEditor'>
+                                        <Row>
+                                            <StyleModal trigger={
+                                                <Col style={{ marginBottom: 15 }} s={12}><div style={{ textDecoration: "underline",color:"blue", cursor:"pointer" }}>What do these mean?</div></Col>
+                                            } />
+                                            {CONTAINER_OPTIONS.map((value, index) => {
+                                                let styleValue = validateStyle(props.sets.container[value[1]]);
+                                                return <TextInput key={index} id={"container-" + index} value={styleValue} s={6} label={value[0]}
+                                                    onChange={e => props.updateContainerStyle(value[1], e.target.value)}
+                                                />
+                                            })}
+                                        </Row>
+                                    </div>
+                                </CollapsibleItem>
+                            </Collapsible>
+                            <h5 className="black-text">
+                                Cards
+                                <InfoModal title="Cards" trigger={
+                                    <span className="material-icons right card-toolbar-help">
+                                        help
+                                    </span>
+                                }>
+                                    <p>The card selector allows you to add your pre-made cards to the set. Text is available to change by clicking on it. </p>
+                                </InfoModal>
+                            </h5>
+                            <Collection className="card-collection">
+                                {renderCardSelectors()}
+                            </Collection>
+                            <InsertCard {...props} trigger={
+                                <Button icon={<Icon className="right">add</Icon>} className="btn btn-primary full-width">Insert Card</Button>
+                            } />
+                        </div>
+                    </div>
+                </div>
+            </div></React.Fragment>            
+        }
     }
     const handleSave = (context, offset) => {
         if(offset === 1){

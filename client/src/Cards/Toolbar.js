@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import 'materialize-css';
 import { connect } from "react-redux";
@@ -6,6 +5,7 @@ import PropTypes from "prop-types";
 import { logoutUser } from "../actions/authActions";
 import { addMessage } from "../actions/toastActions";
 import AddContent from "../components/AddContent"
+import CloneModal from '../components/CloneModal';
 import { BODY_OPTIONS} from '../utils/Constants'
 import {
   Row,
@@ -358,10 +358,20 @@ function StyleSelector(props) {
   </React.Fragment>
   }else{
     return <React.Fragment>
-    <div style={{ pointerEvents: "none"}}>
+    <div>
     <ToolBarNav {...props} />
     <br></br>
-    <h6 style={{ fontWeight:"1000", padding:"30px", color:"red"}}>Clone this card to edit it and make it your own!</h6>
+    <h6 style={{ fontWeight:"1000", padding:"30px", color:"red", textAlign:"center" }}>Clone this card to edit it and make it your own!</h6>
+    <div className='console' style={{marginBottom:0, height:0, overflow:"hidden"}}>
+      <div className='console-content' style={{marginBottom:0, height:0, overflow:"hidden"}}>
+        <CloneModal usersID={props.auth.user.id} cardEditor={props.editor} action_name="Save Card" title="Clone card"  trigger={
+          <Button icon={<Icon className="right">content_copy</Icon>} className="btn btn-primary full-width" type="submit" tooltip="Clone this card!">
+            <span className="hide-on-small-only">Clone this card!</span>
+          </Button>                              
+        } />
+      </div>
+    </div>
+    <div id="nonEditableContainer" style={{ pointerEvents: "none"}}>
     <div className='console'>
       <div className='console-content'>
         <h5 className="black-text">
@@ -507,6 +517,7 @@ function StyleSelector(props) {
           </div>
         </React.Fragment>}
       </div>
+    </div>
     </div>
   </div>
     </React.Fragment>

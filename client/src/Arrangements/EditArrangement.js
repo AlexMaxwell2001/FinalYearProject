@@ -285,23 +285,61 @@ function EditArrangements(props) {
     const {arrangementType, name} = props.arrangements.config[0];
     let dataExists = !!props.arrangements.set && !!props.arrangements.set[0];
     function renderToolbar() {
-        return <React.Fragment><nav className="bg-primary">
-        <div style={{ display: 'flex', paddingLeft: 20 }} className="nav-wrapper">
-            <h5 className="truncate" style={{ lineHeight: "32px" }}>{name}</h5>
-        </div>
-        </nav>
-        <div className='console'>
-            <div className='console-content'>
-            <SelectSet changeSet={changeSet}  trigger={
-                <Button className="btn btn-primary full-width" onClick={_=>setSelectOpen(true)}>Select Set</Button>
-            } {...props}/>
-            {!!dataExists && props.arrangements.config && <React.Fragment>
-            <SelectType changeSet={changeSet} id={id} {...props} trigger = {
-                <Button className="btn btn-primary full-width">Select Type</Button>
-            }/></React.Fragment>}
-            {arrangementType === "grid" && <GridConfuration {...props}/>}
-            </div>
-        </div></React.Fragment>
+        if(isOwner){
+            return <React.Fragment>
+            <div>
+                <nav className="bg-primary">
+                    <div style={{ display: 'flex', paddingLeft: 20 }} className="nav-wrapper">
+                        <h5 className="truncate" style={{ lineHeight: "32px" }}>{name}</h5>
+                    </div>
+                </nav>
+                <div className='console'>
+                    <div className='console-content'>
+                    <SelectSet changeSet={changeSet}  trigger={
+                        <Button className="btn btn-primary full-width" onClick={_=>setSelectOpen(true)}>Select Set</Button>
+                    } {...props}/>
+                    {!!dataExists && props.arrangements.config && <React.Fragment>
+                    <SelectType changeSet={changeSet} id={id} {...props} trigger = {
+                        <Button className="btn btn-primary full-width">Select Type</Button>
+                    }/></React.Fragment>}
+                    {arrangementType === "grid" && <GridConfuration {...props}/>}
+                    </div>
+                </div>
+            </div></React.Fragment>
+        }else{
+            return <React.Fragment>
+            <div>
+                <nav className="bg-primary">
+                    <div style={{ display: 'flex', paddingLeft: 20 }} className="nav-wrapper">
+                        <h5 className="truncate" style={{ lineHeight: "32px" }}>{name}</h5>
+                    </div>
+                </nav>
+                <h6 style={{ fontWeight:"1000", padding:"30px", color:"red", textAlign:"center" }}>Clone this arrangement to edit it and make it your own!</h6>
+                <div className='console' style={{marginBottom:0, height:0, overflow:"hidden"}}>
+                    <div className='console-content' style={{marginBottom:0, height:0, overflow:"hidden"}}>
+                        <CloneModalArrangements usersID={props.auth.user.id} cardEditor={props.editor} trigger={
+                        <Button icon={<Icon className="right">content_copy</Icon>} className="btn btn-primary full-width" type="submit" tooltip="Clone this arrangement!">
+                            <span className="hide-on-small-only">Clone this arrangement!</span>
+                        </Button>                              
+                        } />
+                    </div>
+                </div>
+                <div id="uneditableContainer" style={{pointerEvents:"none"}}>
+                    <div className='console'>
+                        <div className='console-content'>
+                        <SelectSet changeSet={changeSet}  trigger={
+                            <Button className="btn btn-primary full-width" onClick={_=>setSelectOpen(true)}>Select Set</Button>
+                        } {...props}/>
+                        {!!dataExists && props.arrangements.config && <React.Fragment>
+                        <SelectType changeSet={changeSet} id={id} {...props} trigger = {
+                            <Button className="btn btn-primary full-width">Select Type</Button>
+                        }/></React.Fragment>}
+                        {arrangementType === "grid" && <GridConfuration {...props}/>}
+                        </div>
+                    </div>
+                </div>
+            </div></React.Fragment>
+        }
     }
     const handlePublicSave = (context) => {
         if(context === "private"){

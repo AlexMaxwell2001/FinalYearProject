@@ -1,7 +1,13 @@
 import React from 'react'
 import { Col } from 'react-materialize'
 export default function EditorLayout(props) {
-    const colStyling = {
+    const colStyling1 = {
+        style: {
+            padding: 0,position: "absolute", right: 0
+        },
+        className: 'paneGradient'
+    }
+    const colStyling2 = {
         style: {
             padding: 0
         },
@@ -9,7 +15,7 @@ export default function EditorLayout(props) {
     }
     let overflow = props.scrollHidden ? "hidden" : "auto"
     return <React.Fragment>
-        <Col {...colStyling} s={9}>
+        <Col {...colStyling2} s={9}>
             <div className="top-toolbar">
                 {props.top_toolbar}
             </div>
@@ -17,7 +23,7 @@ export default function EditorLayout(props) {
                 {props.children}
             </div>
         </Col>
-        <Col {...colStyling} s={3}>
+        <Col {...colStyling1}s={3}>
             <div className="tool-bar-wrapper">
                 {props.toolbar}
             </div>
