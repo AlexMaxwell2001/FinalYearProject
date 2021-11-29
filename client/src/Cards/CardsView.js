@@ -214,11 +214,11 @@ function ActionBar(props) {
     if(!getUndo())undoFlag=false;
     if(!getRedo())redoFlag=false;
     return <div className="top-toolbar">
-        <Button tooltip="Export your code!" style={{ lineHeight: "12px" }} icon={<Icon className="right">code</Icon>} onClick={_ => setCodeOpen(true)} className="btn btn-outline" >
-            <span className="hide-on-small-only">VIEW CODE</span>
+        <Button tooltip="Export your card!" style={{ lineHeight: "12px" }} icon={<Icon className="right">code</Icon>} onClick={_ => setCodeOpen(true)} className="btn btn-outline" >
+            <span className="hide-on-small-only">Export Card</span>
         </Button>
         <Modal
-            header='View Code'
+            header='Export Card'
             fixedFooter={true}
             options={{
                 onCloseEnd: _ => setCodeOpen(false),
