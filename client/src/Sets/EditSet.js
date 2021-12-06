@@ -257,7 +257,7 @@ function EditSet(props) {
                 onClick={_ => setCodeOpen(true)}
                 style={{ lineHeight: "12px" }}
                 className="btn btn-outline" >
-                VIEW CODE
+                Export Card
             </Button>
             <Button
                 icon={<Icon className="right">visibility</Icon>}
@@ -293,7 +293,7 @@ function EditSet(props) {
                 </Button>
                 <Modal
                     fixedFooter={true}
-                    header='View Code'
+                    header='Export Card'
                     options={{
                         onCloseEnd: _ => setCodeOpen(false),
                     }}
@@ -373,7 +373,7 @@ function EditSet(props) {
             }
         })
         return <React.Fragment>
-            <div style={{ ...props.sets.container }}>
+            <div className="set-body" style={{ ...props.sets.container }}>
                 {props.sets.cards.map((card, index) => {
                     return <div style={{ display: "inline-block", margin: 10 }} key={index}>
                         <div className="card-body" style={card.body} >

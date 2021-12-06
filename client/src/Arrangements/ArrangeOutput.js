@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { Tab, Tabs } from 'react-materialize';
+import { Tab, Tabs,Icon, Button } from 'react-materialize';
 import { generateStack, generateGrid } from '../Code/CodeGenerator'
 import { addMessage } from '../actions/toastActions.js'
 import {html, css, js} from 'js-beautify'
 import Prism from 'prismjs';
 import '../Code/prism.css';
 import { connect } from 'react-redux';
+import domtoimage from 'dom-to-image'
+import saveAs from 'file-saver'
 
 function ArrangeOutput(props) {
     if (!props.open)
@@ -19,17 +21,56 @@ function ArrangeOutput(props) {
     useEffect(() => {
         Prism.highlightAll();
     });
-    // const copyText = (ref) => {
-    //     if (ref === "html") {
-    //         navigator.clipboard.writeText(card.html)
-    //         props.addMessage({ message: "Code copied to clipboard!", type: 1 })
-    //     }
-    // }
+
+    function DownloadImage(){
+        const node= document.querySelector('.imageOutput').contentWindow.document.body.innerHTML
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(node, "text/html").querySelector('.cards');
+        console.log(doc)
+        domtoimage.toBlob(doc)
+        .then(function (req, res, blob) {
+            req.header('Access-Control-Allow-Origin', "*")
+            console.log("here")
+            window.saveAs(blob, props.arrangements.config[0].name +'.png').then(console.log("here")).catch(err => {console.log(err)});
+        });
+    }
+    
+    function DownloadSVG(){
+        const node= document.querySelector('.imageOutput').contentWindow.document.body.innerHTML
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(node, "text/html");
+        function filter (doc) {
+            return (doc.tagName !== 'i');
+        }
+        domtoimage.toSvg(doc.body, {filter: filter})
+            .then(function (dataUrl) {
+                var link = document.createElement("a");
+                document.body.appendChild(link);
+                link.download = props.arrangements.config[0].name +".svg";
+                link.href = dataUrl;
+                link.target = '_blank';
+                link.click();        });
+    }
+    console.log(props)
 
     return (
         <div>
             <Tabs className='tab-demo z-depth-1'>
-                <Tab title="HTML" active>
+                <Tab title="IMAGE" active>
+                    <div style={{width:"50%", marginTop:100, marginLeft:190, marginRight:190,textAlign:"center"}}>
+                        <Button onClick={_ => DownloadImage()}icon={<Icon className="right">import_export</Icon>} style={{borderColor:"#DFDFDF !important"}} className="btn btn-primary full-width green" type="submit" tooltip="Export as Image" disabled>
+                            <span className="hide-on-small-only">Export as Image</span>
+                        </Button>                     
+                    </div>
+                </Tab>
+                <Tab title="SVG">
+                    <div>
+                        <Button onClick={_=> DownloadSVG()} style={{width:"50%", marginTop:100, marginLeft:190,textAlign:"center",borderColor:"#DFDFDF !important"}} icon={<Icon className="right">import_export</Icon>} className="btn btn-primary full-width green" type="submit" tooltip="Export as SVG" disabled>
+                                <span className="hide-on-small-only">Export as SVG</span>
+                        </Button>                     
+                    </div>
+                </Tab>
+                <Tab title="HTML">
                     {/**<Button onClick={_ => copyText("html")}>Copy Text</Button>**/}
                     <div className='code'>
                         <pre>
@@ -83,12 +124,11 @@ function ArrangeOutput(props) {
         </div >
     )
 }
-
 const mapStateToProps = state => ({
     editor: { ...state.styles }
 });
 
 export default connect(
     mapStateToProps,
-    { addMessage }
+    { addMessage, saveAs }
 )(ArrangeOutput);

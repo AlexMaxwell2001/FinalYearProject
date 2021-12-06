@@ -34,7 +34,7 @@ import CloneModalArrangements from '../components/CloneModalArrangements';
         doc.close();
     };
     return (
-        <iframe frameBorder="0" title="preview" src="about:blank" scrolling="yes" height="100%" width="100%" ref={writeHTML} />
+        <iframe className="imageOutput" frameBorder="0" title="preview" src="about:blank" scrolling="yes" height="100%" width="100%" ref={writeHTML} />
     );
 };
 
@@ -364,7 +364,7 @@ function EditArrangements(props) {
     let isOwner = props.arrangements.config[0].createdBy === props.auth.user.id;
     function renderToptoolbar() {
         return <div>
-                <Button icon={<Icon className="right">code</Icon>} onClick={_=>setCodeOpen(true)} style={{lineHeight:"12px"}} className="btn btn-outline" >VIEW CODE</Button>
+                <Button icon={<Icon className="right">code</Icon>} onClick={_=>setCodeOpen(true)} style={{lineHeight:"12px"}} className="btn btn-outline" >Export Code</Button>
                 {isOwner && <Button className="btn btn-primary" 
                     onClick={_=>handleSave()}
                     icon={<Icon className="right">save</Icon>}
@@ -412,10 +412,12 @@ function EditArrangements(props) {
     }
     function renderCards() {
         return <React.Fragment>
+        <span className="arrangement-body">
             {(props.arrangements.config[0].cardSet.length && props.arrangements.config[0].arrangementType === "stack") && <Preview open {...props}/>}
             {(props.arrangements.config[0].cardSet.length && props.arrangements.config[0].arrangementType === "grid") && 
                 props.arrangements.set.length  && <Preview open {...props}/>
             }
+        </span>
         </React.Fragment>
     }
     return <React.Fragment>

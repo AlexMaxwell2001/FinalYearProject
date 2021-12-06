@@ -25,19 +25,42 @@ function CardOutput(props) {
     //         props.addMessage({ message: "Code copied to clipboard!", type: 1 })
     //     }
     // }
+    function DownloadImage(){
+        var node = document.querySelector('.card-body');
+        domtoimage.toBlob(node)
+        .then(function (blob) {
+            window.saveAs(blob, props.editor.name +'.png');
+        });
+    }
+    
+    function DownloadSVG(){
+        var node = document.querySelector('.card-body');
+        function filter (node) {
+            return (node.tagName !== 'i');
+        }
+        
+        domtoimage.toSvg(node, {filter: filter})
+            .then(function (dataUrl) {
+                var link = document.createElement("a");
+                document.body.appendChild(link);
+                link.download = props.editor.name+".svg";
+                link.href = dataUrl;
+                link.target = '_blank';
+                link.click();        });
+    }
     return (
         <div>
             <Tabs className='tab-demo z-depth-1'>
                 <Tab title="IMAGE" active>
                     <div style={{width:"50%", marginTop:160, marginLeft:190, marginRight:190,textAlign:"center"}}>
-                        <Button onClick={_ => DownloadImage()}icon={<Icon className="right">import_export</Icon>} className="btn btn-primary full-width green" type="submit" tooltip="Export as Image">
+                        <Button onClick={_ => DownloadImage()}icon={<Icon className="right">import_export</Icon>} className="btn btn-primary full-width green" style={{borderColor:"#4CAF50"}} type="submit" tooltip="Export as Image">
                             <span className="hide-on-small-only">Export as Image</span>
                         </Button>                     
                     </div>
                 </Tab>
                 <Tab title="SVG">
                     <div>
-                        <Button onClick={_=> DownloadSVG()} style={{width:"50%", marginTop:160, marginLeft:190,textAlign:"center"}} icon={<Icon className="right">import_export</Icon>} className="btn btn-primary full-width green" type="submit" tooltip="Export as SVG">
+                        <Button onClick={_=> DownloadSVG()} style={{width:"50%", marginTop:160, marginLeft:190,textAlign:"center", borderColor:"#4CAF50"}} icon={<Icon className="right">import_export</Icon>} className="btn btn-primary full-width green" type="submit" tooltip="Export as SVG">
                                 <span className="hide-on-small-only">Export as SVG</span>
                         </Button>                     
                     </div>
@@ -92,29 +115,6 @@ function CardOutput(props) {
     )
 }
 
-function DownloadImage(){
-    var node = document.querySelector('.card-body');
-    domtoimage.toBlob(node)
-    .then(function (blob) {
-        window.saveAs(blob, 'my-card.png');
-    });
-}
-
-function DownloadSVG(){
-    var node = document.querySelector('.card-body');
-    function filter (node) {
-        return (node.tagName !== 'i');
-    }
-    
-    domtoimage.toSvg(node, {filter: filter})
-        .then(function (dataUrl) {
-            var link = document.createElement("a");
-            document.body.appendChild(link);
-            link.download = "my-card.svg";
-            link.href = dataUrl;
-            link.target = '_blank';
-            link.click();        });
-}
 
 const mapStateToProps = state => ({
     editor: { ...state.styles }

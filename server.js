@@ -40,17 +40,6 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 
-// app.get('/api/hello', (req, res) => {
-//   res.send({ express: '[GET] Hello From Express' });
-// });
-
-// app.post('/api/world', (req, res) => {
-//   console.log(req.body);
-//   res.send(
-//     `[POST] I received your POST request. This is what you sent me: ${req.body.post}`,
-//   );
-// });
-
 app.use('/comments', commentsRouter);
 app.use('/cards', cardRouter);
 app.use('/api/users', usersRouter);

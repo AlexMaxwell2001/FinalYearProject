@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { Tab, Tabs } from 'react-materialize';
+import { Tab, Tabs, Icon, Button } from 'react-materialize';
 import {  generateRegularCard } from '../Code/CodeGenerator'
 import { addMessage } from '../actions/toastActions.js'
 import Prism from 'prismjs';
 import {html, css, js} from 'js-beautify'
 import { connect } from 'react-redux';
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
 
 function SetOutput(props) {
     if (!props.open)
@@ -19,10 +21,49 @@ function SetOutput(props) {
     //         props.addMessage({ message: "Code copied to clipboard!", type: 1 })
     //     }
     // }
+    console.log(props)
+    function DownloadImage(){
+        var node = document.querySelector('.set-body');
+        domtoimage.toBlob(node)
+        .then(function (blob) {
+            window.saveAs(blob, props.sets.name + '.png');
+        });
+    }
+    
+    function DownloadSVG(){
+        var node = document.querySelector('.set-body');
+        function filter (node) {
+            return (node.tagName !== 'i');
+        }
+        
+        domtoimage.toSvg(node, {filter: filter})
+            .then(function (dataUrl) {
+                var link = document.createElement("a");
+                document.body.appendChild(link);
+                link.download =props.sets.name + ".svg";
+                link.href = dataUrl;
+                link.target = '_blank';
+                link.click();        });
+    }
+
     return (
         <div>
             <Tabs className='tab-demo z-depth-1'>
-                <Tab title="HTML" active>
+            <Tab title="IMAGE" active>
+                    <div style={{width:"50%", marginTop:160, marginLeft:190, marginRight:190,textAlign:"center"}}>
+                        <Button onClick={_ => DownloadImage()} style={{borderColor:"#4CAF50"}} icon={<Icon className="right">import_export</Icon>} className="btn btn-primary full-width green" type="submit" tooltip="Export as Image">
+                            <span className="hide-on-small-only">Export as Image</span>
+                        </Button>                     
+                    </div>
+                </Tab>
+                <Tab title="SVG">
+                    <div>
+                        <Button onClick={_=> DownloadSVG()} style={{width:"50%", marginTop:160, marginLeft:190,textAlign:"center", borderColor:"#4CAF50"}} icon={<Icon className="right">import_export</Icon>} className="btn btn-primary full-width green" type="submit" tooltip="Export as SVG">
+                                <span className="hide-on-small-only">Export as SVG</span>
+                        </Button>                     
+                    </div>
+                </Tab>
+                <Tab title="HTML">
                     {/**<Button onClick={_ => copyText("html")}>Copy Text</Button>**/}
                     <div className='code'>
                         <pre>
@@ -82,5 +123,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { addMessage }
+    { addMessage, saveAs }
 )(SetOutput);
