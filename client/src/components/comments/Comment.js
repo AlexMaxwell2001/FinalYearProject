@@ -57,6 +57,7 @@ class Comment extends Component {
   }
   render() {
     if(this.props.usersID === this.props.authorId){
+      console.log(this.props)
       return (
         <div style={ style.comment }>
           <h4 style={{decoration: 'underline' }}dangerouslySetInnerHTML={ this.rawMarkup() } />

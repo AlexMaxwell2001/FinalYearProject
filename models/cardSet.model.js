@@ -10,6 +10,8 @@ const setSchema = new Schema({
     createdBy: { type: String, required: true },
     visibility: { type: String, default: 'private' },
     activeFlag: { type: String, default: '1' },
+    groupSetFlag: { type: String, default: '0' },
+    contributors: { type: String, default:""},
     container : {
         backgroundColor: { type: String },
         margin: { type: String },

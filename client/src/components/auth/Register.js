@@ -8,6 +8,7 @@ import classnames from "classnames";
 function Register(props) {
     let [name, setName] = useState("")
     let [email, setEmail] = useState("")
+    let [username, setUsername] = useState("")
     let [password, setPassword] = useState("")
     let [password2, setPassword2] = useState("")
     const {errors} = props;
@@ -19,6 +20,7 @@ function Register(props) {
     const onSubmit = e => {
         e.preventDefault();
         const newUser = {
+            username,
             name,
             email,
             password,
@@ -43,6 +45,20 @@ function Register(props) {
                     </p>
                     </div>
                     <form noValidate onSubmit={onSubmit}>
+                    <div className="input-field col s12">
+                        <input
+                        onChange={e=>setUsername(e.target.value)}
+                        value={username}
+                        error={errors.username}
+                        id="username"
+                        type="text"
+                        className={classnames("", {
+                            invalid: errors.username
+                        })}
+                        />
+                        <label htmlFor="username">Username</label>
+                        <span className="red-text">{errors.username}</span>
+                    </div>
                     <div className="input-field col s12">
                         <input
                         onChange={e=>setName(e.target.value)}

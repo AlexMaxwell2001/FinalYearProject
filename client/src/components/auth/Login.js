@@ -6,7 +6,7 @@ import { loginUser, removeAllMessages } from "../../actions/authActions";
 import classnames from "classnames";
 
 function Login(props) {
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const { errors } = props;
     useEffect(_ => {
@@ -20,7 +20,7 @@ function Login(props) {
     const onSubmit = e => {
         e.preventDefault();
         const userData = {
-            email,
+            username,
             password
         };
         props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
@@ -43,19 +43,18 @@ function Login(props) {
                     <form noValidate onSubmit={onSubmit}>
                         <div className="input-field col s12">
                             <input
-                                onChange={e => setEmail(e.target.value)}
-                                value={email}
-                                error={errors.email}
-                                id="email"
-                                type="email"
+                                onChange={e => setUsername(e.target.value)}
+                                value={username}
+                                error={errors.username}
+                                id="username"
+                                type="text"
                                 className={classnames("", {
-                                    invalid: errors.email || errors.emailnotfound
+                                    invalid: errors.username
                                 })}
                             />
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="username">Username</label>
                             <span className="red-text">
-                                {errors.email}
-                                {errors.emailnotfound}
+                                {errors.username}
                             </span>
                         </div>
                         <div className="input-field col s12">

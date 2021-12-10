@@ -65,9 +65,9 @@
   ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "electron-builder": "^22.10.5",
     "babel-core": "^6.26.3",
     "babel-preset-es2015": "^6.24.1",
-    "electron": "^12.0.1"
+    "electron": "^12.0.1",
+    "electron-builder": "^22.10.5"
   }
 }

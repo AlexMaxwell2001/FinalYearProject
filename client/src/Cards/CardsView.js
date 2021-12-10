@@ -205,6 +205,7 @@ function ActionBar(props) {
             })
             .catch(e => { props.addMessage({ message: "Failure Saving Card!" + e, type: 2 }) })
     };
+    console.log(props.auth.user)
     const { id} = props.auth.user;
     let { name } = props.editor;
     let isOwner = props.editor.createdBy === id;
