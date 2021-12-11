@@ -35,7 +35,7 @@ class Comment extends Component {
     //will ignore it.
     let text = (this.state.text) ? this.state.text : null;
     let rating = (this.state.rating) ? this.state.rating : null;
-    let comment = { text: text, rating: rating};
+    let comment = {text: text, rating: rating};
     this.props.onCommentUpdate(id, comment);
     this.setState({
       toBeUpdated: !this.state.toBeUpdated,
@@ -57,11 +57,10 @@ class Comment extends Component {
   }
   render() {
     if(this.props.usersID === this.props.authorId){
-      console.log(this.props)
       return (
         <div style={ style.comment }>
           <h4 style={{decoration: 'underline' }}dangerouslySetInnerHTML={ this.rawMarkup() } />
-          <span>by  <b>You</b></span><br></br>
+          <span>by <b>{this.props.author}(You)</b></span><br></br>
           <button className="btn btn-primary" style={{background:"green"}}onClick={ this.updateComment }>update</button>
           <button className="btn btn-danger" style={{margin:10}} onClick={ this.deleteComment }>delete</button>
           { (this.state.toBeUpdated)
@@ -88,6 +87,7 @@ class Comment extends Component {
                   type='submit'
                   className='btn btn-primary'
                   style={{ backgroundColor:"green"}}
+                  disabled={this.state.text === "" || this.state.rating === 0}
                  >Update</button>
               </form>)
             : null}
@@ -97,7 +97,7 @@ class Comment extends Component {
       return (
         <div style={ style.comment }>
           <h3 style={{decoration: 'underline' }} dangerouslySetInnerHTML={ this.rawMarkup() } />
-          <span>by <b>{"Anonymous"}</b></span><br></br>
+          <span>by <b>{this.props.author}</b></span><br></br>
         </div>
       )
     }

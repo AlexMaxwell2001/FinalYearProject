@@ -7,7 +7,7 @@ import style from './style';
 class CommentBox extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [] };
+    this.state = { data: [] , username: this.props.userInfo};
     this.loadCommentsFromServer = this.loadCommentsFromServer.bind(this);
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
     this.handleCommentDelete = this.handleCommentDelete.bind(this);
@@ -23,6 +23,7 @@ class CommentBox extends Component {
   handleCommentSubmit(comment) {
     let comments = this.state.data;
     comment.id = Date.now();
+    comment.username=this.state.username
     let newComments = comments.concat([comment]);
     this.setState({ data: newComments });
     axios.post(this.props.url, comment)

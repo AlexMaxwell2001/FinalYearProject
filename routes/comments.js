@@ -14,7 +14,7 @@ router.route('/card/:cardid/:username/:userid')
   // Post new comment to our database
   .post(function(req, res) {
     var comment = new Comment();
-    (req.params.username) ? comment.author = req.params.username : null;
+    (req.body.username) ? comment.author = req.body.username : null;
     (req.body.text) ? comment.text = req.body.text : null;
     (req.body.rating) ? comment.rating = req.body.rating : null;
     (req.params.cardid) ? comment.cardId = req.params.cardid : null;

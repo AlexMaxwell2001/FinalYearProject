@@ -5,8 +5,7 @@ import StarRatings from "react-star-ratings";
 class CommentForm extends Component {
   constructor(props) {
     super(props);
-    
-    this.state = { text: '', rating: 0 };
+    this.state = { text: '', rating: 0, username:JSON.stringify(this.props.userInfo)};
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changeRating = this.changeRating.bind(this);
@@ -23,10 +22,11 @@ class CommentForm extends Component {
     e.preventDefault();
     let text = this.state.text.trim();
     let rating = this.state.rating;
+    let username = this.state.username
     if (!text || !rating) {
       return;
     }
-    this.props.onCommentSubmit({ username:this.props.userInfo,text: text, rating: rating });
+    this.props.onCommentSubmit({ username:username,text: text, rating: rating });
     this.setState({ text: '', rating: 0 });
   }
   render() {

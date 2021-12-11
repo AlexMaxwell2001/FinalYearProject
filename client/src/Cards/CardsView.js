@@ -205,7 +205,6 @@ function ActionBar(props) {
             })
             .catch(e => { props.addMessage({ message: "Failure Saving Card!" + e, type: 2 }) })
     };
-    console.log(props.auth.user)
     const { id} = props.auth.user;
     let { name } = props.editor;
     let isOwner = props.editor.createdBy === id;
@@ -293,7 +292,7 @@ function ActionBar(props) {
         }
         <Modal header='Card Comments'
                 trigger={<Button  tooltip="Comment on this card!" icon={<Icon className="right">comments</Icon>} className="btn btn-primary">Comments</Button>}>
-                <CommentBox cardEditor={props.editor} usersID={props.auth.user.id} userInfo={props.auth.user.name}
+                <CommentBox cardEditor={props.editor} usersID={props.auth.user.id} userInfo={props.auth.user.username}
                     url={`/comments/card/'${cardID}/${name}/${props.auth.user.id}`}
                     pollInterval={2000} />
         </Modal>
