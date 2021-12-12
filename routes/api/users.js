@@ -7,6 +7,14 @@ const keys = require("../../config/keys");
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
+router.route('/:id').get((req, res) => {
+  // Taking in logged in user id as a parameter
+  // Return back cards that are not deleted and createdBy logged in user OR cards that are not deleted and are public
+  User.find({})
+      .then(users => res.send({users: users}))
+      .catch(err => res.status(400).json('[GET] | /users/ | Error: ' + err));
+});
+
 // @route POST api/users/register
 // @desc Register user
 // @access Public

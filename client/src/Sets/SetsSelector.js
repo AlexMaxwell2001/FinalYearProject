@@ -15,7 +15,9 @@ import AddSet from '../components/AddSet'
 function SetsSelector(props) {
     const [sets, setSets] = useState([-1])
     const [publicSets, setPublicSets] = useState([])
+    const [groupSets, setGroupSets] = useState([])
     const [publicSetsFilter, setPublicSetsFilter] = useState("")
+    const [groupSetsFilter, setGroupSetsFilter] = useState("")
     const [mySetsFilter, setMySetsFilter] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
     const [sort, setSort] = useState(MOST_RECENT)
@@ -29,6 +31,9 @@ function SetsSelector(props) {
             }))
             setPublicSets(res.data.allCards.filter(card => {
                    return card.visibility === "public"
+           }))
+           setGroupSets(res.data.allCards.filter(card => {
+                return card.contributors.includes(",") && (card.createdBy === props.auth.user.id || card.contributors.includes(props.auth.user.username))
            }))
             setLoading(false);
         })
@@ -111,6 +116,32 @@ function SetsSelector(props) {
                             {publicSets
                             .filter(v => {
                                 return v.name && v.name.toLowerCase().includes(publicSetsFilter.toLowerCase());
+                            })
+                            .map((value, index) => {
+                                return <Link key={index + value._id} to={"/edit-set?id=" + value._id}>
+                                    <div style={{ color: '#676767' }} className="card-grid-item" key={index}>
+                                        <h5><b>{value.name}</b></h5>
+                                        <p>{value.description}</p>
+                                        <TagDisplay tags={value.tags === ""? "": value.tags} setTags={null} deleteable={false} />
+                                    </div>
+                                </Link>
+                            })}
+                        </div>
+                    </div>
+                    </Tab>
+                    <Tab title="Group Sets" >
+                        <div style={{padding:20}}>
+                        <b style={{ fontSize: 18, marginBottom: 10 }}>Search:</b>
+                        <input style={{ marginBottom: 17, marginTop: 5 }} value={groupSetsFilter} onChange={e => setGroupSetsFilter(e.target.value)} className="bordered" placeholder="Set Name" type="text" id="TextInput-S3" /> 
+                        <div className="card-grid-container" style={{border:"white"}}>
+                            {!groupSets.length && 
+                                <React.Fragment>
+                                    <h5 style={{textAlign: 'center'}}>No group sets yet! Make a set and Invite other users to collaborate on the set, to make it a group set</h5>
+                                </React.Fragment>
+                            }
+                            {groupSets
+                            .filter(v => {
+                                return v.name && v.name.toLowerCase().includes(groupSetsFilter.toLowerCase());
                             })
                             .map((value, index) => {
                                 return <Link key={index + value._id} to={"/edit-set?id=" + value._id}>

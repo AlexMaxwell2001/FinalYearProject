@@ -25,6 +25,7 @@ import InfoModal from '../components/InfoModal';
 import WarningModal from '../components/WarningModal';
 import EditorLayout from '../Layout/EditorLayout';
 import InsertCard from './InsertCard';
+import AddCollaborators from '../components/AddCollaborators'
 function validateStyle(styleValue) {
     if (styleValue === undefined)
         return "";
@@ -80,6 +81,7 @@ function EditSet(props) {
         return <LoaderCircle />
     let { name } = props.sets;
     let isOwner = props.sets.createdBy === props.auth.user.id;
+    let isContributor = props.sets.contributors.includes(props.auth.user.username)
     const newCardWithTemplate = (card) => {
         let newCard = card;
         newCard.createdBy = props.auth.user.id;
@@ -110,7 +112,7 @@ function EditSet(props) {
         })
     }
     function renderToolbar() {
-        if(isOwner){
+        if(isOwner ||isContributor){
             return <React.Fragment>
             <div>
                 <nav className="bg-primary">
@@ -278,14 +280,14 @@ function EditSet(props) {
                     <Preview open={previewOpen} {...props} />
                 </div>
             </Modal>
-            {!isOwner &&
-            <CloneModalSet usersID={props.auth.user.id} cardEditor={props.sets} action_name="Save Set" title="Clone set"  trigger={
-                <Button icon={<Icon className="right">content_copy</Icon>} className="btn btn-primary" type="submit" tooltip="Clone this set!">
-                    <span className="hide-on-small-only">Clone this set!</span>
-                </Button>                              
-            } />
-        }
-            {isOwner && <React.Fragment><Button className="btn btn-primary"
+            {!isOwner && !isContributor &&
+                <CloneModalSet usersID={props.auth.user.id} cardEditor={props.sets} action_name="Save Set" title="Clone set"  trigger={
+                    <Button icon={<Icon className="right">content_copy</Icon>} className="btn btn-primary" type="submit" tooltip="Clone this set!">
+                        <span className="hide-on-small-only">Clone this set!</span>
+                    </Button>                              
+                } />
+            }
+            {(isOwner||isContributor) && <React.Fragment><Button className="btn btn-primary"
                 onClick={e => handleSave(e)}
                 icon={<Icon className="right">save</Icon>}
                 type="submit" tooltip="Save current card changes">
@@ -331,6 +333,13 @@ function EditSet(props) {
                     url={`/comments/card/'${id}/${name}/${props.auth.user.id}`}
                     pollInterval={2000} />
                 </Modal>
+                {isOwner &&
+                    <AddCollaborators username={props.auth.user.username} cardEditor={props.sets} trigger={
+                        <Button icon={<Icon className="right">people</Icon>} className="btn btn-primary" type="submit" tooltip="Add Collaborators to this set!">
+                            <span className="hide-on-small-only">Add/Remove Collaborators!</span>
+                        </Button>                              
+                    } />
+                }
         </div>
     }
     function renderCards() {
