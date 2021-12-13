@@ -4,7 +4,7 @@ const cardSet = require('../models/cardSet.model');
 router.route('/:id').get((req, res) => {
     // Taking in logged in user id as a parameter
     // Return back cards that are not deleted and createdBy logged in user OR cards that are not deleted and are public
-    cardSet.find({ $or: [ { activeFlag: "1", createdBy: req.params.id }, { activeFlag: "1", visibility: "public" } ] })
+    cardSet.find({ $or: [ { activeFlag: "1", createdBy: req.params.id }, {} ] })
         .then(cards => res.send({allCards: cards}))
         .catch(err => res.status(400).json('[GET] | /cards/ | Error: ' + err));
 });

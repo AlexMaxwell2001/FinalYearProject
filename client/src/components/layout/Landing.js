@@ -25,7 +25,7 @@ function Landing(props) {
           <div className="col s6">
             <Link to="/register"
               style={linksStyle}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3">
+              className="btn btn-large hoverable blue accent-3">
               Register
             </Link>
           </div>
@@ -33,7 +33,7 @@ function Landing(props) {
             <Link to="/login"
                           style={linksStyle}
 
-                          className="btn btn-large waves-effect waves-light hoverable secondary accent-3">
+                          className="btn btn-large hoverable secondary accent-3">
                           Log In
             </Link>
           </div>

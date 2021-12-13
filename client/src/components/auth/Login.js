@@ -29,7 +29,7 @@ function Login(props) {
         <div className="container">
             <div style={{ marginTop: "4rem" }} className="row">
                 <div className="col s8 offset-s2">
-                    <Link to="/" className="btn-flat waves-effect">
+                    <Link to="/" className="btn-flat">
                         <i className="material-icons left">keyboard_backspace</i> Back to home
                     </Link>
                     <div className="col s12" style={{ paddingLeft: "11.250px" }}>
@@ -83,7 +83,7 @@ function Login(props) {
                                     marginTop: "1rem"
                                 }}
                                 type="submit"
-                                className="btn btn-large waves-effect waves-light hoverable blue accent-3">
+                                className="btn btn-large hoverable blue accent-3">
                                 Login
                             </button>
                         </div>

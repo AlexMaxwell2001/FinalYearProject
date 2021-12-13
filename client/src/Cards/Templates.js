@@ -68,14 +68,14 @@ function Templates(props) {
         .map((value, index) => {
             return <div style={{ padding: 10 }} className="card-grid-item" key={index}>
                 <b>{value.name}</b>
-                <Button onClick={_ => openCard(value._id)} tooltip="Edit Card" className="btn-small waves-effect waves-light hoverable btn-primary right" style={{ height: 30, width: 30, padding: 0 }} icon={<Icon>edit</Icon>}></Button>
+                <Button onClick={_ => openCard(value._id)} tooltip="Edit Card" className="btn-small hoverable btn-primary right" style={{ height: 30, width: 30, padding: 0 }} icon={<Icon>edit</Icon>}></Button>
                 <WarningModal 
                     warningText="This will delete your Card permanently. Are you sure?"
                     action_name="Delete" title="Delete Card" 
                     continueAction={_ => {removeCard(value._id)}} 
                     trigger={
                         <Button tooltip="Delete Card" 
-                            className="btn-small waves-effect waves-light hoverable btn-primary right" 
+                            className="btn-small hoverable btn-primary right" 
                             style={{ height: 30, width: 30, padding: 0 }} 
                             icon={
                                 <Icon>delete</Icon>
