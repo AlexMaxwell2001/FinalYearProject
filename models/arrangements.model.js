@@ -13,6 +13,7 @@ const setSchema = new Schema({
     row_spacing: { type: String },
     col_spacing: { type: String },
     arrangementType: { type: String },
+    contributors: { type: String, default:""},
     grid: {type: [Schema.Types.Mixed]},
 }, {
     timestamps: true,

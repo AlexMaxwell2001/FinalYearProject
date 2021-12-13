@@ -25,7 +25,7 @@ import InfoModal from '../components/InfoModal';
 import WarningModal from '../components/WarningModal';
 import EditorLayout from '../Layout/EditorLayout';
 import InsertCard from './InsertCard';
-import AddCollaborators from '../components/AddCollaborators'
+import AddCollaborators from '../components/AddCollaboratorsSet'
 function validateStyle(styleValue) {
     if (styleValue === undefined)
         return "";

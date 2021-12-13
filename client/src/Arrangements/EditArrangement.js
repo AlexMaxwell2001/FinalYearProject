@@ -21,6 +21,8 @@ import { css, js } from 'js-beautify';
 import InfoModal from '../components/InfoModal';
 import {saveArrange} from '../actions/arrangementActions';
 import CloneModalArrangements from '../components/CloneModalArrangements';
+import AddCollaborators from '../components/AddCollaboratorsArrange'
+
 
 
   const Iframe = (props) => {
@@ -285,7 +287,7 @@ function EditArrangements(props) {
     const {arrangementType, name} = props.arrangements.config[0];
     let dataExists = !!props.arrangements.set && !!props.arrangements.set[0];
     function renderToolbar() {
-        if(isOwner){
+        if(isOwner || isContributor){
             return <React.Fragment>
             <div>
                 <nav className="bg-primary">
@@ -362,10 +364,11 @@ function EditArrangements(props) {
         })
     }
     let isOwner = props.arrangements.config[0].createdBy === props.auth.user.id;
+    let isContributor = props.arrangements.config[0].contributors.includes(props.auth.user.username)
     function renderToptoolbar() {
         return <div>
                 <Button icon={<Icon className="right">code</Icon>} onClick={_=>setCodeOpen(true)} style={{lineHeight:"12px"}} className="btn btn-outline" >Export Code</Button>
-                {isOwner && <Button className="btn btn-primary" 
+                {(isOwner||isContributor) && <Button className="btn btn-primary" 
                     onClick={_=>handleSave()}
                     icon={<Icon className="right">save</Icon>}
                     type="submit" tooltip="Save current card changes">
@@ -388,7 +391,7 @@ function EditArrangements(props) {
                         <span className="hide-on-small-only" tooltip="Save your settings!">Save Settings</span>
                     </Button>
                 </Modal>
-                {isOwner && 
+                {(isOwner || isContributor) && 
                     <WarningModal warningText="As you are saving the arrangement as a different visibility, this will save your arrangement. Are you sure you want to save?" action_name="Save" title="Save card" continueAction={_ => handlePublicSave(props.arrangements.config[0].visibility)} trigger={
                         <Button
                             icon={<Icon className="right">public</Icon>}
@@ -398,16 +401,25 @@ function EditArrangements(props) {
                         </Button>
                     }/>
                 }
-        	    <CloneModalArrangements usersID={props.auth.user.id} cardEditor={props.arrangements.config[0]} action_name="Save arrangement" title="Clone arrangement"  trigger={
-                    <Button icon={<Icon className="right">content_copy</Icon>} className="btn btn-primary" type="submit" tooltip="Clone this Arrangement!">
-                        <span className="hide-on-small-only">Clone this Arrangement!</span>
-                    </Button>                              
-                } />
+        	    {!isOwner && !isContributor &&
+                    <CloneModalArrangements usersID={props.auth.user.id} cardEditor={props.arrangements.config[0]} action_name="Save arrangement" title="Clone arrangement"  trigger={
+                        <Button icon={<Icon className="right">content_copy</Icon>} className="btn btn-primary" type="submit" tooltip="Clone this Arrangement!">
+                            <span className="hide-on-small-only">Clone this Arrangement!</span>
+                        </Button>                              
+                    } />
+                }
                 <Modal header='Card Comments' trigger={<Button  tooltip="Comment on this set!" icon={<Icon className="right">comments</Icon>} className="btn btn-primary">Comments</Button>}>
                     <CommentBox cardEditor={props.arrangements.config[0]} usersID={props.auth.user.id} userInfo={props.auth.user.name}
                         url={`/comments/card/'${id}/${name}/${props.auth.user.id}`}
                         pollInterval={2000} />
                 </Modal>
+                {isOwner &&
+                    <AddCollaborators username={props.auth.user.username} cardEditor={props.arrangements.config[0]} trigger={
+                        <Button icon={<Icon className="right">people</Icon>} className="btn btn-primary" type="submit" tooltip="Add Collaborators to this set!">
+                            <span className="hide-on-small-only">Add/Remove Collaborators!</span>
+                        </Button>                              
+                    } />
+                }
         </div>
     }
     function renderCards() {

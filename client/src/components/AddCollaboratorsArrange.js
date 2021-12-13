@@ -2,8 +2,8 @@ import React,{useState} from 'react'
 import { Button, Modal, Icon } from "react-materialize";
 import { loadUsers } from '../api/UsersAPI';
 import WarningModal from './WarningModal';
-import { saveSet } from '../api/CardSets';
-export default function AddCollaborators(props) {
+import { saveArrangement } from '../api/Arrangements';
+export default function AddCollaboratorsSet(props) {
     const [users, setUsers] = useState([-1])
     const [contributors, setContributors] = useState([-1])
     const [userFilter, setUserFilter]= useState("")
@@ -23,7 +23,8 @@ export default function AddCollaborators(props) {
     let removeUser =(username) => {
         var contributors= props.cardEditor.contributors.replace(username+",", "")
         props.cardEditor.contributors=contributors
-        saveSet(props.cardEditor._id,props.cardEditor)
+        console.log(props.cardEditor)
+        saveArrangement(props.cardEditor._id,props.cardEditor)
         loadingContributors()
         loadingUsers()
     }
@@ -31,8 +32,7 @@ export default function AddCollaborators(props) {
     let addUser =(username) => {
         var contributors= props.cardEditor.contributors + username +","
         props.cardEditor.contributors=contributors
-        props.cardEditor.visibility="public"
-        saveSet(props.cardEditor._id,props.cardEditor)
+        saveArrangement(props.cardEditor._id,props.cardEditor)
         loadingContributors()
         loadingUsers()
     }

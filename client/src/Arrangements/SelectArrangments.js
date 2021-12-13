@@ -16,6 +16,8 @@ function SelectArrangements(props) {
     const [loading, setLoading] = useState(false)
     const [publicArrangementsFilter, setPublicArrangementsFilter] = useState("")
     const [myArrangementsFilter, setMyArrangementsFilter] = useState("")
+    const [groupArrangements, setGroupArrangements] = useState([])
+    const [groupArrangementsFilter, setGroupArrangementsFilter] = useState("")
     const [privacyFilter, setPrivacyFilter] = useState(1)
     const [currentPage, setCurrentPage] = useState(1)
     const [sort, setSort] = useState(MOST_RECENT)
@@ -28,10 +30,13 @@ function SelectArrangements(props) {
                 }))
                 setPublicArrangements(res.data.allCards.filter(card => {
                     return card.visibility === "public"
-            }))
+                }))
+                setGroupArrangements(res.data.allCards.filter(card => {
+                    return card.contributors.includes(",") && (card.createdBy === props.auth.user.id || card.contributors.includes(props.auth.user.username))
+                }))
                 setLoading(false);
             })
-            .catch(_ => props.addMessage({ message: "Error loading Sets", type: 2 }))
+            .catch(_ => props.addMessage({ message: "Error loading Arrangements", type: 2 }))
     }
     const removeArrangement = (id) => {
         deleteArrangement(id)
@@ -111,6 +116,31 @@ function SelectArrangements(props) {
                                 </React.Fragment>
                             }
                             {publicArrangements
+                            .filter(v => {
+                                return v.name && v.name.toLowerCase().includes(publicArrangementsFilter.toLowerCase());
+                            })
+                            .map((value, index) => {
+                                return <Link key={index + value._id} to={"/edit-arrangement?id=" + value._id}>
+                                    <div style={{ color: '#676767' }} className="card-grid-item" key={index}>
+                                        <h5><b>{value.name}</b></h5>
+                                        <p>{value.description}</p>
+                                    </div>
+                                </Link>
+                            })}
+                        </div>
+                    </div>
+                </Tab>
+                <Tab title="Group Arrangements" >
+                    <div style={{padding:20}}>
+                        <b style={{ fontSize: 18, marginBottom: 10 }}>Search:</b>
+                        <input style={{ marginBottom: 17, marginTop: 5 }} value={groupArrangementsFilter} onChange={e => setGroupArrangementsFilter(e.target.value)} className="bordered" placeholder="Arrangement Name" type="text" id="TextInput-S3" /> 
+                        <div className="card-grid-container-small" style={{border:"white"}}>
+                            {!groupArrangements.length && 
+                                <React.Fragment>
+                                    <h5 style={{textAlign: 'center'}}>No group arrangements yet! Make an arrangement and Invite other users to collaborate on the arrangement, to make it a group arrangement</h5>
+                                </React.Fragment>
+                            }
+                            {groupArrangements
                             .filter(v => {
                                 return v.name && v.name.toLowerCase().includes(publicArrangementsFilter.toLowerCase());
                             })
