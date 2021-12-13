@@ -18,6 +18,8 @@ function Templates(props) {
     const [cards, setCards] = useState([-1])
     const [templates, setTemplates] = useState([])
     const [publicCardsFilter, setPublicCardsFilter] = useState("")
+    const [groupCards, setGroupCards] = useState([])
+    const [groupCardsFilter, setGroupCardsFilter] = useState("")
     const [myCardsFilter, setMyCardsFilter] = useState("")
     const [privacyFilter, setPrivacyFilter] = useState(1)
     const [currentPage, setCurrentPage] = useState(1)
@@ -29,7 +31,10 @@ function Templates(props) {
                 return card.createdBy === props.auth.user.id
             }))
             setTemplates(res.data.allCards.filter(card => {
-                   return card.visibility === "public" && card.createdBy !== "root"
+                return card.visibility === "public" && card.createdBy !== "root"
+           }))
+           setGroupCards(res.data.allCards.filter(card => {
+                return card.contributors.includes(",") && (card.createdBy === props.auth.user.id || card.contributors.includes(props.auth.user.username))
            }))
            setLoading(false);
         })
@@ -52,7 +57,16 @@ function Templates(props) {
         loadingCards()
     let pageSize = 10
     let pageStart = (currentPage - 1) * pageSize;
-    const renderDefaultCards = () =>templates
+    const renderGroupCards = () => groupCards
+        .filter(v => { return v.name && v.name.toLowerCase().includes(publicCardsFilter.toLowerCase())})
+        .map((value, index) => {
+        return <div onClick={_ => {openCard(value._id)}} 
+                    className="card-grid-item" key={index}>
+                    <h5><b>{value.name}</b></h5>
+                    <p>{value.description}</p>
+                </div>
+    })
+    const renderDefaultCards = () => templates
         .filter(v => { return v.name && v.name.toLowerCase().includes(publicCardsFilter.toLowerCase())})
         .map((value, index) => {
         return <div onClick={_ => {openCard(value._id)}} 
@@ -126,6 +140,23 @@ function Templates(props) {
                         placeholder="Card Name" 
                         type="text" />
                     {renderDefaultCards()}
+                </div>
+            </Tab>
+            <Tab title="Group Cards">
+                <div className="card-grid-container">
+                    <b style={{ fontSize: 18 }}>Search:</b>
+                    <input value1={groupCardsFilter} 
+                        onChange={e => setGroupCardsFilter(e.target.value)} 
+                        className="bordered" 
+                        placeholder="Card Name" 
+                        type="text" />
+                    {!groupCards.length && 
+                        <React.Fragment>
+                            <h5>No group cards yet!</h5>
+                            <h5>Make a card and Invite other users to collaborate on the card, to make it a group card</h5>
+                        </React.Fragment>
+                    }
+                    {renderGroupCards()}
                 </div>
             </Tab>
         </Tabs>

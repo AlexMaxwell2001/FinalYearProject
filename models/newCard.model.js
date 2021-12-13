@@ -12,6 +12,7 @@ const cardSchema = new Schema({
     cardSet: { type: String, required: true},
     createdBy: { type: String, required: true },
     gridEnabled: {type: Boolean, required: true},
+    contributors: { type: String, default:""},
     container : {
         backgroundColor: { type: String },
         margin: { type: String },

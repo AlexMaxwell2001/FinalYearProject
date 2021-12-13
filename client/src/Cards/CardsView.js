@@ -22,9 +22,7 @@ import { FilterDropDown, FilterPrivacy, getSort } from '../components/Sort';
 import { useHistory } from 'react-router';
 import CloneModal from '../components/CloneModal'
 import WarningModal from '../components/WarningModal'
-
-
-
+import AddCollaborators from '../components/AddCollaboratorsCard'
 
 const Iframe = (props) => {
     const writeHTML = (frame) => {
@@ -208,6 +206,7 @@ function ActionBar(props) {
     const { id} = props.auth.user;
     let { name } = props.editor;
     let isOwner = props.editor.createdBy === id;
+    let isContributor = props.editor.contributors.includes(props.auth.user.username)
     let cardID = new URLSearchParams(window.location.search).get("id")
     var undoFlag=true;
     var redoFlag=true;
@@ -241,7 +240,7 @@ function ActionBar(props) {
                 type="submit" tooltip="Flip the card to its front or back">
                  <span className="hide-on-small-only">Flip Card</span>
         </Button>}
-        {isOwner && <React.Fragment><WarningModal warningText="This will save your card and remove the history from the undo and redo stacks. Are you sure you want to save?" action_name="Save" title="Save card" continueAction={e => handleSave(e)} trigger={
+        {(isOwner||isContributor) && <React.Fragment><WarningModal warningText="This will save your card and remove the history from the undo and redo stacks. Are you sure you want to save?" action_name="Save" title="Save card" continueAction={e => handleSave(e)} trigger={
             <Button icon={<Icon className="right">save</Icon>} className="btn btn-primary" onClick={e => handleSave(e)} type="submit" tooltip="Save current card changes">
                 <span className="hide-on-small-only">Save</span>
             </Button>}/>
@@ -283,7 +282,7 @@ function ActionBar(props) {
                 </Button>
             }/>
         }
-        {!isOwner &&
+        {!isOwner && !isContributor &&
             <CloneModal usersID={props.auth.user.id} cardEditor={props.editor} action_name="Save Card" title="Clone card"  trigger={
                 <Button icon={<Icon className="right">content_copy</Icon>} className="btn btn-primary" type="submit" tooltip="Clone this card!">
                     <span className="hide-on-small-only">Clone this card!</span>
@@ -309,6 +308,13 @@ function ActionBar(props) {
                 <Preview open={previewOpen} {...props} />
             </div>
         </Modal>
+        {isOwner &&
+            <AddCollaborators username={props.auth.user.username} cardEditor={props.editor} trigger={
+                <Button icon={<Icon className="right">people</Icon>} className="btn btn-primary" type="submit" tooltip="Add Collaborators to this set!">
+                    <span className="hide-on-small-only">Add/Remove Collaborators!</span>
+                </Button>                              
+            } />
+        }
     </div>
 }
 

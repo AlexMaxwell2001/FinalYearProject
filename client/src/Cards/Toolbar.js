@@ -206,7 +206,8 @@ function StyleSelector(props) {
   const { front, back, body, backEnabled } = props.editor;
   const { id} = props.auth.user;
   let isOwner = props.editor.createdBy === id;
-  if(isOwner){
+  let isContributor = props.editor.contributors.includes(props.auth.user.username)
+  if(isOwner ||isContributor){
     return  <React.Fragment>
     <ToolBarNav {...props} />
     <div className='console'>
